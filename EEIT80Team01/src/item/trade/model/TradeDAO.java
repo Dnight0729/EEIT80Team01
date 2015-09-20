@@ -1,11 +1,10 @@
-package trade.model;
+package item.trade.model;
 
 import java.util.List;
 
 public interface TradeDAO {
 	public List<TradeBean> getAll();
 	public TradeBean getByPK(int itemId);
-	public List<TradeBean> getByItem(int itemId);
 	public List<TradeBean> getBySeller(String seller);
 	public List<TradeBean> getByBuyer(String buyer);
 	public int insert(TradeBean bean);

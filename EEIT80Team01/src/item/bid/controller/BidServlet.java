@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import item.bid.model.BidLogBean;
 import item.bid.model.BidService;
+import item.trade.model.TradeBean;
+import item.trade.model.TradeDAOService;
 import member.model.MemberBean;
 
 @WebServlet("/product/bid.do")
@@ -22,8 +24,13 @@ public class BidServlet extends HttpServlet {
 	private double bidPrice = 0;
 	private Timestamp bidTime = null;
 	private String buyer = null;
+	private String seller = null;
+	private TradeDAOService tradeDaoService = null;
+	private TradeBean tradeBean = null;
 	public BidServlet(){
 		bidService = new BidService();
+		tradeDaoService = new TradeDAOService();
+		tradeBean = new TradeBean();
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,14 +53,20 @@ public class BidServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		bidTime = new java.sql.Timestamp(new java.util.Date().getTime());
-		
-		if(bidService.getSeller(itemId)!=buyer){
+		seller = bidService.getSeller(itemId);
+		if(seller!=buyer){
 			
 			if(action.equalsIgnoreCase("direct")){
 				
 				if(bidService.changeItemStatusToTwo(itemId)){
 					bidLogBean = bidService.insertDirectBuyer(itemId,bidTime,buyer);
 					if(bidLogBean!=null){
+						tradeBean.setItemId(itemId);
+						tradeBean.setBuyer(buyer);
+						tradeBean.setBuyerCheck(0);
+						tradeBean.setSeller(seller);
+						tradeBean.setSellerCheck(0);
+						tradeDaoService.insert(tradeBean);
 						request.setAttribute("message","購買成功");
 						request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
 					} else{

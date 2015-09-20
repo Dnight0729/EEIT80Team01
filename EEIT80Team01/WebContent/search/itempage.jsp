@@ -76,8 +76,10 @@ body { padding-top: 50px; }
 	        		<c:if test="${empty LoginOK}">
 	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
 	        		</c:if>	        				
+	        		<div>
 	        		<h4>商品內容描述：</h4>
 	        		${item.itemDescribe}
+	        		</div>
 	        		<c:if test="${!empty images}">
 	        		<c:forEach items="${images}" var="image">
 	        			<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${image}" class="itemimg">

@@ -28,7 +28,7 @@ pageContext.setAttribute("list",list);
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="home-navar">
 	      
-	      <form class="navbar-form navbar-left" role="search" action="/search/searchItems.do" method="get">
+	      <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/search/searchItems.do" method="get">
 	        <div class="form-group">
 	          <div class="input-group">	
 		          <div class="input-group-btn">

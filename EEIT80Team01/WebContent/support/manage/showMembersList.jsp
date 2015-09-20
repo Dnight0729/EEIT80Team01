@@ -24,7 +24,7 @@ body {
 </style>
 </head>
 <body>
-	<header><%@include file="/include/header-admin"%></header>
+	<header><%@include file="/include/header-support"%></header>
 	<article>
 		<div class="container-fluid">
 			<div class="row">
@@ -43,6 +43,9 @@ body {
 							<c:if test="${!empty LoginSupport }">
 								<a
 									href="${pageContext.request.contextPath}/support/manage/listMembers.jsp">會員列表</a>
+								<br>
+								<br>
+								<a href="${pageContext.request.contextPath}/support/manage/question/listUnansweredQuestionsServlet.jsp">會員問題列表</a>
 								<br>
 								<br>
 								<a
@@ -77,7 +80,7 @@ body {
 									<tbody>
 										<c:forEach items="${memberlist}" var="item">
 											<tr>
-												<td>${item.userMame}</td>
+												<td>${item.userName}</td>
 												<td>${item.lastName}</td>
 												<td>${item.firstName}</td>
 												<td>${item.email}</td>

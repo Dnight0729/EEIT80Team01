@@ -16,6 +16,11 @@ public class BidService {
 		bidLogDao = new BidLogDAOService();
 		itemsDao = new ItemsDAOjdbc();
 	}
+	public String getSeller(int itemId){
+		itemsBean = itemsDao.selectId(itemId);
+		return itemsBean.getSeller();
+	}
+	
 	public BidLogBean compareTopPrice(BidLogBean newBean,int itemId){
 		BidLogBean result = null;
 		bidLogBean = bidLogDao.getTopPrice(itemId);

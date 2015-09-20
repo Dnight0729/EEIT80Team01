@@ -1,4 +1,4 @@
-package trade.model.dao;
+package item.trade.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import trade.model.TradeBean;
-import trade.model.TradeDAO;
+import item.trade.model.TradeBean;
+import item.trade.model.TradeDAO;
 
 public class TradeDAOJdbc implements TradeDAO {
 
@@ -121,51 +121,6 @@ public class TradeDAOJdbc implements TradeDAO {
 		return bean;
 	}
 
-	private String getByItem = "select * from trade where item_id=?";
-	@Override
-	public List<TradeBean> getByItem(int itemId) {
-		try {
-			conn = ds.getConnection();
-			ptmt = conn.prepareStatement(getByItem);
-			ptmt.setInt(1,itemId);
-			beans = new ArrayList<TradeBean>();
-			rs = ptmt.executeQuery();
-			while(rs.next()){
-				bean = new TradeBean();
-				bean.setItemId(rs.getInt(1));
-				bean.setSeller(rs.getString(2));
-				bean.setSellerCheck(rs.getInt(3));
-				bean.setBuyer(rs.getString(4));
-				bean.setBuyerCheck(rs.getInt(5));
-				beans.add(bean);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			if(rs!=null){
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(ptmt!=null){
-				try {
-					ptmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn!=null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return beans;
-	}
 
 	private String getBySeller = "select * from trade where seller=?";
 	@Override

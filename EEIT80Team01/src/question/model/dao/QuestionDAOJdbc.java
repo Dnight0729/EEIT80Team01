@@ -32,7 +32,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 
 	/* SUPPOTER AREA */
 	// supporter list unanswered questions
-	private static final String UNANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTION WHERE SUPPORTER IS NULL";
+	private static final String UNANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTIONS WHERE SUPPORTER IS NULL";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#supporterListUnAnsweredQuestions()

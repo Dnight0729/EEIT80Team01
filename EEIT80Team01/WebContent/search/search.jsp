@@ -94,21 +94,19 @@ body { font-family: sans-serif; }
 		<c:forEach var="item" items="${items}">
 			  <div class="item">
 			    <div class="item-content">
-			    	<c:if test="${!empty imgNumMap.get(items.itemId)}">
-			    		<img alt="" src="${pageContext.request.contextPath}/items/showImage?imageNo=${imgNumMap.get(items.itemId)}" width="100%" height="100%">
+			    	<c:if test="${imgNumMap.get(item.getItemId())!=null}">
+			    		<img alt="" src="${pageContext.request.contextPath}/search/showImage?imageNo=${imgNumMap.get(item.getItemId())}" width="100%" height="100%">
 			    	</c:if>
-			    	<c:if test="${empty imgNumMap.get(items.itemId)}">
-			    		<img alt="" src="${pageContext.request.contextPath}/items/showImage" width="100%" height="100%">
+			    	<c:if test="${imgNumMap.get(item.getItemId())==null}">
+			    		<img alt="" src="${pageContext.request.contextPath}/search/showImage" width="100%" height="100%">
 			    	</c:if>
 			    </div>
 			    <div class="detail">
 			    	<h4>${item.title}</h4>
-			    	<hr/>
 			    	<div>起標價：${item.startPrice}</div>
 			    	<div>直購價：${item.directPrice}</div>
 			    	<fmt:formatDate value="${item.endTime}" var="endTime" type="date" pattern="yyyy年MM月dd日hh時mm分"/>
 			    	<div>結標時間：${endTime}</div>
-			    	<hr/>
 			    	<p>${item.itemDescribe}</p>
 			    </div>
 			  </div>

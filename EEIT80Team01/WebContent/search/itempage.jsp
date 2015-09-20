@@ -36,6 +36,18 @@ body { padding-top: 50px; }
 		<%@include file="/include/header" %>
 </header>	
 <article>
+		<c:if test="${!empty errorMsg }">
+			<div class="alert alert-danger alert-dismissible text-center" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>${errorMsg}</strong>
+			</div>
+		</c:if>
+		<c:if test="${!empty message }">
+			<div class="alert alert-success alert-dismissible text-center" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>${message}</strong>
+			</div>
+		</c:if>
 		<div class="container-fluid">
 	      <div class="row">
 			<%@include file="/include/navPart" %>

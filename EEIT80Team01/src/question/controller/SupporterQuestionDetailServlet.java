@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import question.model.QuestionBean;
 import question.model.QuestionService;
 
-@WebServlet("/support/manage/question/supporterQuestionDetail.do")
+@WebServlet("/support/manage/question/supportQuestionDetail.do")
 public class SupporterQuestionDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

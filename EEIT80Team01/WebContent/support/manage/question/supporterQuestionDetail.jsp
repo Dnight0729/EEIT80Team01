@@ -8,20 +8,18 @@
 <title></title>
 </head>
 <body>
-		<c:forEach items="${questionDetail}" var="bean">
-			<div>${bean.qno}</div>
-			<div>${bean.title}</div>
-			<div>${bean.member}</div>
-			<div>${bean.msg}</div>
-			<div>${bean.qt}</div>
-		</c:forEach>
+			<div>${questionDetail.qno}</div>
+			<div>${questionDetail.title}</div>
+			<div>${questionDetail.member}</div>
+			<div>${questionDetail.qmsg}</div>
+			<div>${questionDetail.qt}</div>
 		<form method="post" action="supporterAnswerQuestion.do" id="answerform">
 			<input type="submit" value="送出">
-			<input type="hidden" name="hiddenqno" value="${bean.qno}">
-			<input type="hidden" name="hiddenqmsg" value="${bean.qmsg}">
-			<input type="hidden" name="hiddenmember" value="${bean.member}">
-			<input type="hidden" name="hiddentitle" value="${bean.title}">
-			<input type="hidden" name="hiddenqt" value="${bean.qt}">
+			<input type="hidden" name="hiddenqno" value="${questionDetail.qno}">
+			<input type="hidden" name="hiddenqmsg" value="${questionDetail.qmsg}">
+			<input type="hidden" name="hiddenmember" value="${questionDetail.member}">
+			<input type="hidden" name="hiddentitle" value="${questionDetail.title}">
+			<input type="hidden" name="hiddenqt" value="${questionDetail.qt}">
 		</form>
 		<textarea rows="20" cols="100" name="answer" form="answerform"></textarea>
 </body>

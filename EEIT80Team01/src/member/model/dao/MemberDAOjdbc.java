@@ -95,7 +95,7 @@ public class MemberDAOjdbc implements MemberDAO {
 				bean.setBirthDay(new Date(rset.getDate("birthday").getTime()));
 				bean.setAccess(rset.getInt("access"));
 				bean.setCertified(rset.getInt("certified"));
-				beans.add(bean);				
+				beans.add(bean);
 			}
 			
 		} catch (SQLException e) {
@@ -215,6 +215,7 @@ public class MemberDAOjdbc implements MemberDAO {
 	
 	private static final String BAN =
 			"update member set access=? where username=?";
+	@Override
 	public int banMember(String[] userName){
 		int count = 0;
 		try {

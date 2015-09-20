@@ -26,7 +26,7 @@ public class SearchServlet extends HttpServlet {
 	private Map<Integer,Integer> imgNumMap = null;
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String keyword=" ";
+		String keyword="";
 		int option =-100;
 		try {
 			option = Integer.parseInt(request.getParameter("option"));
@@ -37,11 +37,16 @@ public class SearchServlet extends HttpServlet {
 		 imgNumMap = new HashMap<Integer,Integer>();
 		if(option==-100){
 			beans = searchService.getItemsByKeyword(keyword);
-			if(beans!=null){
+			if(beans!=null && !beans.isEmpty()){
 				for(ItemsBean bean:beans){
-					Integer id = bean.getItemId();
-					Integer imgNum = itemImgService.selectImagesNumbers(id).get(0);
-					imgNumMap.put(id,imgNum);
+					int id = bean.getItemId();
+					Integer itemId = id;
+					System.out.println("id="+id);
+					List<Integer> imgNums = itemImgService.selectImagesNumbers(id);
+					if(!imgNums.isEmpty()){
+						Integer imgNum = imgNums.get(0);
+						imgNumMap.put(itemId,imgNum);
+					}
 				}
 				request.setAttribute("imgNumMap",imgNumMap);
 				request.setAttribute("items",beans);
@@ -52,11 +57,16 @@ public class SearchServlet extends HttpServlet {
 			}
 		}else{
 			beans = searchService.getItemsWithOption(option, keyword);
-			if(beans!=null){
+			if(beans!=null && !beans.isEmpty()){
 				for(ItemsBean bean:beans){
-					Integer id = bean.getItemId();
-					Integer imgNum = itemImgService.selectImagesNumbers(id).get(0);
-					imgNumMap.put(id,imgNum);
+					int id = bean.getItemId();
+					Integer itemId = id;
+					System.out.println("id="+id);
+					List<Integer> imgNums = itemImgService.selectImagesNumbers(id);
+					if(!imgNums.isEmpty()){
+						Integer imgNum = imgNums.get(0);
+						imgNumMap.put(itemId,imgNum);
+					}
 				}
 				request.setAttribute("imgNumMap",imgNumMap);
 				request.setAttribute("items",beans);

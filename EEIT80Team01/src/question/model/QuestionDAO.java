@@ -8,7 +8,7 @@ public interface QuestionDAO {
 
 	List<QuestionBean> supporterListUnAnsweredQuestions();
 
-	boolean supporterAnswerQuestion(int qno, String supporter, String amsg);
+	boolean supporterAnswerQuestion(QuestionBean bean);
 
 	QuestionBean supporterQuestionDetail(int qno);
 

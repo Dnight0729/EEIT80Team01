@@ -41,18 +41,18 @@ body {
 							<div class="panel-body">
 								<form method="post" action="adminChangePassword.do">
 									<div class="form-group">
-										<label for="username">舊密碼：</label> <input type="password"
-											id="oldpassword" name="oldpassword" title="請輸入舊密碼"
+										<label for="oldpassword">舊密碼：</label> <input type="password"
+											name="oldpassword" title="請輸入舊密碼"
 											class="form-control">
 									</div>
 									<div class="form-group">
 										<label for="password">新密碼：</label> <input type="password"
-											id="password" name="password" title="請輸入新密碼"
+											name="password" title="請輸入新密碼"
 											class="form-control">
 									</div>
 									<div class="form-group">
-										<label for="password">確認新密碼：</label> <input type="password"
-											id="passwordCheck" name="passwordCheck" title="請確認新密碼"
+										<label for="passwordCheck">確認新密碼：</label> <input type="password"
+											name="passwordCheck" title="請確認新密碼"
 											class="form-control">
 									</div>
 									<input class="btn btn-default" type="submit" id="submit"

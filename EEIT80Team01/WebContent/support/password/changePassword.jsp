@@ -38,19 +38,16 @@ body {
 						<div class="panel-body">
 							<form method="post" action="supportChangePassword.do">
 								<div class="form-group">
-									<label class="tag" for="oldpassword">舊密碼：</label> <input
-										type="password" name="oldpassword" title="請輸入舊密碼"
-										class="form-control">
+									<label for="oldpassword">舊密碼：</label> <input type="password"
+										name="oldpassword" title="請輸入舊密碼" class="form-control">
 								</div>
 								<div class="form-group">
-									<label class="tag" for="password">新密碼：</label> <input
-										type="password" name="password" title="請輸入新密碼"
-										class="form-control">
+									<label for="password">新密碼：</label> <input type="password"
+										name="password" title="請輸入新密碼" class="form-control">
 								</div>
 								<div class="form-group">
-									<label class="tag" for="password">確認密碼：</label> <input
-										type="password" name="passwordCheck" title="請再次輸入新密碼"
-										class="form-control">
+									<label for="password">確認密碼：</label> <input type="password"
+										name="passwordCheck" title="請再次輸入新密碼" class="form-control">
 								</div>
 								<input class="btn btn-default" type="submit" id="submit"
 									value="送出"> <input class="btn btn-danger" type="reset"
@@ -64,15 +61,6 @@ body {
 	</article>
 	<footer> </footer>
 	<%@include file="/include/modal"%>
-
-
-
-
-
-
-
-
-
 	<script src="changeData.js"></script>
 </body>
 </html>

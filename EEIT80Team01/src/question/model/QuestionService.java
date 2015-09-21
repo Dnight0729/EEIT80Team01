@@ -2,7 +2,6 @@ package question.model;
 
 import java.util.List;
 
-import question.model.QuestionDAO;
 import question.model.dao.QuestionDAOJdbc;
 
 public class QuestionService {
@@ -21,9 +20,9 @@ public class QuestionService {
 		return dao.supporterQuestionDetail(qno);
 	}
 
-	public boolean supporterAnswerQuestion(int qno, String supporter, String amsg) {
+	public boolean supporterAnswerQuestion(QuestionBean bean) {
 		QuestionDAO dao = new QuestionDAOJdbc();
-		return dao.supporterAnswerQuestion(qno, supporter, amsg);
+		return dao.supporterAnswerQuestion(bean);
 	}
 
 	public List<QuestionBean> memberListUnAnsweredQuestions(String member) {

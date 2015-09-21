@@ -245,13 +245,33 @@ public class SupportDAOJdbc implements SupportDAO {
 		return result;
 	}
 
-	private static final String UPDATE_SUPPORTER = "UPDATE SUPPORTERS SET PASSWD=?,EMPLOYEE_ID=?,FIRST_NAME=?,LAST_NAME=? WHERE SUPPORTERNAME=? ";
+	private static final String MODIFY_SUPPORTER = "UPDATE SUPPORTERS SET SUPPORTERNAME=?,PASSWD=?,EMPLOYEE_ID=?,FIRST_NAME=?,LAST_NAME=? WHERE SUPPORTERNAME=?";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see support.model.dao.SupportDAO#update(support.model.SupportBean)
-	 */
+	@Override
+	public boolean modify(SupportBean bean, String oldSupporterName) {
+		try (
+				Connection connection = ds.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(MODIFY_SUPPORTER);
+				) {
+			pstmt.setString(1, bean.getSupportername());
+			pstmt.setString(2, bean.getPassword());
+			pstmt.setString(3, bean.getEmployeeid());
+			pstmt.setString(4, bean.getFirstname());
+			pstmt.setString(5, bean.getLastname());
+			pstmt.setString(6, oldSupporterName);
+			int i = pstmt.executeUpdate();
+			if (i == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+
+	private static final String UPDATE_SUPPORTER = "UPDATE SUPPORTERS SET PASSWD=?,EMPLOYEE_ID=?,FIRST_NAME=?,LAST_NAME=? WHERE SUPPORTERNAME=?";
+
 	@Override
 	public SupportBean update(SupportBean bean) {
 		SupportBean result = null;
@@ -290,22 +310,22 @@ public class SupportDAOJdbc implements SupportDAO {
 	}
 
 	private static final String DELETE_SUPPORTER_BY_EMPLOYEEID = "DELETE FROM SUPPORTERS WHERE EMPLOYEE_ID=?";
-	
+
 	@Override
-	public boolean deleteByEmployeeID(String employeeid){
-		try(Connection connection = ds.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(DELETE_SUPPORTER_BY_EMPLOYEEID);){
+	public boolean deleteByEmployeeID(String employeeid) {
+		try (Connection connection = ds.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(DELETE_SUPPORTER_BY_EMPLOYEEID);) {
 			pstmt.setString(1, employeeid);
 			int i = pstmt.executeUpdate();
-			if (i == 1){
+			if (i == 1) {
 				return true;
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
+
 	private static final String SELECT_BY_EMPLOYEEID = "SELECT SUPPORTERNAME,PASSWD,EMPLOYEE_ID,FIRST_NAME,LAST_NAME FROM SUPPORTERS WHERE EMPLOYEE_ID=?";
 
 	@Override

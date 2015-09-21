@@ -42,7 +42,7 @@ public class ReceiveDeleteServlet extends HttpServlet {
 		String[] messageNumbers = request.getParameterValues("messageNumber");
 		MessageService service = new MessageService();
 		if(messageNumbers!=null && messageNumbers.length>0){
-			service.changeVisibility(receiver, 2, messageNumbers);			
+			service.changeVisibility(receiver, 1, messageNumbers);			
 		}
 		
 		response.sendRedirect("receive.jsp");

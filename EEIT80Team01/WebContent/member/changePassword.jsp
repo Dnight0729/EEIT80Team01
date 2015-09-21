@@ -69,7 +69,7 @@ body { padding-top: 50px; }
 				  <div class="form-group">
 				    <div class="col-sm-offset-3 col-sm-7">
 				      <button type="submit" id="submit" class="btn btn-default">送出</button>
-				      <button type="button" id="reset" class="btn btn-default">清除</button>
+				      <button type="reset" id="reset" class="btn btn-default">清除</button>
 				    </div>
 				  </div>
 				</form>

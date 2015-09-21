@@ -71,7 +71,7 @@ pageContext.setAttribute("list",list);
 	            <li><a href="${pageContext.request.contextPath}/register/register.jsp"><span class="glyphicon glyphicon-pencil">&nbsp;創建帳號</span></a></li>
 	            <li role="separator" class="divider"></li>
 	            <c:if test="${!empty LoginOK}">
-	            <li><a href="${pageContext.request.contextPath}/login/login.jsp"><span class="glyphicon glyphicon-log-out">&nbsp;登出</span></a></li>
+	            <li><a href="${pageContext.request.contextPath}/login/logout.jsp"><span class="glyphicon glyphicon-log-out">&nbsp;登出</span></a></li>
 	            </c:if>
 	          </ul>
 	        </li>

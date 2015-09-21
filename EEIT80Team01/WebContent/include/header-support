@@ -32,7 +32,7 @@
 	          <ul class="dropdown-menu ul-lg">
 	            <c:if test="${!empty LoginSupport}">
 	            <li><a href="${pageContext.request.contextPath}/support/manage/listMembers.jsp"><span class="glyphicon glyphicon-menu-hamburger">&nbsp;會員列表</span></a></li>
-	            <li><a href="${pageContext.request.contextPath}/support/manage/question/listUnansweredQuestionsServlet.jsp"><span class="glyphicon glyphicon-menu-hamburger">&npsp;會員問題列表</span></a></li>
+	            <li><a href="${pageContext.request.contextPath}/support/manage/question/listUnansweredQuestionsServlet.jsp"><span class="glyphicon glyphicon-menu-hamburger">&nbsp;會員問題列表</span></a></li>
 	            <li><a href="${pageContext.request.contextPath}/support/password/changePassword.jsp"><span class="glyphicon glyphicon-pencil">&nbsp;修改客服密碼</span></a></li>
 	            <li><a href="${pageContext.request.contextPath}/support/login/logout.jsp"><span class="glyphicon glyphicon-log-out">&nbsp;客服登出</span></a></li>
 	            </c:if>

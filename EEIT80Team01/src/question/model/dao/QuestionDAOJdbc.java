@@ -60,22 +60,26 @@ public class QuestionDAOJdbc implements QuestionDAO {
 	}
 
 	// supporter answer question
-	private static final String SUPPORT_ANSWER_QUESTION = "UPDATE QUESTIONS SET SUPPORTER=?,AMSG=?,AT=? WHERE QNO=?";
+	private static final String SUPPORT_ANSWER_QUESTION = "UPDATE QUESTIONS SET MEMBER=?,TITLE=?,QMSG=?,QT=?,SUPPORTER=?,AMSG=?,AT=? WHERE QNO=?";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#supporterAnswerQuestion(int, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean supporterAnswerQuestion(int qno, String supporter, String amsg) {
+	public boolean supporterAnswerQuestion(QuestionBean bean) {
 		boolean result = false;
-		long at = new Date().getTime();
 		try (Connection connection = ds.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SUPPORT_ANSWER_QUESTION);) {
-			pstmt.setString(1, supporter);
-			pstmt.setString(2, amsg);
-			pstmt.setLong(3, at);
-			pstmt.setInt(4, qno);
+			pstmt.setString(1, bean.getMember());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getQmsg());
+			pstmt.setLong(4, bean.getQt());
+			pstmt.setString(5, bean.getSupporter());
+			pstmt.setString(6, bean.getAmsg());
+			pstmt.setLong(7, bean.getAt());
+			pstmt.setInt(8, bean.getQno());
 			result = pstmt.execute();
+			result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

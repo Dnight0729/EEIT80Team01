@@ -74,7 +74,9 @@ public class LoginFilter implements Filter {
 		SupportBean supportToken = (SupportBean) session.getAttribute(GlobalService.LOGIN_TOKEN_SUPPORT);
 		if (loginToken == null && adminToken == null && supportToken==null) {
 			return false;
-		} else {
+		} else if (loginToken.getAccess()==1){
+			return false;
+		}else {
 			return true;
 		}
 	}

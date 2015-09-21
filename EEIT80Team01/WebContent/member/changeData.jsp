@@ -68,7 +68,7 @@ body { padding-top: 50px; }
 				  <div class="form-group">
 				    <div class="col-sm-offset-3 col-sm-7">
 				      <button type="submit" id="submit" class="btn btn-default">送出</button>
-				      <button type="button" id="reset" class="btn btn-default">還原</button>
+				      <button type="reset" id="reset" class="btn btn-default">還原</button>
 				    </div>
 				  </div>
 				</form>
@@ -76,13 +76,13 @@ body { padding-top: 50px; }
 			<%@include file="/include/blockPart" %>
          </div>
         </div>
+        
 	</article>
 	<footer>
 	
 	</footer>
 	<%@include file="/include/modal" %>
 	
-
 <script>
 $("#sectionItem2").addClass("active");
 </script>

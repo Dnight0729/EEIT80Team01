@@ -9,6 +9,12 @@
 <%@include file="/include/include" %>
 <style >
 body { padding-top: 50px; }
+.detail{
+  width:100%;
+  height:30%;
+  word-break:keep-all;
+  overflow:hide;
+}
 //---------------------------------
 * {
   -webkit-box-sizing: border-box;
@@ -32,7 +38,7 @@ body { font-family: sans-serif; }
 
 .item {
   width: 20%;
-  height: 250px;
+  height: 300px;
 }
 
 .item-content {
@@ -46,17 +52,11 @@ body { font-family: sans-serif; }
        -o-transition: width 0.4s, height 0.4s;
           transition: width 0.4s, height 0.4s;
 }
-.detail{
-	width:100%;
-	height:30%;
-	word-break:keep-all;
-	overflow:hidden;
-	background:red;
-}
+
 /* item has expanded size */
 .item.is-expanded {
   width: 40%;
-  height: 500px;
+  height:600px;
 }
 
 .item:hover { cursor: pointer; }
@@ -91,16 +91,14 @@ body { font-family: sans-serif; }
  		 </c:choose>
 	</div>
 	<div class="packery">
-		<c:forEach var="item" items="${items}">
-			  <div class="item">
-			    <div class="item-content">
-			    	<c:if test="${imgNumMap.get(item.getItemId())!=null}">
-			    		<img alt="" src="${pageContext.request.contextPath}/search/showImage?imageNo=${imgNumMap.get(item.getItemId())}" width="100%" height="100%">
-			    	</c:if>
-			    	<c:if test="${imgNumMap.get(item.getItemId())==null}">
-			    		<img alt="" src="${pageContext.request.contextPath}/search/showImage" width="100%" height="100%">
-			    	</c:if>
-			    </div>
+		<!--<c:forEach var="item" items="${items}">-->
+			  <div class="item" >
+		    	<c:if test="${imgNumMap.get(item.getItemId())!=null}">
+		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage?imageNo=${imgNumMap.get(item.getItemId())}" width="100%" height="100%">
+		    	</c:if>
+		    	<c:if test="${imgNumMap.get(item.getItemId())==null}">
+		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage" width="100%" height="100%">
+		    	</c:if>
 			    <div class="detail">
 			    	<h4>${item.title}</h4>
 			    	<div>起標價：${item.startPrice}</div>
@@ -110,7 +108,7 @@ body { font-family: sans-serif; }
 			    	<p>${item.itemDescribe}</p>
 			    </div>
 			  </div>
-		</c:forEach>
+		<!--</c:forEach>-->
 	</div>
 	
 </article>
@@ -119,21 +117,61 @@ body { font-family: sans-serif; }
 
 <script>
 //http://packery.metafizzy.co/packery.pkgd.js added as external resource
+var transitionProp = getStyleProperty('transition');
+// get transition end event name
+var transitionEndEvent = {
+  WebkitTransition: 'webkitTransitionEnd',
+  MozTransition: 'transitionend',
+  OTransition: 'otransitionend',
+  transition: 'transitionend'
+}[ transitionProp ];
 
 $( function() {
-  var $container = $('.packery').packery();
+  var $container = $('.packery').packery({
+    percentPosition: true
+  });
+  $container.on( 'click', '.item-content', function( event ) {
+    var target = event.target;
+    var $target = $( target );
 
-  $container.on( 'click', '.item', function( event ) {
-    var $item = $( event.currentTarget );
-    var isExpanded = $item.hasClass('is-expanded');
-    $item.toggleClass('is-expanded');
+    // disable transition
+    $target.css( transitionProp, 'none' );
+    // set current size
+    $target.css({
+      width: $target.width(),
+      height: $target.height()
+    });
+
+    var $itemElem = $target.parent();
+    var isExpanded = $itemElem.hasClass('is-expanded');
+    $itemElem.toggleClass('is-expanded');
+    // force redraw
+    var redraw = target.offsetWidth;
+    // renable default transition
+    target.style[ transitionProp ] = '';
+
+    // reset 100%/100% sizing after transition end
+    if ( transitionProp ) {
+      $target.one( transitionEndEvent, function() {
+        target.style.width = '';
+        target.style.height = '';
+      });
+    }
+
+    // set new size
+    $target.css({
+      width: $itemElem.width(),
+      height: $itemElem.height()
+    });
+
     if ( isExpanded ) {
       // if shrinking, just layout
       $container.packery();
     } else {
       // if expanding, fit it
-      $container.packery( 'fit', event.currentTarget );
+      $container.packery( 'fit', $itemElem[0] );
     }
+
   });
 });
 </script>

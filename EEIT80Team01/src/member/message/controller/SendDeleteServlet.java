@@ -44,7 +44,7 @@ public class SendDeleteServlet extends HttpServlet {
 			service.changeVisibility(sender, 2, messageNumbers);			
 		}
 		
-		response.sendRedirect("send");
+		response.sendRedirect("send.jsp");
 	}
 
 }

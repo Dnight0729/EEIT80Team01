@@ -45,7 +45,7 @@ public class ReceiveDeleteServlet extends HttpServlet {
 			service.changeVisibility(receiver, 2, messageNumbers);			
 		}
 		
-		response.sendRedirect("receive");
+		response.sendRedirect("receive.jsp");
 	}
 
 }

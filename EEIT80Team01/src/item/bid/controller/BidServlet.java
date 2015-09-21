@@ -2,6 +2,7 @@ package item.bid.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Timer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,12 @@ import item.bid.model.BidLogBean;
 import item.bid.model.BidService;
 import item.trade.model.TradeBean;
 import item.trade.model.TradeDAOService;
+import item.trade.model.TradeTimer;
 import member.model.MemberBean;
 
 @WebServlet("/product/bid.do")
 public class BidServlet extends HttpServlet {
+	
 	private BidService bidService = null;
 	private BidLogBean bidLogBean = null;
 	private int itemId = 0;
@@ -66,9 +69,16 @@ public class BidServlet extends HttpServlet {
 						tradeBean.setBuyerCheck(0);
 						tradeBean.setSeller(seller);
 						tradeBean.setSellerCheck(0);
-						tradeDaoService.insert(tradeBean);
-						request.setAttribute("message","購買成功");
-						request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+						tradeBean = tradeDaoService.insert(tradeBean);
+						if(tradeBean!=null){
+							Timer timer = new Timer();
+							timer.schedule(new TradeTimer(itemId),new java.util.Date().getTime()+7*24*60*60*1000);
+							request.setAttribute("message","購買成功");
+							request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+						}else{
+							request.setAttribute("errorMsg","購買失敗");
+							request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+						}
 					} else{
 						bidService.changeItemStatusToZero(itemId);
 					}

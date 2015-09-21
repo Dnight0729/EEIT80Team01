@@ -36,8 +36,8 @@ public class TradeDAOService {
 		}
 		return null;
 	}
-	public void delete(int itemId){
-		dao.delete(itemId);
+	public int delete(int itemId){
+		return dao.delete(itemId);
 	}
 	
 }

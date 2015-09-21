@@ -77,7 +77,12 @@ public class TradeServlet extends HttpServlet {
 		int buyerCheck = tradeBean.getBuyerCheck();
 		int sellerCheck = tradeBean.getSellerCheck();
 		if(buyerCheck==2 && sellerCheck==2){
-			tradeDaoService.delete(itemId);
+			int del = tradeDaoService.delete(itemId);
+			if(del==1){
+				System.out.println("itemId:"+itemId+" 刪除成功");
+			}else{
+				System.out.println("itemId:"+itemId+" 刪除失敗");
+			}
 		}
 		request.getRequestDispatcher("tradeCenter.do").forward(request, response);
 		

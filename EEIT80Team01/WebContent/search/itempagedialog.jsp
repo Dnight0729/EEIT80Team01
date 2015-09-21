@@ -51,11 +51,11 @@
 				    $( "#dialog" ).dialog({
 				      autoOpen: false,
 				      show: {
-				        effect: "clip",
+				        effect: "fade",
 				        duration: 500
 				      },
 				      hide: {
-				        effect: "explode",
+				        effect: "blind",
 				        duration: 500
 				      },
 				      height:400,

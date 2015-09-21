@@ -53,19 +53,21 @@ public class AdminAddSupporterServlet extends HttpServlet {
 							SupportBean result = service.register(bean);
 							if (result != null && result.getSupportername().toLowerCase()
 									.equals(bean.getSupportername().toLowerCase())) {
+								request.setAttribute("addResult", "新增 1 筆資料");
 								RequestDispatcher rd = request
-										.getRequestDispatcher("/admin/manage/AddNewSupporterSuccess.jsp");
+										.getRequestDispatcher("/admin/manage/AddNewSupporter.jsp");
 								rd.forward(request, response);
 								return;
 							}
 						}
 					}
 				}
-				RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/AddNewSupporter.jsp");
-				rd.forward(request, response);
-				return;
 			}
 		}
+		request.setAttribute("addResult", "新增失敗");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/AddNewSupporter.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
 }

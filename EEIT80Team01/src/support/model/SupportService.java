@@ -86,4 +86,9 @@ public class SupportService {
 		}
 		return result;
 	}
+	
+	public boolean modifySupporter(SupportBean bean, String oldSupporterName){
+		SupportDAO dao = new SupportDAOJdbc();
+		return dao.modify(bean, oldSupporterName);
+	}
 }

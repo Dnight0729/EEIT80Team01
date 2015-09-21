@@ -29,34 +29,7 @@ body {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="panel panel-default" style="margin-top: 20px">
-						<div class="panel-heading">
-							<h3 class="panel-title">客服</h3>
-						</div>
-						<div class="panel-body">
-							<c:if test="${empty LoginSupport }">
-								<a
-									href="${pageContext.request.contextPath}/support/login/login.jsp">登入</a>
-								<br>
-								<br>
-							</c:if>
-							<c:if test="${!empty LoginSupport }">
-								<a
-									href="${pageContext.request.contextPath}/support/manage/listMembers.jsp">會員列表</a>
-								<br>
-								<br>
-								<a href="${pageContext.request.contextPath}/support/manage/question/listUnansweredQuestionsServlet.jsp">會員問題列表</a>
-								<br>
-								<br>
-								<a
-									href="${pageContext.request.contextPath}/support/password/changePassword.jsp">修改客服密碼</a>
-								<br>
-								<br>
-								<a
-									href="${pageContext.request.contextPath}/support/login/logout.jsp">登出</a>
-							</c:if>
-						</div>
-					</div>
+					<%@include file="/support/toolbar" %>
 				</div>
 				<div class="col-md-9">
 					<form method="post" action="還沒寫">

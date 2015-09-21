@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import global.GlobalService;
 import support.model.SupportBean;
 import support.model.SupportService;
 
@@ -51,6 +52,7 @@ public class AdminModifySupporterServlet extends HttpServlet {
 		String employeeid = request.getParameter("employeeid");
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
+		String oldSupporterName = request.getParameter("oldSupporterName");
 
 		SupportBean bean = new SupportBean();
 		Map<String, String> errorMsgs = new HashMap<String, String>();
@@ -58,8 +60,8 @@ public class AdminModifySupporterServlet extends HttpServlet {
 
 		if (supportername == null || supportername.trim().length() == 0) {
 			errorMsgs.put("supporternameError", "請輸入帳號");
-		} else if (service.checkSupporterAccountExist(supportername)) {
-			errorMsgs.put("supporternameError", "帳號名稱重複");
+		} else if (supportername.trim().length()<5) {
+			errorMsgs.put("supporternameError", "帳號長度不足5");
 		}
 		if (password == null || password.trim().length() == 0) {
 			errorMsgs.put("passwordError", "請輸入密碼");
@@ -70,8 +72,6 @@ public class AdminModifySupporterServlet extends HttpServlet {
 		}
 		if (employeeid == null || employeeid.trim().length() == 0) {
 			errorMsgs.put("employeeidError", "請輸入客服編號");
-		} else if (service.checkEmployeeIDExist(employeeid)) {
-			errorMsgs.put("employeeidError", "客服編號重複");
 		}
 		if (firstname == null || firstname.trim().length() == 0) {
 			errorMsgs.put("firstnameError", "請輸入名字");
@@ -82,18 +82,19 @@ public class AdminModifySupporterServlet extends HttpServlet {
 
 		if (errorMsgs.isEmpty()) {
 			bean.setSupportername(supportername);
-			bean.setPassword(password);
+			bean.setPassword(GlobalService.getMD5Encoding(password));
 			bean.setEmployeeid(employeeid);
 			bean.setFirstname(firstname);
 			bean.setLastname(lastname);
-			if (service.updateSupporterAccountInfo(bean)) {
-				RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/listSupporters.jsp");
-				// call AdminListSupporterServlet.java to reload supporter list
-				// again
+			
+			if (service.modifySupporter(bean, oldSupporterName)) {
+				request.setAttribute("modifyResult", "成功修改 1 筆資料");
+				RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/modifySupporter.jsp");
 				rd.forward(request, response);
 				return;
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/modifySupporterFailed.jsp");
+				request.setAttribute("modifyResult", "修改失敗");
+				RequestDispatcher rd = request.getRequestDispatcher("/admin/manage/modifySupporter.jsp");
 				rd.forward(request, response);
 				return;
 			}

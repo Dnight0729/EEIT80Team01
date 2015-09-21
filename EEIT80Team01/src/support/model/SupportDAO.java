@@ -31,4 +31,6 @@ public interface SupportDAO {
 	int delete(List<SupportBean> supporterlist);
 	
 	boolean deleteByEmployeeID(String employeeid);
+	
+	public boolean modify(SupportBean bean, String oldSupporterName);
 }

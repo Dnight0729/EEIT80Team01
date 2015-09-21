@@ -15,7 +15,7 @@ import item.trade.model.TradeDAOService;
 import item.trade.model.TradeService;
 import member.model.MemberBean;
 
-@WebServlet("/tradeCenter.jsp")
+@WebServlet("/trade/trade.do")
 public class TradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -41,20 +41,16 @@ public class TradeServlet extends HttpServlet {
 			if(usr==seller){
 				tradeBean = tradeService.changeSellerStatus(itemId,1);
 				if(tradeBean!=null){
-					request.setAttribute("message","確認交易");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("message","交易確認完成");
 				}else{
-					request.setAttribute("errorMsg","確認失敗!");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("errorMsg","交易確認失敗!");
 				}
 			}else{
 				tradeBean = tradeService.changeBuyerStatus(itemId,1);
 				if(tradeBean!=null){
-					request.setAttribute("message","確認交易");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("message","交易確認完成");
 				}else{
-					request.setAttribute("errorMsg","確認失敗!");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("errorMsg","交易確認失敗!");
 				}
 			}
 		}
@@ -63,23 +59,33 @@ public class TradeServlet extends HttpServlet {
 			if(usr==seller){
 				tradeBean = tradeService.changeSellerStatus(itemId,2);
 				if(tradeBean!=null){
-					request.setAttribute("message","取消交易");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("message","交易取消完成");
 				}else{
-					request.setAttribute("errorMsg","取消失敗!");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("errorMsg","交易取消失敗!");
 				}
 			}else{
 				tradeBean = tradeService.changeBuyerStatus(itemId,2);
 				if(tradeBean!=null){
-					request.setAttribute("message","取消交易");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("message","交易取消完成");
 				}else{
-					request.setAttribute("errorMsg","取消失敗!");
-					request.getRequestDispatcher("tradeCenter.jsp").forward(request,response);
+					request.setAttribute("errorMsg","交易取消失敗!");
 				}
 			}
 		}
+		
+		tradeBean = tradeDaoService.getByPK(itemId);
+		int buyerCheck = tradeBean.getBuyerCheck();
+		int sellerCheck = tradeBean.getSellerCheck();
+		if(buyerCheck==2 && sellerCheck==2){
+			tradeDaoService.delete(itemId);
+		}
+		request.getRequestDispatcher("tradeCenter.do").forward(request, response);
+		
+		
+		
+		
+		
+		
 	}
 
 	

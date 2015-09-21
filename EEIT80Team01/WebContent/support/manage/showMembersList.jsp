@@ -32,7 +32,7 @@ body {
 					<%@include file="/support/toolbar" %>
 				</div>
 				<div class="col-md-9">
-					<form method="post" action="還沒寫">
+					<form method="post" action="banMember.do">
 						<fieldset>
 							<legend>會員列表</legend>
 							<div>
@@ -46,7 +46,7 @@ body {
 											<td>性別</td>
 											<td>生日</td>
 											<td>身分驗證</td>
-											<td>狀態</td>
+											<td>封鎖狀態</td>
 											<td>封鎖</td>
 										</tr>
 									</thead>
@@ -83,7 +83,7 @@ body {
 						</div>
 					</form>
 					<c:if test="${!empty bannedNumber}">
-						<span style="color:red">成功封鎖 ${bannedNumber} 位會員</span>
+						<div><span style="color:red">成功封鎖 ${bannedNumber} 位會員</span></div>
 					</c:if>
 				</div>
 			</div>

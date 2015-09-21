@@ -222,12 +222,11 @@ public class MemberDAOjdbc implements MemberDAO {
 			Connection conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement stmt = conn.prepareStatement(BAN);
-			for (int i = 0; i < userName.length; ){
+			for (int i = 0; i < userName.length; i++){
 				stmt.setInt(1, 1); // 1 = ban, 0 = normal
 				stmt.setString(2, userName[i]);
-				if(stmt.execute()){
-					count++;
-				}
+				stmt.execute();
+				count++;
 			}
 			conn.commit();
 			conn.setAutoCommit(true);

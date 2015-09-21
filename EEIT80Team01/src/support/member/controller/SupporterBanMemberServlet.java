@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.MemberService;
 
-@WebServlet("/SupporterBanMemberServlet")
+@WebServlet("/support/manage/banMember.do")
 public class SupporterBanMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class SupporterBanMemberServlet extends HttpServlet {
 			result = service.banMember(memberaccounts);
 		}
 		request.setAttribute("bannedNumber", result);
-		RequestDispatcher rd = request.getRequestDispatcher("");
+		RequestDispatcher rd = request.getRequestDispatcher("/support/manage/listMembers.jsp");
 		rd.forward(request, response);
 		return;
 	}

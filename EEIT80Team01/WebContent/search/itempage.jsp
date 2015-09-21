@@ -54,12 +54,8 @@ body { padding-top: 50px; }
 	        <div class="col-md-7 main" id="contentPart">
 	        	<c:choose>
 				<c:when test="${!empty item}">
-				<c:if test="${!empty LoginOK}">
-					賣家：<a href="${pageContext.request.contextPath}/member/default.jsp?id=${item.seller}" target="_blank">${item.seller}</a><br>
-	        	</c:if>
-	        	<c:if test="${empty LoginOK}">
-	        		賣家：${item.seller}<br>
-	        	</c:if>
+				
+					<div id="opener">賣家：${item.seller}</div>        	
 	        		商品分類：${itemCategory.categoryName}<br>
 	        		商品主題：${item.title}	<br>
 	        		商品價格：${price}<br>
@@ -106,6 +102,7 @@ body { padding-top: 50px; }
 				</c:otherwise>
 				</c:choose>	        
  			 </div>
+ 			 <%@include file="itempagedialog.jsp" %>
 			<%@include file="/include/blockPart" %>
          </div>
         </div>

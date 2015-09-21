@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.MemberBean;
+import member.model.MemberService;
+
 
 @WebServlet("/search/item")
 public class ItemPageServlet extends HttpServlet {
@@ -37,6 +40,7 @@ public class ItemPageServlet extends HttpServlet {
 		ItemsBean bean=null;
 		ItemCategoryBean icb=null;
 		List<Integer> images=null;
+		MemberBean mb = null;
 		double price=0;
 		try {
 			int itemId = Integer.parseInt(itemid);
@@ -54,6 +58,9 @@ public class ItemPageServlet extends HttpServlet {
 				} else{
 				 	price = bean.getStartPrice();
 				}
+				MemberService ms = new MemberService();
+				mb = ms.findMemberData(bean.getSeller());
+						
 			}
 		} catch (NumberFormatException e) {
 			bean = null;
@@ -63,6 +70,7 @@ public class ItemPageServlet extends HttpServlet {
 		request.setAttribute("itemCategory", icb);
 		request.setAttribute("price", price);
 		request.setAttribute("images", images);
+		request.setAttribute("member", mb);
 		rd.forward(request, response);
 	}
 

@@ -78,4 +78,8 @@ public class MemberService {
 		return dao.banMember(userName);
 	}
 	
+	public int unbanMember(String[] userName) {
+		MemberDAO dao = new MemberDAOjdbc();
+		return dao.unbanMember(userName);
+	}
 }

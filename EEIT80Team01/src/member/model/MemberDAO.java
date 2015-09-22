@@ -18,6 +18,8 @@ public interface MemberDAO {
 	public abstract boolean delete(String userName);
 	
 	public abstract int banMember(String[] userName);
+	
+	public abstract int unbanMember(String[] userName);
 
 }
 

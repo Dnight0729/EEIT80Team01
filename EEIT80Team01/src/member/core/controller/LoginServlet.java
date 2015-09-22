@@ -66,7 +66,13 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberBean mb = service.checkPasswordWithUsername(username.toLowerCase(), password);
 		if (mb != null) {
-			session.setAttribute(GlobalService.LOGIN_TOKEN, mb);
+			if(mb.getAccess()==1){
+				session.setAttribute("memberBan", "此帳號已被停權");
+				response.sendRedirect(request.getContextPath() + "/login/login.jsp");
+				return;
+			}else{
+				session.setAttribute(GlobalService.LOGIN_TOKEN, mb);
+			}			
 		} else {
 			errorMsgMap.put("LoginError", "該帳號不存在或密碼錯誤");
 		}

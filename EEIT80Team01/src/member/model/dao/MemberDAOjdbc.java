@@ -213,7 +213,7 @@ public class MemberDAOjdbc implements MemberDAO {
 		return false;
 	}
 	
-	private static final String BAN =
+	private static final String BAN_OR_UNBAN =
 			"update member set access=? where username=?";
 	@Override
 	public int banMember(String[] userName){
@@ -221,9 +221,30 @@ public class MemberDAOjdbc implements MemberDAO {
 		try {
 			Connection conn = ds.getConnection();
 			conn.setAutoCommit(false);
-			PreparedStatement stmt = conn.prepareStatement(BAN);
+			PreparedStatement stmt = conn.prepareStatement(BAN_OR_UNBAN);
 			for (int i = 0; i < userName.length; i++){
 				stmt.setInt(1, 1); // 1 = ban, 0 = normal
+				stmt.setString(2, userName[i]);
+				stmt.execute();
+				count++;
+			}
+			conn.commit();
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	@Override
+	public int unbanMember(String[] userName){
+		int count = 0;
+		try {
+			Connection conn = ds.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(BAN_OR_UNBAN);
+			conn.setAutoCommit(false);
+			for (int i =0; i < userName.length;i++){
+				stmt.setInt(1, 0); // 1 = ban, 0 = normal
 				stmt.setString(2, userName[i]);
 				stmt.execute();
 				count++;

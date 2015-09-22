@@ -2,6 +2,7 @@ package items.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 import items.model.dao.ItemsDAOjdbc;
 
@@ -58,6 +59,45 @@ public class ItemsService {
 		return result;
 	}
 	
+	public Timer timerForEndTime(){
+		Timer timer = new Timer();
+		return timer;
+	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public boolean changeItemStatusDown(int itemId){
+//		ItemsBean bean = null;
+//		ItemsDAO dao = new ItemsDAOjdbc();
+//		
+//		bean = dao.selectId(itemId);
+//		if(bean!=null && bean.getItemStatus()==0){
+//			bean.setItemStatus(1);
+//			bean = dao.update(bean);
+//			return true;
+//		}
+//		return false;
+//	}
+	
+//	public boolean changeItemStatusSell(int itemId){
+//		ItemsBean bean = null;
+//		ItemsDAO dao = new ItemsDAOjdbc();
+//		
+//		bean = dao.selectId(itemId);
+//		if(bean!=null && bean.getItemStatus()==0){
+//			bean.setItemStatus(2);
+//			bean = dao.update(bean);
+//			return true;
+//		}
+//		return false;
+//	}
 }

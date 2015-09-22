@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/include/include"%>
 <%@include file="/include/datatables.file"%>
-<title>會員列表</title>
+<title>封鎖中會員列表</title>
 <style>
 .navbar {
 	margin-bottom: 0px;
@@ -32,13 +32,13 @@ body {
 					<%@include file="/support/toolbar"%>
 				</div>
 				<div class="col-md-9">
-					<form method="post" action="banMember.do">
+					<form method="post" action="unbanMember.do">
 						<fieldset>
 							<legend>
 								會員列表
-								<c:if test="${!empty bannedNumber}">
-									<span style="color: red; float: right">成功封鎖
-										${bannedNumber} 位會員</span>
+								<c:if test="${!empty unbannedNumber}">
+									<span style="color: red; float: right">成功解除封鎖
+										${unbannedNumber} 位會員</span>
 								</c:if>
 							</legend>
 							<div>
@@ -51,14 +51,12 @@ body {
 											<td>email</td>
 											<td>性別</td>
 											<td>生日</td>
-<!-- 										<td>身分驗證</td> -->
-<!-- 										<td>封鎖狀態</td> -->
-											<td>封鎖</td>
+											<td>解除封鎖</td>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${memberlist}" var="item">
-											<c:if test="${item.access eq 0}">
+											<c:if test="${item.access eq 1}">
 												<tr>
 													<td>${item.userName}</td>
 													<td>${item.lastName}</td>
@@ -68,15 +66,7 @@ body {
 															test="${item.gender eq 0}">女</c:if></td>
 													<td><fmt:formatDate value="${item.birthDay}"
 															pattern="yyyy/MM/dd" /></td>
-<!-- 												<td> -->
-<%-- 													<c:if test="${item.certified eq 0}">未認證</c:if> --%>
-<%-- 													<c:if test="${item.certified eq 1}">已認證</c:if> --%>
-<!-- 												</td> -->
-<!-- 												<td> -->
-<%-- 													<c:if test="${item.access eq 0}">正常</c:if> --%>
-<%-- 													<c:if test="${item.access eq 1}">封鎖中</c:if> --%>
-<!-- 												</td> -->
-													<td><input type="checkbox" name="memberChecked"
+													<td><input type="checkbox" name="bannedMemberChecked"
 														value="${item.userName}"></td>
 												</tr>
 											</c:if>
@@ -90,15 +80,16 @@ body {
 								value="重新載入列表" onclick="goToPage()"></span> <span
 								style="float: right"><input type="reset" name="reset"
 								value="清除選取"> <input type="submit" name="delete"
-								value="封鎖已選取會員"></span>
+								value="解除封鎖已選取會員"></span>
 						</div>
 					</form>
+
 				</div>
 			</div>
 		</div>
 	</article>
 	<script>
-		var url = "listMembers.jsp";
+		var url = "listBannedMembers.jsp";
 		function goToPage() {
 			window.location = url;
 		}

@@ -7,9 +7,11 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,12 +25,16 @@ import javax.servlet.http.Part;
 
 import global.GlobalService;
 import items.model.ImageInput;
+import items.model.ItemTimer;
 import items.model.ItemsBean;
 import items.model.ItemsService;
 import member.model.MemberBean;
 
 @WebServlet("/items/itemAdd.controller")
-@MultipartConfig(maxFileSize=999999)
+@MultipartConfig(location="",
+		fileSizeThreshold = 1024 * 1024,
+		maxFileSize=1024 * 1024 * 500,
+		maxRequestSize = 1024 * 1024 * 500 * 3)
 public class ItemsAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemsService service;
@@ -169,19 +175,28 @@ public class ItemsAddServlet extends HttpServlet {
 		bean.setThreadLock(0);	//預設為0
 		
 		List<ImageInput> list = new ArrayList<ImageInput>();							
-			for(Part part: parts ){
-				try {
-					
-					ImageInput input= new ImageInput();
-					input.setFis((FileInputStream) part.getInputStream());				
-					input.setSize(part.getSize());
-					list.add(input);
-				} catch (Exception e) {
-				}
+		for(Part part: parts ){
+			try {
+				
+				ImageInput input= new ImageInput();
+				input.setFis((FileInputStream) part.getInputStream());				
+				input.setSize(part.getSize());
+				list.add(input);
+			} catch (Exception e) {
 			}
+		}
+
+		
 		//根據Model執行結果導向View
 		if(itemsButton!=null &&itemsButton.equals("Insert")){
 			ItemsBean result = service.insert(bean, list);
+			
+			Date date = new Date(endTime.getTime());
+			System.out.println(date);
+//			Timer timer = new Timer();
+			Timer timer = service.timerForEndTime();
+			timer.schedule(new ItemTimer(result), date);
+			
 			if(result==null){
 				errors.put("action", "商品上架錯誤");
 			}else{

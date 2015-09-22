@@ -32,11 +32,16 @@ public class SupporterBanMemberServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		if (memberaccounts != null && memberaccounts.length>0){
 			result = service.banMember(memberaccounts);
+			request.setAttribute("bannedNumber", result);
+			RequestDispatcher rd = request.getRequestDispatcher("/support/manage/listMembers.jsp");
+			rd.forward(request, response);
+			return;
+		} else {
+			request.setAttribute("bannedNumber", 0);
+			RequestDispatcher rd = request.getRequestDispatcher("/support/manage/listMembers.jsp");
+			rd.forward(request, response);
+			return;
 		}
-		request.setAttribute("bannedNumber", result);
-		RequestDispatcher rd = request.getRequestDispatcher("/support/manage/listMembers.jsp");
-		rd.forward(request, response);
-		return;
 	}
 
 }

@@ -15,11 +15,24 @@
  	margin-bottom: 0px;
 }
 body { padding-top: 50px; }
-#contentPart { padding-top: 50px; }
+#contentPart { padding-top: 50px;
+font-size:180%; }
 .itemimg{
 	width:100px;
 	hight:100px
 }
+
+#directPrice{
+color:#FF0000;
+font-size:150%;
+ 
+}
+#opener{
+cursor: pointer; 
+color:#0088A8;
+}
+
+#directPrice1{padding-left:50px; }
 </style>
 <c:choose>
 	<c:when test="${!empty item}">
@@ -50,7 +63,7 @@ body { padding-top: 50px; }
 		</c:if>
 		<div class="container-fluid">
 	      <div class="row">
-			<%@include file="/include/navPart" %>
+			<%@include file="/include/itempage" %>
 	        <div class="col-md-7 main" id="contentPart">
 	        	<c:choose>
 				<c:when test="${!empty item}">
@@ -61,8 +74,8 @@ body { padding-top: 50px; }
 	        		商品價格：${price}<br>
 	        		<fmt:formatDate value="${item.endTime}" var="formatDate" type="date" pattern="yyyy年MM月dd日HH時mm分" />	
 	        		結標時間：${formatDate}<br>
-	        		最小加價：${item.bid}<br>
-	        		直購價：${item.directPrice}<br>
+	        		最小加價：${item.bid}<br><br>
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
 	        		<c:if test="${!empty LoginOK}">
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
 	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post">
@@ -101,12 +114,11 @@ body { padding-top: 50px; }
 					<h3>查無此商品</h3>
 				</c:otherwise>
 				</c:choose>	        
- 			 </div>
+ 			 </div> 
  			 <%@include file="itempagedialog.jsp" %>
-			<%@include file="/include/blockPart" %>
+<%-- 			<%@include file="/include/blockPart" %> --%>
          </div>
         </div>
 	</article>
-
 </body>
 </html>

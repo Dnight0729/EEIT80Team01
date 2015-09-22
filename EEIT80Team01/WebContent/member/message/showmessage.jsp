@@ -30,7 +30,6 @@ body { padding-top: 50px; }
 #div {border-radius:20% ;
 }
 
-
 dd{border-radius:10px;}
 
 #dd{text-align:center}
@@ -51,19 +50,26 @@ dd{border-radius:10px;}
 				<div class="col-md-7 main" id="contentPart">
 				<dl class="dl-horizontal" >
  					
- 					<dt class="list-group-item list-group-item-success">收件者：</dt>
+ 					<dt class="list-group-item list-group-item-success">寄件者：</dt>
   					<dd name="dd">${Message.sender}</dd>
-  					<dt class="list-group-item list-group-item-warning">寄件者：</dt>
+  					<dt class="list-group-item list-group-item-warning">收件者：</dt>
   					<dd >${Message.receiver}</dd>
   					<dt class="list-group-item list-group-item-info">信件主旨：</dt>
   					<dd >${Message.messageTitle}</dd>
-  					<dt class="list-group-item list-group-item-danger">信件內容：</dt>
-  					
+  					<dt class="list-group-item list-group-item-danger">信件內容：</dt> 					
 				</dl>
 	<br>
-	<dd class="list-group-item">${Message.messageBody}<BR><BR><BR><BR></dd>
-		</div>
-		
+	<dl>
+		<dd class="list-group-item">${Message.messageBody}<BR><BR><BR><BR></dd>
+	</dl>
+		<input type ="button" onclick="history.back()" class="btn btn-default" value="上一頁"></input>	
+		<c:if test="${!Message.sender.equals(LoginOK.userName)}">
+			<a href="sendmessage.jsp?id=${Message.sender}" class="btn btn-default" role="button">回覆信件</a>
+		</c:if>	
+				<c:if test="${Message.sender.equals(LoginOK.userName)}">
+			<a href="sendmessage.jsp" class="btn btn-default" role="button">寫新信件</a>
+		</c:if>	
+		</div>		
 		<%@include file="/include/blockPart" %>
 	</div>
 	</div>

@@ -50,13 +50,14 @@ body { padding-top: 50px; }
 				CKEDITOR.replace( 'editor1' );
 			</script>
 			 <div class="form-group">
-			 <div class="col-sm-offset-2 col-sm-7">
+			 <div class="col-sm-offset-2 col-sm-10">
 			<input type="submit" id="submit" value="送出" class="btn btn-default">
-			<input type="reset" id="reset" value="清除" class="btn btn-default">
+			<input type="reset" id="reset" value="清除" class="btn btn-default">						
 			</div>
 			</div>
 		</fieldset>
-	</form>
+	</form> 
+
 	&nbsp;<small><Font color='red' size="-3">${successMessage}</Font></small>
 	&nbsp;<small><Font color='red' size="-3">${errorMessage}</Font></small>
 	</div>

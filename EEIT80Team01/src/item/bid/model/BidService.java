@@ -119,6 +119,22 @@ public class BidService {
 		}
 		return false;
 	}
+	
+	public boolean changeItemStatusToOne(int itemId){
+		ItemsBean result = null;
+		itemsBean = itemsDao.selectId(itemId);
+		if(itemsBean!=null && itemsBean.getItemStatus()==0){
+			itemsBean.setItemStatus(1);
+			result = itemsDao.update(itemsBean);
+			if(result!=null){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	
 	public BidLogBean insertDirectBuyer(int itemId,Timestamp bidTime,String buyer){
 		itemsBean = itemsDao.selectId(itemId);
 		if(itemsBean!=null){

@@ -15,11 +15,24 @@
  	margin-bottom: 0px;
 }
 body { padding-top: 50px; }
-#contentPart { padding-top: 50px; }
+#contentPart { padding-top: 50px;
+font-size:180%; }
 .itemimg{
 	width:100px;
 	hight:100px
 }
+
+#directPrice{
+color:#FF0000;
+font-size:150%;
+ 
+}
+#opener{
+cursor: pointer; 
+color:#0088A8;
+}
+
+#directPrice1{padding-left:50px; }
 </style>
 <c:choose>
 	<c:when test="${!empty item}">
@@ -50,7 +63,7 @@ body { padding-top: 50px; }
 		</c:if>
 		<div class="container-fluid">
 	      <div class="row">
-			<%@include file="/include/navPart" %>
+			<%@include file="/include/itempage" %>
 	        <div class="col-md-7 main" id="contentPart">
 	        	<c:choose>
 				<c:when test="${!empty item}">
@@ -61,16 +74,23 @@ body { padding-top: 50px; }
 	        		商品價格：${price}<br>
 	        		<fmt:formatDate value="${item.endTime}" var="formatDate" type="date" pattern="yyyy年MM月dd日HH時mm分" />	
 	        		結標時間：${formatDate}<br>
-	        		最小加價：${item.bid}<br>
-	        		直購價：${item.directPrice}<br>
+	        		最小加價：${item.bid}<br><br>
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
 	        		<c:if test="${!empty LoginOK}">
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
+	        		<c:if test="${!LoginOK.userName.equals(topPrice.buyer)}">
 	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post">
 	        			<input type="number" min="${price + item.bid}" value="${price + item.bid}" name="bidPrice">
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
 	        			<input type="hidden" name="action" value="bid">
 	        			<button type="submit" class="btn btn-primary">出價</button>
 	        		</form>
+	        		</c:if>
+	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
+	        		<div>
+	        			您是目前最高出價者
+	        		</div>
+	        		</c:if>
 	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post">
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
 	        			<input type="hidden" name="action" value="direct">	        			
@@ -78,7 +98,7 @@ body { padding-top: 50px; }
 	        		</form>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(item.seller)}">
-	        			你是這個商品的賣家<br>
+	        			您是這個商品的賣家<br>
 	        		</c:if>	        
 	        		</c:if>
 	        		<c:if test="${empty LoginOK}">
@@ -101,12 +121,11 @@ body { padding-top: 50px; }
 					<h3>查無此商品</h3>
 				</c:otherwise>
 				</c:choose>	        
- 			 </div>
+ 			 </div> 
  			 <%@include file="itempagedialog.jsp" %>
-			<%@include file="/include/blockPart" %>
+<%-- 			<%@include file="/include/blockPart" %> --%>
          </div>
         </div>
 	</article>
-
 </body>
 </html>

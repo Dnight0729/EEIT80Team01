@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import support.model.SupportBean;
 import admin.model.AdminBean;
 import member.model.MemberBean;
+import member.model.MemberService;
 
 @WebFilter(
 		urlPatterns = { "/member/*", "/items/*" }
@@ -52,12 +53,20 @@ public class LoginFilter implements Filter {
 				requestURI = requestURI+"?"+queryString;
 			}
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
-			
-			
+			HttpSession session = req.getSession();
+			MemberBean loginToken = (MemberBean) session.getAttribute(GlobalService.LOGIN_TOKEN);
 				if (checkLogin(req)) {   //  需要登入，已經登入
-					chain.doFilter(request, response);
+					MemberService service = new MemberService();
+					MemberBean user = service.findMemberData(loginToken.getUserName());
+					if (user.getAccess()==1){
+						session.removeAttribute(GlobalService.LOGIN_TOKEN);
+						session.setAttribute("memberBan", "此帳號已被停權");
+						resp.sendRedirect(contextPath + "/login/login.jsp");
+						return;						
+					} else {
+						chain.doFilter(request, response);
+					}
 				} else {				//  需要登入，尚未登入
-					HttpSession session = req.getSession();
 					session.setAttribute("requestURI", requestURI);
 					if ( ! isRequestedSessionIdValid ) {
 						session.setAttribute("timeOut", "使用逾時，請重新登入");
@@ -74,9 +83,7 @@ public class LoginFilter implements Filter {
 		SupportBean supportToken = (SupportBean) session.getAttribute(GlobalService.LOGIN_TOKEN_SUPPORT);
 		if (loginToken == null && adminToken == null && supportToken==null) {
 			return false;
-		} else if (loginToken.getAccess()==1){
-			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}

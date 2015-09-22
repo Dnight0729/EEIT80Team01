@@ -41,6 +41,7 @@ public class ItemPageServlet extends HttpServlet {
 		ItemCategoryBean icb=null;
 		List<Integer> images=null;
 		MemberBean mb = null;
+		BidLogBean blb = null;
 		double price=0;
 		try {
 			int itemId = Integer.parseInt(itemid);
@@ -50,7 +51,7 @@ public class ItemPageServlet extends HttpServlet {
 				ItemCategoryService ics = new ItemCategoryService();
 				icb = ics.getOneCategory(bean.getItemCategory());
 				BidLogDAOService bls = new BidLogDAOService();
-				BidLogBean blb = bls.getTopPrice(itemId);
+				blb = bls.getTopPrice(itemId);
 				ItemImagesService iis = new ItemImagesService();
 				images = iis.selectImagesNumbers(itemId);
 				if(blb!=null){
@@ -68,6 +69,7 @@ public class ItemPageServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/search/itempage.jsp");
 		request.setAttribute("item",bean);
 		request.setAttribute("itemCategory", icb);
+		request.setAttribute("topPrice", blb);
 		request.setAttribute("price", price);
 		request.setAttribute("images", images);
 		request.setAttribute("member", mb);

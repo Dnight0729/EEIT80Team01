@@ -8,12 +8,25 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="/include/include" %>
 <style >
-body { padding-top: 50px; }
-.detail{
+
+.content{
   width:100%;
   height:30%;
-  word-break:keep-all;
-  overflow:hide;
+  background-color:#2F4F4F;
+}
+.detail{
+  padding-left:7px;
+  color:#FAEBD7;
+}
+.title h4{
+  margin:0px;
+  background-color:#8B0000;
+  padding:5px;
+  color:#FFE4C4;
+}
+.title h4 small{
+  margin-right:5px;
+  float:right;
 }
 //---------------------------------
 * {
@@ -22,11 +35,8 @@ body { padding-top: 50px; }
           box-sizing: border-box;
 }
 
-body { font-family: sans-serif; }
 
 .packery {
-  background: #FDD;
-  background: hsla(45, 100%, 40%, 0.2);
 }
 
 /* clearfix */
@@ -39,14 +49,17 @@ body { font-family: sans-serif; }
 .item {
   width: 20%;
   height: 300px;
+  border: 2px solid #333;
+  border-color: #5F9EA0;
+  word-break:keep-all;
+  overflow:hidden;
 }
 
 .item-content {
   width:  100%;
   height: 70%;
-  background: #09D;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 100%, 0.4);
+  background-color:#2F4F4F;    
+  padding-bottom:0px;
   -webkit-transition: width 0.4s, height 0.4s;
      -moz-transition: width 0.4s, height 0.4s;
        -o-transition: width 0.4s, height 0.4s;
@@ -91,24 +104,26 @@ body { font-family: sans-serif; }
  		 </c:choose>
 	</div>
 	<div class="packery">
-		<!--<c:forEach var="item" items="${items}">-->
+		<c:forEach var="item" items="${items}">
 			  <div class="item" >
 		    	<c:if test="${imgNumMap.get(item.getItemId())!=null}">
-		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage?imageNo=${imgNumMap.get(item.getItemId())}" width="100%" height="100%">
+		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage?imageNo=${imgNumMap.get(item.getItemId())}">
 		    	</c:if>
 		    	<c:if test="${imgNumMap.get(item.getItemId())==null}">
-		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage" width="100%" height="100%">
+		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage">
 		    	</c:if>
-			    <div class="detail">
-			    	<h4>${item.title}</h4>
-			    	<div>起標價：${item.startPrice}</div>
-			    	<div>直購價：${item.directPrice}</div>
-			    	<fmt:formatDate value="${item.endTime}" var="endTime" type="date" pattern="yyyy年MM月dd日hh時mm分"/>
-			    	<div>結標時間：${endTime}</div>
-			    	<p>${item.itemDescribe}</p>
-			    </div>
+		    	<div class="content">
+				    <div class="title"><h4>${item.title}<small><a href="${pageContext.request.contextPath}/search/item?itemid=${item.itemId}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>參觀專頁</a></small></h4></div>
+				    <div class="detail">
+				    	<span>起始標價：<strong>${item.startPrice}</strong></span>
+				    	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直購價：<strong>${item.directPrice}</strong></span>
+				    	<fmt:formatDate value="${item.endTime}" var="endTime" type="date" pattern="yyyy年  MM月 dd日 hh時  mm分"/>
+				    	<div>結標時間：<strong>${endTime}</strong></div>
+				    	<p>商品描述<br/>${item.itemDescribe}</p>
+				    </div>
+		    	</div>
 			  </div>
-		<!--</c:forEach>-->
+		 </c:forEach>
 	</div>
 	
 </article>

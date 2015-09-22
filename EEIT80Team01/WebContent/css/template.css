@@ -5,4 +5,9 @@ body { padding-top: 50px;
 	   			   "儷黑 Pro", "LiHei Pro",
 	   			   "微軟正黑體", "Microsoft JhengHei",
 	   			   "標楷體", DFKai-SB, sans-serif;
+	   padding-top: 50px;
+	   background-color:#FDFFFF;
+}
+.navbar{ 
+ 	margin-bottom: 0px;
 }

@@ -84,7 +84,7 @@ public class TradeServlet extends HttpServlet {
 				System.out.println("itemId:"+itemId+" 刪除失敗");
 			}
 		}
-		request.getRequestDispatcher("tradeCenter.do").forward(request, response);
+		request.getRequestDispatcher("myTradeCenter.jsp").forward(request, response);
 		
 		
 		

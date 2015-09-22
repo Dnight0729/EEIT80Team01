@@ -7,13 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
 <style >
-.navbar{ 
- 	margin-bottom: 0px;
-}
 #carousel1{
 	margin-bottom: 20px;
 }
-body { padding-top: 50px; }
 </style>
 <title>Home</title>
 </head>

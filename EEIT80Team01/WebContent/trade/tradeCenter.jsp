@@ -1,12 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%@include file="/include/include" %>
+<title>Trade Center</title>
+<style>
+.page-header{
+	text-align:center;
+}
+.menu .btn{
+	width:287px;
+}
+
+</style>
 </head>
 <body>
+<header>
+<%@include file="/include/header" %>
+</header>
+<article>
+<div class="container-fluid">
+	<div class="row page-header">
+		<h2>交易中心</h2>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10" style="background-color:#FCFCFC">
+		
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs nav-justified" role="tablist">
+		    <li role="presentation" class="active"><a href="#uncheck" aria-controls="sellerCheck" role="tab" data-toggle="tab">待確認的交易</a></li>
+		    <li role="presentation"><a href="#checked" aria-controls="sellerUncheck" role="tab" data-toggle="tab">已確認的交易</a></li>
+		    <li role="presentation"><a href="#finished" aria-controls="buyerCheck" role="tab" data-toggle="tab">已完成的交易</a></li>
+		    <li role="presentation dropdown">
+			  <a id="toggle" data-toggle="dropdown" role="button" aria-haspopup="true">
+			   	買賣家切換<span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu menu" aria-labelledby="toggle">
+			    	<li class="active"><a class="btn">我是買家</a></li>
+			    	<li><a class="btn">我是賣家</a></li>
+			  </ul>
+			</li>
+		  </ul>
+			
+			
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane fade in active" id="uncheck">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>商品編號</th>
+							<th>商品圖片</th>
+							<th>商品名稱</th>
+							<th>買家</th>
+							<th>賣家</th>
+							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr></tr>
+						<tr></tr>
+					</tbody>
+				</table>
+			</div>
+		    <div role="tabpanel" class="tab-pane fade" id="checked">
+		
+			</div>
+		    <div role="tabpanel" class="tab-pane fade" id="finished">
+		    
+		    </div>
+		    
+		  </div>
+		  
+		</div>
+	</div>
+</div>
+</article>
+<footer>
 
+</footer>
 </body>
 </html>

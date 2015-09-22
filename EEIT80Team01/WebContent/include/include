@@ -20,8 +20,8 @@
 <!--Packery-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.3/packery.pkgd.min.js"></script>
 
-
-
+<!--Template css-->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/template.css"
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

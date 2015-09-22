@@ -78,12 +78,19 @@ color:#0088A8;
 	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
 	        		<c:if test="${!empty LoginOK}">
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
+	        		<c:if test="${!LoginOK.userName.equals(topPrice.buyer)}">
 	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post">
 	        			<input type="number" min="${price + item.bid}" value="${price + item.bid}" name="bidPrice">
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
 	        			<input type="hidden" name="action" value="bid">
 	        			<button type="submit" class="btn btn-primary">出價</button>
 	        		</form>
+	        		</c:if>
+	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
+	        		<div>
+	        			您是目前最高出價者
+	        		</div>
+	        		</c:if>
 	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post">
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
 	        			<input type="hidden" name="action" value="direct">	        			
@@ -91,7 +98,7 @@ color:#0088A8;
 	        		</form>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(item.seller)}">
-	        			你是這個商品的賣家<br>
+	        			您是這個商品的賣家<br>
 	        		</c:if>	        
 	        		</c:if>
 	        		<c:if test="${empty LoginOK}">

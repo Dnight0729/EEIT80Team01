@@ -19,13 +19,13 @@ public class LoginToBidServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String itemid = request.getParameter("itemid");
-		response.sendRedirect(request.getContextPath()+"/items/itempage.jsp?itemid="+itemid);
+		response.sendRedirect(request.getContextPath()+"/search/item?itemid="+itemid);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String itemid = request.getParameter("itemid");
-		response.sendRedirect(request.getContextPath()+"/items/itempage.jsp?itemid="+itemid);
+		response.sendRedirect(request.getContextPath()+"/search/item?itemid="+itemid);
 	}
 
 }

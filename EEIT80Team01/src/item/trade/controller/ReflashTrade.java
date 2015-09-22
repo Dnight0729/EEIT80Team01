@@ -20,7 +20,7 @@ import items.model.ItemsService;
 import member.model.MemberBean;
 
 @WebServlet("/trade/myTradeCenter.jsp")
-public class ReflashTrade extends HttpServlet {
+public class ReflashTrade extends HttpServlet { 
 	private TradeDAOService tradeDAOService = null;
 	private ItemsService itemsService = null;
 	private ItemImagesService itemImgService = null;

@@ -41,7 +41,7 @@
 			  </a>
 			  <ul class="dropdown-menu menu" aria-labelledby="toggle">
 			    	<li class="active"><a class="btn" href="#">我是買家</a></li>
-			    	<li><a class="btn" href="${pageContext.request.contextPath}/trade/myTradeCenter.do">我是賣家</a></li>
+			    	<li><a class="btn" href="${pageContext.request.contextPath}/trade/myTradeCenter.jsp">我是賣家</a></li>
 			  </ul>
 			</li>
 		  </ul>

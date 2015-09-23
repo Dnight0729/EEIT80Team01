@@ -40,8 +40,8 @@
 			   	買賣家切換<span class="caret"></span>
 			  </a>
 			  <ul class="dropdown-menu menu" aria-labelledby="toggle">
-			    	<li class="active"  href="${pageContext.request.contextPath}/trade/myTradeCenter.do"><a class="btn">我是買家</a></li>
-			    	<li><a class="btn" href="#">我是賣家</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/trade/myTradeCenter.jsp"class="btn">我是買家</a></li>
+			    	<li class="active"><a class="btn" href="#">我是賣家</a></li>
 			  </ul>
 			</li>
 		  </ul>

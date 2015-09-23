@@ -62,9 +62,35 @@ body {
 							</div>
 						</fieldset>
 					</form>
-
-					&nbsp;<small><Font color='red' size="-3">${questionSuccess}</Font></small>
-					&nbsp;<small><Font color='red' size="-3">${quesstionFailed}</Font></small>
+					<c:if test="${!empty questionSuccess || !empty quesstionFailed }">
+					<div id="dialog" title="${questionSuccess}${quesstionFailed}">
+					<H3><Font color='red'>${questionSuccess}</Font></H3>
+					<H3><Font color='red'>${quesstionFailed}</Font></H3>					
+					</div>
+					<script>
+					$(function() {
+				    $( "#dialog" ).dialog({
+				      hide: {
+				        effect: "fade",
+				        duration: 500
+				      },
+				      height:200,
+				      width:300,
+				      modal: true,
+				      closeOnEscape: false,//按ESC不能關閉
+				      open: function(event, ui) {
+				    	    //隱藏「x」關閉按鈕
+				    	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+				    	    },
+				      buttons: {
+				    	  "關閉":function() {
+				              $( this ).dialog( "close" );
+				          }
+				      }
+				    })
+				  });
+					</script>
+					</c:if>
 				</div>
 				<%@include file="/include/blockPart"%>
 			</div>

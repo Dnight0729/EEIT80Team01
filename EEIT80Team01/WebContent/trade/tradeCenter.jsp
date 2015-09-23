@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,23 +63,94 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr></tr>
-						<tr></tr>
+						<c:forEach var="item" items="myBuyItemsUncheck">
+							<tr>
+								<td>${item.tradeBean.itemId}</td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td>${item.title}</td>
+								<td>${item.tradeBean.buyer}</td>
+								<td>${item.tradeBean.seller}</td>
+								<td>
+									<form action="trade.do" method="post">
+										<input type="hidden" name="itemId" value="${item.tradeBean.itemId}">
+										<input type="hidden" name="action" value="check">
+										<input type="submit" value="確認">
+									</form>
+								</td>
+								<td>
+									<form action="trade.do" method="post">
+										<input type="hidden" name="itemId" value="${item.tradeBean.itemId}">
+										<input type="hidden" name="action" value="cancel">
+										<input type="submit" value="取消">
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		    <div role="tabpanel" class="tab-pane fade" id="checked">
-		
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>商品編號</th>
+							<th>商品圖片</th>
+							<th>商品名稱</th>
+							<th>買家</th>
+							<th>賣家</th>
+							<th>交易狀態</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="myBuyItemsCheck">
+							<tr>
+								<td>${item.tradeBean.itemId}</td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td>${item.title}</td>
+								<td>${item.tradeBean.buyer}</td>
+								<td>${item.tradeBean.seller}</td>
+								<td>
+									<span>等待對方確認交易中</span>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		    <div role="tabpanel" class="tab-pane fade" id="finished">
-		    
+		    	<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>商品編號</th>
+							<th>商品圖片</th>
+							<th>商品名稱</th>
+							<th>買家</th>
+							<th>賣家</th>
+							<th>交易狀態</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="myBuyItemsFinished">
+							<tr>
+								<td>${item.tradeBean.itemId}</td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td>${item.title}</td>
+								<td>${item.tradeBean.buyer}</td>
+								<td>${item.tradeBean.seller}</td>
+								<td>
+									<span>交易已完成</span>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 		    </div>
 		    
-		  </div>
+		  </div><!--Tab panes-->
 		  
 		</div>
-	</div>
-</div>
+	</div><!-- row -->
+</div><!-- container-fluid -->
 </article>
 <footer>
 

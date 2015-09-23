@@ -266,7 +266,6 @@ public class ItemsDAOjdbc implements ItemsDAO{
 					conn.commit();
 					result =  bean;
 				}
-				conn.setAutoCommit(true);
 			}						
 		} catch (SQLException e) {
 			if (conn!=null) {
@@ -398,7 +397,6 @@ public class ItemsDAOjdbc implements ItemsDAO{
 				conn.commit();
 				result =  bean;
 			}
-			conn.setAutoCommit(true);
 		} catch (SQLException e) {
 			if (conn!=null) {
 				try {
@@ -556,7 +554,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 //				conn.commit();
 //				return true;
 //			}
-			conn.setAutoCommit(true);
+			
 		} catch (SQLException e) {
 			if(conn!=null){
 				try {
@@ -567,6 +565,11 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			}
 			e.printStackTrace();
 		}finally{
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			if(stmt!=null){
 				try {
 					stmt.close();

@@ -62,7 +62,7 @@ function check_all(obj,cName)
 			     <br>
 			     <form method="post" action="${pageContext.request.contextPath }/items/itemList.controller">
 						<input type="submit" value="下架">
-					    <input type="hidden" name=deleteButton value="${item.itemsBean.itemId }">
+					    <input type="hidden" name=deleteButton value="${item.itemId }">
 					    <input type="hidden" name="action"value="delete">
 					</form>
 				</td>

@@ -41,7 +41,10 @@ public class ItemMyListServlet extends HttpServlet {
 		//取得session
 		HttpSession session = request.getSession();	//用來抓取seller資料用
 		MemberBean memberBean = (MemberBean)session.getAttribute(GlobalService.LOGIN_TOKEN);
-		String userName = memberBean.getUserName();
+		String userName=null;
+		if(memberBean!=null){
+			userName = memberBean.getUserName();
+		}
 //		System.out.println("userName="+userName);
 		
 		ItemsService dao = new ItemsService();

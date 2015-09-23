@@ -13,9 +13,15 @@ public interface ItemsDAO {
 	List<ItemsBean> getAll();
 
 	ItemsBean insert(ItemsBean bean, List<ImageInput> list);
-
+	
 	ItemsBean update(ItemsBean bean);
+	
+	ItemsBean update(ItemsBean bean, List<ImageInput> list);
 
-	boolean delete(int itemId);
+	public boolean delete(int itemId);
+	
+	boolean delete(int imageNo, int itemId);
+	
+	public List<ItemsBean> selectSeller(String seller);
 
 }

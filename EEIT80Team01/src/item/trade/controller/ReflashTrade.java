@@ -64,7 +64,12 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(myBuyItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(myBuyItem.getBuyer());
+					itemDto.setSeller(myBuyItem.getSeller());
+					itemDto.setBuyerCheck(myBuyItem.getBuyerCheck());
+					itemDto.setSellerCheck(myBuyItem.getSellerCheck());
+					myBuyItemsUncheck.add(itemDto);
 					myBuyItemsFinished.add(itemDto);
 					
 				}else if(myBuyItem.getBuyerCheck()==1 && myBuyItem.getSellerCheck()==0){
@@ -75,7 +80,12 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(myBuyItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(myBuyItem.getBuyer());
+					itemDto.setSeller(myBuyItem.getSeller());
+					itemDto.setBuyerCheck(myBuyItem.getBuyerCheck());
+					itemDto.setSellerCheck(myBuyItem.getSellerCheck());
+					myBuyItemsUncheck.add(itemDto);
 					myBuyItemsCheck.add(itemDto);
 				}else{
 					itemDto = new ItemDTO();
@@ -85,7 +95,11 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(myBuyItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(myBuyItem.getBuyer());
+					itemDto.setSeller(myBuyItem.getSeller());
+					itemDto.setBuyerCheck(myBuyItem.getBuyerCheck());
+					itemDto.setSellerCheck(myBuyItem.getSellerCheck());
 					myBuyItemsUncheck.add(itemDto);
 				}
 			}
@@ -100,7 +114,11 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(mySellItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(mySellItem.getBuyer());
+					itemDto.setSeller(mySellItem.getSeller());
+					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
+					itemDto.setSellerCheck(mySellItem.getSellerCheck());
 					mySellItemsFinished.add(itemDto);
 				}else if(mySellItem.getBuyerCheck()==0 && mySellItem.getSellerCheck()==1){
 					itemDto = new ItemDTO();
@@ -110,7 +128,11 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(mySellItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(mySellItem.getBuyer());
+					itemDto.setSeller(mySellItem.getSeller());
+					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
+					itemDto.setSellerCheck(mySellItem.getSellerCheck());
 					mySellItemsFinished.add(itemDto);				
 				}else{
 					itemDto = new ItemDTO();
@@ -120,7 +142,11 @@ public class ReflashTrade extends HttpServlet {
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
-					itemDto.setTradeBean(mySellItem);
+					itemDto.setItemId(itemId);
+					itemDto.setBuyer(mySellItem.getBuyer());
+					itemDto.setSeller(mySellItem.getSeller());
+					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
+					itemDto.setSellerCheck(mySellItem.getSellerCheck());
 					mySellItemsFinished.add(itemDto);
 				}
 			}
@@ -131,7 +157,7 @@ public class ReflashTrade extends HttpServlet {
 		request.setAttribute("mySellItemsCheck", mySellItemsCheck);
 		request.setAttribute("mySellItemsUncheck", mySellItemsUncheck);
 		request.setAttribute("mySellItemsFinished", mySellItemsFinished);
-		request.getRequestDispatcher("tradeCenter.jsp").forward(request, response);
+		request.getRequestDispatcher("/trade/tradeCenter.jsp").forward(request, response);
 		
 		
 		

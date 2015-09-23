@@ -58,18 +58,18 @@
 							<th>商品名稱</th>
 							<th>買家</th>
 							<th>賣家</th>
-							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+							<th>aaa</th>
 							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="myBuyItemsUncheck">
+						<c:forEach var="item" items="${myBuyItemsUncheck}">
 							<tr>
-								<td>${item.tradeBean.itemId}</td>
+								<td>${item.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
-								<td>${item.tradeBean.buyer}</td>
-								<td>${item.tradeBean.seller}</td>
+								<td>${item.buyer}</td>
+								<td>${item.seller}</td>
 								<td>
 									<form action="trade.do" method="post">
 										<input type="hidden" name="itemId" value="${item.tradeBean.itemId}">
@@ -102,13 +102,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="myBuyItemsCheck">
+						<c:forEach var="item" items="${myBuyItemsCheck}">
 							<tr>
-								<td>${item.tradeBean.itemId}</td>
+								<td>${item.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
-								<td>${item.tradeBean.buyer}</td>
-								<td>${item.tradeBean.seller}</td>
+								<td>${item.buyer}</td>
+								<td>${item.seller}</td>
 								<td>
 									<span>等待對方確認交易中</span>
 								</td>
@@ -130,7 +130,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="myBuyItemsFinished">
+						<c:forEach var="item" items="${myBuyItemsFinished}">
 							<tr>
 								<td>${item.tradeBean.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>

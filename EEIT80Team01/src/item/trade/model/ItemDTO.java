@@ -3,7 +3,11 @@ package item.trade.model;
 public class ItemDTO {
 	private int imageNo;
 	private String title;
-	private TradeBean tradeBean;
+	private int itemId;
+    private String seller;
+    private int sellerCheck;
+    private String buyer;
+    private int buyerCheck;
 	public int getImageNo() {
 		return imageNo;
 	}
@@ -16,11 +20,35 @@ public class ItemDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public TradeBean getTradeBean() {
-		return tradeBean;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setTradeBean(TradeBean tradeBean) {
-		this.tradeBean = tradeBean;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+	public int getSellerCheck() {
+		return sellerCheck;
+	}
+	public void setSellerCheck(int sellerCheck) {
+		this.sellerCheck = sellerCheck;
+	}
+	public String getBuyer() {
+		return buyer;
+	}
+	public void setBuyer(String buyer) {
+		this.buyer = buyer;
+	}
+	public int getBuyerCheck() {
+		return buyerCheck;
+	}
+	public void setBuyerCheck(int buyerCheck) {
+		this.buyerCheck = buyerCheck;
 	}
 	
 }

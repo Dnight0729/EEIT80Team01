@@ -38,7 +38,7 @@ public class TradeServlet extends HttpServlet {
 		tradeBean = tradeDaoService.getByPK(itemId);
 		seller = tradeBean.getSeller();
 		if(action.equalsIgnoreCase("check")){
-			if(usr==seller){
+			if(usr.equalsIgnoreCase(seller)){
 				tradeBean = tradeService.changeSellerStatus(itemId,1);
 				if(tradeBean!=null){
 					session.setAttribute("message","交易確認完成");
@@ -56,7 +56,7 @@ public class TradeServlet extends HttpServlet {
 		}
 		
 		if(action.equalsIgnoreCase("cancel")){
-			if(usr==seller){
+			if(usr.equalsIgnoreCase(seller)){
 				tradeBean = tradeService.changeSellerStatus(itemId,2);
 				if(tradeBean!=null){
 					session.setAttribute("message","交易取消完成");
@@ -85,7 +85,7 @@ public class TradeServlet extends HttpServlet {
 			}
 		}
 		request.setAttribute("refererPage",request.getHeader("referer"));
-		request.getRequestDispatcher("myTradeCenter.do").forward(request, response);
+		request.getRequestDispatcher("myTradeCenter.jsp").forward(request, response);
 		
 		
 		

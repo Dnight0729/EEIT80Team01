@@ -61,7 +61,10 @@ public class ReflashTrade extends HttpServlet {
 					itemId = myBuyItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
-					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					List<Integer> itemImgNums = itemImgService.selectImagesNumbers(itemId);
+					if(!itemImgNums.isEmpty()){
+						itemImgNum = itemImgNums.get(0);
+					}
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
 					itemDto.setItemId(itemId);
@@ -160,15 +163,16 @@ public class ReflashTrade extends HttpServlet {
 		session.setAttribute("mySellItemsCheck", mySellItemsCheck);
 		session.setAttribute("mySellItemsUncheck", mySellItemsUncheck);
 		session.setAttribute("mySellItemsFinished", mySellItemsFinished);
-		if(request.getHeader("referer").equalsIgnoreCase("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenter.jsp")){
+		
+		if(request.getAttribute("refererPage")!=null){
+			System.out.println("c");
+			response.sendRedirect(request.getAttribute("refererPage").toString());
+		}else if(request.getHeader("referer").equalsIgnoreCase("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenter.jsp")){
 			System.out.println("a");
 			response.sendRedirect(request.getContextPath()+"/trade/tradeCenterSeller.jsp");
 		}else if(request.getHeader("referer").equalsIgnoreCase("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenterSeller.jsp")){
 			System.out.println("b");
 			response.sendRedirect(request.getContextPath()+"/trade/tradeCenter.jsp");
-		}else if(request.getAttribute("refererPage")!=null){
-			System.out.println("c");
-			response.sendRedirect(request.getAttribute("refererPage").toString());
 		}else{
 			System.out.println("d");
 			response.sendRedirect(request.getContextPath()+"/trade/tradeCenter.jsp");

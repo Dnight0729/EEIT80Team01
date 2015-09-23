@@ -23,7 +23,7 @@ public class TradeService {
 	public TradeBean changeBuyerStatus(int itemId,int buyerCheck){
 		bean = tradeDaoService.getByPK(itemId);
 		if(bean!=null){
-			bean.setSellerCheck(buyerCheck);
+			bean.setBuyerCheck(buyerCheck);
 			newBean = tradeDaoService.update(bean);
 			if(newBean!=null){
 				return newBean;

@@ -135,8 +135,8 @@
 								<td>${item.tradeBean.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
-								<td>${item.tradeBean.buyer}</td>
-								<td>${item.tradeBean.seller}</td>
+								<td>${item.buyer}</td>
+								<td>${item.seller}</td>
 								<td>
 									<span>交易已完成</span>
 								</td>

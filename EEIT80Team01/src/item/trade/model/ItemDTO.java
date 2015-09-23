@@ -1,6 +1,9 @@
 package item.trade.model;
 
-public class ItemDTO {
+import java.io.Serializable;
+
+public class ItemDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int imageNo;
 	private String title;
 	private int itemId;

@@ -50,43 +50,24 @@ public class ItemMyListServlet extends HttpServlet {
 		//取出seller欄位資料
 		List<ItemsBean> getseller = dao.getSeller(userName);
 //		System.out.println("getseller="+getseller);	檢查取得seller資料
-		
-		
-		
+		List<Object> list = new ArrayList<Object>();
+		int itemId = 0;
 		List<Integer> images = null;
 		Integer image = null;
-		
-		
-		
-		List<Object> list = new ArrayList<Object>();
-		
-		int itemId = 0;
-
 		for(ItemsBean findItemId: getseller){
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("itemsBean", findItemId);
 			itemId = findItemId.getItemId();
-			
-			
-			
-			
+
 			images = imgSvc.selectImagesNumbers(itemId);
-			System.out.println("1");
 			if(!images.isEmpty()){
 				image = images.get(0);
-				System.out.println("image"+image);
-				System.out.println("2");
+//				System.out.println("image="+image);	//測試圖片編號
 				map.put("image", image);
 			}else{
 				getServletContext().getResourceAsStream("/imgs/NoImage.jpg");
 			}
-			
 
-			
-			
-			
-			
-			
 //			System.out.println("itemIdxxx="+itemId);	//檢查有無抓到itemId
 			String buyer = "尚未有人出價";
 			double price = 0;

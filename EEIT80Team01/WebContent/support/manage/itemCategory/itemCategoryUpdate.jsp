@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-	ItemCategoryBean bean = (ItemCategoryBean) request.getAttribute("bean"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+// 	ItemCategoryBean bean = (ItemCategoryBean) request.getAttribute("bean"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,14 +14,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商品分類修改</title>
 <script type="text/javascript">
-function clearForm(){
-	var inputs = document.getElementsByTagName("input");
-	for(var i=0; i<=inputs.length; i++){
-		if(inputs[i].type == "text"){
-			inputs[i].value="";
-		}
-	}
-}
+// function clearForm(){
+// 	var inputs = document.getElementsByTagName("input");
+// 	for(var i=0; i<=inputs.length; i++){
+// 		if(inputs[i].type == "text"){
+// 			inputs[i].value="";
+// 		}
+// 	}
+// }
 </script>
 </head>
 <body>
@@ -37,24 +37,24 @@ function clearForm(){
 <!-- 	</font> -->
 <%-- </c:if> --%>
 
-<FORM METHOD="post" ACTION="${pageContext.request.contextPath }/support/manage/itemCategory/itemCategoryUpdate.controller" name="form1">
+<FORM METHOD="post" ACTION="${pageContext.request.contextPath }/support/manage/itemCategory/itemCategoryUpdate.controller">
 <table border="0">
 	<tr>
-		<td>商品分類編號:<font color=red><b>*</b></font></td>
+		<td>商品分類編號:</td>
 		<td><input type="text" name="itemCategory" value="${param.itemCategory }" readonly="readonly"></td>
-			<td><font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font></td>
+		<td><font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font></td>
 	</tr>
 	<tr>
 		<td>商品分類名稱:</td>
 		<td><input type="text" name="categoryName" value="${param.categoryName }"></td>
-			<td><font color="red" size="-1"><span class="error">${error.categoryNameError }</span></font></td>
+		<td><font color="red" size="-1"><span class="error">${error.categoryNameError }</span></font></td>
 	</tr>
 </table>
 <br>
 
 <input type="submit" value="進行修改">
 <input type="hidden" name="action" value="update">
-<input type="button" value="Clear" onclick="clearForm()">
+<!-- <input type="button" value="Clear" onclick="clearForm()"> -->
 
 <h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
 </FORM>

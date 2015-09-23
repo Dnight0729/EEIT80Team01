@@ -33,9 +33,9 @@ public class BidService {
 					System.out.println("新增成功!");
 					return result;
 				} 
-				return null;
+				return result;
 			}
-			return null;
+			return result;
 		}
 		if(bidLogBean==null){
 			System.out.println("the column of this itemId in table bidLog is empty");
@@ -43,9 +43,9 @@ public class BidService {
 			if(result!=null){
 				return result;
 			}
-			return null;
+			return result;
 		}
-		return null;
+		return result;
 	}
 	public boolean validateBidPrice(double bidPrice,int itemId){
 		ItemsBean itemsBean = itemsDao.selectId(itemId);

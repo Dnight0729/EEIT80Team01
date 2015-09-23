@@ -165,7 +165,7 @@ public class BidLogDAOJdbc implements BidLogDAO {
 		return beans;
 	}
 
-	private String getByPK ="select * from bidlog where item_id=? buyer=?";
+	private String getByPK ="select * from bidlog where item_id=? and buyer=?";
 	@Override
 	public BidLogBean getByPK(int itemId, String buyer) {
 		PreparedStatement ptmt = null;

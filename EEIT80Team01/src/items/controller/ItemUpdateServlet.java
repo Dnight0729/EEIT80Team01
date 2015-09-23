@@ -57,10 +57,7 @@ public class ItemUpdateServlet extends HttpServlet {
 			userName = memberBean.getUserName();
 		}
 		String action = request.getParameter("action");
-		System.out.println("jsp請求前");
-		System.out.println(action);
 		if ("update".equals(action)) { // 來自itemUpdate.jsp的請求	
-			System.out.println("進入jsp請求");
 			Map<String, String> errors = new HashMap<String, String>();
 			request.setAttribute("error", errors);
 			try {
@@ -72,15 +69,7 @@ public class ItemUpdateServlet extends HttpServlet {
 				String bidStr = request.getParameter("bid");
 				String endTimeStr = request.getParameter("endTime");
 				String itemDescribe = request.getParameter("itemDescribe");
-				Part[] parts = new Part[3];
-				try {
-					parts[0] = request.getPart("image1");
-					parts[1] = request.getPart("image2");
-					parts[2] = request.getPart("image3");
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				System.out.println("接收資料");
+				
 				//資料驗證
 				if(userName==null || userName.trim().length()==0){
 					errors.put("loginError", "請重新登入");
@@ -112,13 +101,11 @@ public class ItemUpdateServlet extends HttpServlet {
 				if(itemDescribe==null || itemDescribe.trim().length()==0){
 					itemDescribe = "";
 				}
-				System.out.println("驗證資料");
 				if(!errors.isEmpty()){
 					RequestDispatcher rd = request.getRequestDispatcher("/items/itemUpdate.jsp");
 					rd.forward(request, response);
 					return;
 				}
-				System.out.println("錯誤轉交回去List");
 				//格式轉換
 				int itemCategory = 0;
 				if(itemCategorySelect!=null && itemCategorySelect.length()!=0){
@@ -145,7 +132,6 @@ public class ItemUpdateServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-				System.out.println("格式轉換");
 				ItemsBean bean = new ItemsBean();
 				bean.setItemCategory(itemCategory);
 				bean.setTitle(title);
@@ -154,21 +140,12 @@ public class ItemUpdateServlet extends HttpServlet {
 				bean.setBid(bid);
 				bean.setEndTime(endTime);
 				bean.setItemDescribe(itemDescribe);
-				System.out.println("準備修改資料");
-				List<ImageInput> list = new ArrayList<ImageInput>();							
-				for(Part part: parts ){
-					try {
-						
-						ImageInput input= new ImageInput();
-						input.setFis((FileInputStream) part.getInputStream());				
-						input.setSize(part.getSize());
-						list.add(input);
-					} catch (Exception e) {
-					}
-				}
-				System.out.println("準備修改圖片");
-				service.update(bean);
+				System.out.println("準備修改資料");							
+				
+				ItemsBean update = service.update(bean);
+				System.out.println("update="+update);
 				System.out.println("存入資料");
+				
 //				if (!errors.isEmpty()) {
 //					request.setAttribute("bean", bean); // 含有輸入格式錯誤的bean物件,也存入request
 //					RequestDispatcher failureView = request
@@ -176,11 +153,13 @@ public class ItemUpdateServlet extends HttpServlet {
 //					failureView.forward(request, response);
 //					return; //程式中斷
 //				}
-				System.out.println("錯誤轉交");
-				ItemsBean update = service.update(bean);
 				
-				request.setAttribute("update", update); // 資料庫update成功後,正確的的bean物件,存入request
-				request.getRequestDispatcher("/items/itemList.jsp").forward(request, response); // 修改成功後,轉交itemList.jsp
+				System.out.println("錯誤轉交");
+//				ItemsBean update = service.update(bean);
+//				System.out.println(update);
+//				request.setAttribute("update", update); // 資料庫update成功後,正確的的bean物件,存入request
+				
+				request.getRequestDispatcher("/items/itemList").forward(request, response); // 修改成功後,轉交itemList.jsp
 				System.out.println("成功轉交下一支");
 			} catch (Exception e) {
 				errors.put("action", "修改資料失敗");

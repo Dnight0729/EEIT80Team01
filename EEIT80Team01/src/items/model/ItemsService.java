@@ -41,10 +41,21 @@ public class ItemsService {
 	
 	public ItemsBean update(ItemsBean bean){
 		ItemsDAO dao = new ItemsDAOjdbc();
-		
+		System.out.println("1");
 		ItemsBean result = null;
 		if(bean!=null){
 			result = dao.update(bean);
+		}
+		System.out.println(bean);
+		return result;
+	}
+	
+	public ItemsBean update(ItemsBean bean, List<ImageInput> list ){
+		ItemsDAO dao = new ItemsDAOjdbc();
+		
+		ItemsBean result = null;
+		if(bean!=null){
+			result = dao.update(bean, list);
 		}
 		return result;
 	}

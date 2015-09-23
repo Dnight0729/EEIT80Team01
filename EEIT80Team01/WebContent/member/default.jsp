@@ -139,7 +139,9 @@ body { padding-top: 50px; }
 				</c:when>
 				<c:otherwise>
 				<div  class="col-md-12 ">
-					<h2>查無此會員</h2>
+<!-- 					<h2>查無此會員</h2> -->
+<img style="padding-left:10%" src="${pageContext.request.contextPath}/imgs/member.jpg" width="100%">
+
 				</div>
 				</c:otherwise>
 				</c:choose>

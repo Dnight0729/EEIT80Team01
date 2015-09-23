@@ -48,9 +48,7 @@ public class BidServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
-		if(memberBean!=null){
-			buyer = memberBean.getUserName();	
-		}
+		buyer = memberBean.getUserName();	
 		try {
 			itemId = Integer.parseInt(request.getParameter("itemId"));
 		} catch (NumberFormatException e) {

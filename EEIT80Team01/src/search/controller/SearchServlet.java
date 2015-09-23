@@ -60,7 +60,6 @@ public class SearchServlet extends HttpServlet {
 				for(ItemsBean bean:beans){
 					int id = bean.getItemId();
 					Integer itemId = id;
-					System.out.println("id="+id);
 					List<Integer> imgNums = itemImgService.selectImagesNumbers(id);
 					if(!imgNums.isEmpty()){
 						Integer imgNum = imgNums.get(0);

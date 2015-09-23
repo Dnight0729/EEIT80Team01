@@ -25,7 +25,6 @@ public class LoginServlet extends HttpServlet {
 
     public LoginServlet() {
         super();
- 
     }
 
 

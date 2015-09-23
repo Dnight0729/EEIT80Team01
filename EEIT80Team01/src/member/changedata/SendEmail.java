@@ -44,8 +44,7 @@ public class SendEmail {
 	  mp.addBodyPart(part1);
 	  message.setContent(mp);
 	  Transport.send(message);
-   
-	  System.out.println("寄送email結束.");
+
 	  return true;
   	} catch (Exception e) {
   		return false;

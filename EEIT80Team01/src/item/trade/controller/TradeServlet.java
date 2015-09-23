@@ -41,16 +41,16 @@ public class TradeServlet extends HttpServlet {
 			if(usr==seller){
 				tradeBean = tradeService.changeSellerStatus(itemId,1);
 				if(tradeBean!=null){
-					request.setAttribute("message","交易確認完成");
+					session.setAttribute("message","交易確認完成");
 				}else{
-					request.setAttribute("errorMsg","交易確認失敗!");
+					session.setAttribute("errorMsg","交易確認失敗!");
 				}
 			}else{
 				tradeBean = tradeService.changeBuyerStatus(itemId,1);
 				if(tradeBean!=null){
-					request.setAttribute("message","交易確認完成");
+					session.setAttribute("message","交易確認完成");
 				}else{
-					request.setAttribute("errorMsg","交易確認失敗!");
+					session.setAttribute("errorMsg","交易確認失敗!");
 				}
 			}
 		}
@@ -59,16 +59,16 @@ public class TradeServlet extends HttpServlet {
 			if(usr==seller){
 				tradeBean = tradeService.changeSellerStatus(itemId,2);
 				if(tradeBean!=null){
-					request.setAttribute("message","交易取消完成");
+					session.setAttribute("message","交易取消完成");
 				}else{
-					request.setAttribute("errorMsg","交易取消失敗!");
+					session.setAttribute("errorMsg","交易取消失敗!");
 				}
 			}else{
 				tradeBean = tradeService.changeBuyerStatus(itemId,2);
 				if(tradeBean!=null){
-					request.setAttribute("message","交易取消完成");
+					session.setAttribute("message","交易取消完成");
 				}else{
-					request.setAttribute("errorMsg","交易取消失敗!");
+					session.setAttribute("errorMsg","交易取消失敗!");
 				}
 			}
 		}
@@ -84,7 +84,8 @@ public class TradeServlet extends HttpServlet {
 				System.out.println("itemId:"+itemId+" 刪除失敗");
 			}
 		}
-		request.getRequestDispatcher("myTradeCenter.jsp").forward(request, response);
+		request.setAttribute("refererPage",request.getHeader("referer"));
+		request.getRequestDispatcher("myTradeCenter.do").forward(request, response);
 		
 		
 		

@@ -20,7 +20,7 @@ import items.model.ItemsBean;
 import items.model.ItemsService;
 import member.model.MemberBean;
 
-@WebServlet("/trade/myTradeCenter.jsp")
+@WebServlet("/trade/myTradeCenter.do")
 public class ReflashTrade extends HttpServlet { 
 	private TradeDAOService tradeDAOService = null;
 	private ItemsService itemsService = null;
@@ -151,13 +151,22 @@ public class ReflashTrade extends HttpServlet {
 				}
 			}
 		}
-		request.setAttribute("myBuyItemsCheck", myBuyItemsCheck);
-		request.setAttribute("myBuyItemsUncheck", myBuyItemsUncheck);
-		request.setAttribute("myBuyItemsFinished", myBuyItemsFinished);
-		request.setAttribute("mySellItemsCheck", mySellItemsCheck);
-		request.setAttribute("mySellItemsUncheck", mySellItemsUncheck);
-		request.setAttribute("mySellItemsFinished", mySellItemsFinished);
-		request.getRequestDispatcher("/trade/tradeCenter.jsp").forward(request, response);
+		session.setAttribute("myBuyItemsCheck", myBuyItemsCheck);
+		session.setAttribute("myBuyItemsUncheck", myBuyItemsUncheck);
+		session.setAttribute("myBuyItemsFinished", myBuyItemsFinished);
+		session.setAttribute("mySellItemsCheck", mySellItemsCheck);
+		session.setAttribute("mySellItemsUncheck", mySellItemsUncheck);
+		session.setAttribute("mySellItemsFinished", mySellItemsFinished);
+		if(request.getHeader("referer").toString()=="http://"+request.getServerName()+request.getServerPort()+"/trade/tradeCenter.jsp"){
+			response.sendRedirect(request.getContextPath()+"/trade/tradeCenterSeller.jsp");
+		}else if(request.getHeader("referer").toString()=="http://"+request.getServerName()+request.getServerPort()+"/trade/tradeCenterSeller.jsp"){
+			response.sendRedirect(request.getContextPath()+"/trade/tradeCenter.jsp");
+		}else if(request.getAttribute("refererPage")!=null){
+			response.sendRedirect(request.getAttribute("refererPage").toString());
+		}else{
+			response.sendRedirect(request.getContextPath()+"/trade/tradeCenter.jsp");
+		}
+		
 		
 		
 		

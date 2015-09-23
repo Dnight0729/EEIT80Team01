@@ -40,8 +40,8 @@
 			   	買賣家切換<span class="caret"></span>
 			  </a>
 			  <ul class="dropdown-menu menu" aria-labelledby="toggle">
-			    	<li class="active"><a class="btn" href="#">我是買家</a></li>
-			    	<li><a class="btn" href="${pageContext.request.contextPath}/trade/myTradeCenter.do">我是賣家</a></li>
+			    	<li class="active"  href="${pageContext.request.contextPath}/trade/myTradeCenter.do"><a class="btn">我是買家</a></li>
+			    	<li><a class="btn" href="#">我是賣家</a></li>
 			  </ul>
 			</li>
 		  </ul>
@@ -63,7 +63,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${sessionScope.myBuyItemsUncheck}">
+						<c:forEach var="item" items="${sessionScope.mySellItemsUncheck}">
 							<tr>
 								<td>${item.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
@@ -102,7 +102,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${sessionScope.myBuyItemsCheck}">
+						<c:forEach var="item" items="${sessionScope.mySellItemsCheck}">
 							<tr>
 								<td>${item.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
@@ -130,7 +130,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${sessionScope.myBuyItemsFinished}">
+						<c:forEach var="item" items="${sessionScope.mySellItemsFinished}">
 							<tr>
 								<td>${item.tradeBean.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>

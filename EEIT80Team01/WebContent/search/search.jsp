@@ -96,7 +96,8 @@
 	<div class="page-header text-center">
 		 <c:choose>
 		 	<c:when test="${!empty error}">
- 		 		<h1>${error}</h1>
+<%--  		 		<h1>${error}</h1> --%>
+<img style="padding-left:10%" style=" opacity:.70 "  src="${pageContext.request.contextPath}/imgs/search1.jpg" width="60%">
  		 	</c:when>
  		 	<c:otherwise>
 	 		 	<h1>搜尋結果 </h1>

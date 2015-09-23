@@ -232,9 +232,8 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		try {
 //			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);	
 			//進行commit
-//			conn.setAutoCommit(false);
+			conn.setAutoCommit(false);	
 			stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			if(bean!=null){
 				stmt.setString(1, bean.getSeller());
@@ -248,11 +247,11 @@ public class ItemsDAOjdbc implements ItemsDAO{
 				stmt.setInt(9, bean.getItemStatus());
 				stmt.setInt(10, bean.getThreadLock());
 				int i = stmt.executeUpdate();
-				
 				ResultSet rs= stmt.getGeneratedKeys();
-
+				
 				if(rs.next()){
 					int itemId = rs.getInt(1);
+					bean.setItemId(itemId);
 					if(list!=null && !list.isEmpty()){
 						for(ImageInput input : list){
 							stmt = conn.prepareStatement(INSERT_PICTURE);
@@ -265,17 +264,21 @@ public class ItemsDAOjdbc implements ItemsDAO{
 								
 				if(i>0){
 					conn.commit();
+					result =  bean;
 				}
+				conn.setAutoCommit(true);
 			}						
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			if (conn!=null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
 			}
 		}finally{
 			try {
-				conn.setAutoCommit(false);
+				conn.setAutoCommit(true);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}	
@@ -296,6 +299,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		}
 		return result;
 	}
+	
 	private static final String UPDATE ="UPDATE ITEMS SET SELLER=?,ITEM_CATEGORY=?,TITLE=?, "
 			+ "START_PRICE=?, DIRECT_PRICE=?, BID=?, END_TIME=?,ITEM_DESCRIBE=?, ITEM_STATUS=?,THREAD_LOCK=? WHERE ITEM_ID=?";
 
@@ -329,6 +333,87 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+	
+	
+
+	private static final String UPDATE_PICTURE = "UPDATE ITEM_IMAGES SET IMAGE=? WHERE IMAGE_NO=?";
+	/* (non-Javadoc)
+	 * @see items.model.dao.ItemsDAO#update(java.lang.String, java.lang.String, int, java.lang.String, double, double, int, java.util.Date, java.lang.String, int, int, int)
+	 */
+	@Override
+	public ItemsBean update(ItemsBean bean, List<ImageInput> list){
+		ItemsBean result = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+//			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(UPDATE , Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, bean.getSeller());
+			stmt.setInt(2, bean.getItemCategory());
+			stmt.setString(3, bean.getTitle());
+			stmt.setDouble(4, bean.getStartPrice());
+			stmt.setDouble(5, bean.getDirectPrice());
+			stmt.setInt(6, bean.getBid());
+			stmt.setTimestamp(7, bean.getEndTime());
+			stmt.setString(8, bean.getItemDescribe());
+			stmt.setInt(9, bean.getItemStatus());
+			stmt.setInt(10, bean.getThreadLock());
+			stmt.setInt(11, bean.getItemId());
+			int i = stmt.executeUpdate();
+			
+			ResultSet rs= stmt.getGeneratedKeys();
+
+			if(rs.next()){
+				int itemId = rs.getInt(1);
+				if(list!=null && !list.isEmpty()){
+					for(ImageInput input : list){
+						stmt = conn.prepareStatement(UPDATE_PICTURE);
+						stmt.setInt(1, itemId);
+						stmt.setBinaryStream(2, input.getFis(), input.getSize());	
+						i = stmt.executeUpdate();
+					}
+				}
+			}
+							
+			if(i>0){
+				conn.commit();
+				result =  bean;
+			}
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			if (conn!=null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
+			}
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}	
 			if(stmt!=null){
 				try {
 					stmt.close();
@@ -385,8 +470,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		}
 		return false;
 	}
-	
-	
+		
 	private static final String SELECT_THREE_BY_SELLER = "SELECT top(3) * FROM ITEMS WHERE SELLER = ? and ITEM_STATUS=0 order by item_id desc";
 	
 	public List<ItemsBean> selectThreeBySeller(String username){
@@ -398,6 +482,122 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(SELECT_THREE_BY_SELLER);
 			stmt.setString(1, username);
+			rset = stmt.executeQuery();
+			result = new ArrayList<ItemsBean>();
+			while(rset.next()){
+				ItemsBean item = new ItemsBean();
+				item.setItemId(rset.getInt("ITEM_ID"));
+				item.setSeller(rset.getString("SELLER"));
+				item.setItemCategory(rset.getInt("ITEM_CATEGORY"));
+				item.setTitle(rset.getString("TITLE"));
+				item.setStartPrice(rset.getDouble("START_PRICE"));
+				item.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
+				item.setBid(rset.getInt("BID"));
+				item.setEndTime(rset.getTimestamp("END_TIME"));
+				item.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
+				item.setItemStatus(rset.getInt("ITEM_STATUS"));
+				item.setThreadLock(rset.getInt("THREAD_LOCK"));
+				result.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rset!=null){
+				try {
+					rset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	private static final String DELETE_PICTURE = "DELETE FROM ITEM_IMAGES WHERE IMAGE_NO=? ";
+
+	/* (non-Javadoc)
+	 * @see items.model.dao.ItemsDAO#delete(int)
+	 */
+	@Override
+	public boolean delete(int imageNo, int itemId){
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int i =0;
+		try {
+//			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			//先刪圖片
+			stmt = conn.prepareStatement(DELETE_PICTURE);
+			stmt.setInt(1, imageNo);
+			i = stmt.executeUpdate();
+			
+			
+//			//後刪商品
+//			stmt = conn.prepareStatement(DELETE);
+//			stmt.setInt(1, itemId);
+//			i = stmt.executeUpdate();
+//			if(i > 0){
+//				conn.commit();
+//				return true;
+//			}
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			if(conn!=null){
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		}finally{
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return false;
+	}
+
+	
+	private static final String GET_SELLER = "SELECT * FROM ITEMS WHERE SELLER = ? and item_status = 0";
+	@Override
+	public List<ItemsBean> selectSeller(String seller){
+		ArrayList<ItemsBean> result=null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+//			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(GET_SELLER);
+			stmt.setString(1, seller);
 			rset = stmt.executeQuery();
 			result = new ArrayList<ItemsBean>();
 			while(rset.next()){

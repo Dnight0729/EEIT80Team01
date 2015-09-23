@@ -512,4 +512,45 @@ public class BidLogDAOJdbc implements BidLogDAO {
 		return result;
 	}
 
+	private String getItemBidCount = "select count(item_id) from bidlog where item_id =?";
+	@Override
+	public int getItemBidCount(int itemId){
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			conn = ds.getConnection();
+			ptmt = conn.prepareStatement(getItemBidCount);
+			ptmt.setInt(1,itemId);
+			rs = ptmt.executeQuery();
+			if(rs.next()){
+				count = Integer.parseInt(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ptmt!=null){
+				try {
+					ptmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return count;
+	}
 }

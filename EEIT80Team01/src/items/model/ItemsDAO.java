@@ -13,11 +13,18 @@ public interface ItemsDAO {
 	List<ItemsBean> getAll();
 
 	ItemsBean insert(ItemsBean bean, List<ImageInput> list);
-
+	
 	ItemsBean update(ItemsBean bean);
+	
+	ItemsBean update(ItemsBean bean, List<ImageInput> list);
 
 	boolean delete(int itemId);
 	
 	List<ItemsBean> selectThreeBySeller(String username);
+	
+	boolean delete(int imageNo, int itemId);
+	
+	public List<ItemsBean> selectSeller(String seller);
+
 
 }

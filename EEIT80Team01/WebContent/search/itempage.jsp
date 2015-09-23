@@ -78,18 +78,22 @@ color:#0088A8;
 	        		<fmt:formatDate value="${item.endTime}" var="formatDate" type="date" pattern="yyyy年MM月dd日HH時mm分" />	
 	        		結標時間：${formatDate}<br>
 	        		最小加價：${item.bid}<br><br>
-	        		<div class="col-md-6 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
-	        		</div>
+	        	
 	        		<c:if test="${!empty LoginOK}">
+	        		<c:choose>
+	        		<c:when test="${item.itemStatus==0}">
+	        		
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
-					<div class="col-md-6 ">
-	        		<form action="${pageContext.request.contextPath}/product/bid.do" method="post" class="form-inline">
+					<div class="col-md-12 ">
+					<form action="${pageContext.request.contextPath}/product/bid.do" method="post" class="form-inline">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span>
+	        		<button type="submit" class="btn btn-primary">直購</button></span><br><BR>
+	        		</div>	        		
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
-	        			<input type="hidden" name="action" value="direct">	        			
-	        			<button type="submit" class="btn btn-lg btn-primary">直購</button>
+	        			<input type="hidden" name="action" value="direct">	        				        			
 	        		</form>
-	        		</div>
+	        		
+	        	
 	        		<c:if test="${!LoginOK.userName.equals(topPrice.buyer)}">
 	        		<div class="col-md-12 ">
 	        		<div class="form-group col-md-5">
@@ -111,15 +115,23 @@ color:#0088A8;
 	        			您是目前最高出價者
 	        		</div>
 	        		</c:if>
-
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(item.seller)}">
 	        		<div class="col-md-12 ">	 
 	        			您是這個商品的賣家
 	        		</div>
-	        		</c:if>	        
 	        		</c:if>
+	        		</c:when>
+	        		<c:when test="${item.itemStatus==2}">
+	           			<h1>此商品已售出</h1>
+	        		</c:when>
+					</c:choose>
+	        		</c:if>	
+	        		        	        	
 	        		<c:if test="${empty LoginOK}">
+	        		<div class="col-md-12 ">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
+	        		</div>
 	        		<div  class="col-md-12">
 	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
 	        		</div>

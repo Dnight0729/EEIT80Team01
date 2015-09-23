@@ -36,6 +36,11 @@ body { padding-top: 50px; }
 	      <div class="row">
 			<%@include file="/include/navPart" %>
 			 <div class="col-md-7 main" id="contentPart">
+<script type="text/javascript">
+	function tdUrl(num){
+		window.location="msg.jsp?t="+num;
+	}
+</script>
 <form method="post" action="senddelete">
 	<fieldset>
 		<legend>寄件備份</legend>
@@ -68,11 +73,7 @@ body { padding-top: 50px; }
 	</fieldset>
 </form>
 
-<script type="text/javascript">
-	function tdUrl(num){
-		window.location="msg.jsp?t="+num;
-	}
-</script>
+
 	</div>
 		<%@include file="/include/blockPart" %>
 	</div>

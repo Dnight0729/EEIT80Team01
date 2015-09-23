@@ -59,5 +59,8 @@ public class BidLogDAOService {
 	public void delete(int itemId,String buyer){
 		dao.delete(itemId, buyer);
 	}
-	
+	public int getItemBidCount(int itemId){
+		BidLogDAO dao = new BidLogDAOJdbc();
+		return dao.getItemBidCount(itemId);
+	}
 }

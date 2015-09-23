@@ -1,10 +1,20 @@
 package member.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import global.GlobalService;
+import item.bid.model.BidLogBean;
+import item.bid.model.BidLogDAO;
+import item.bid.model.dao.BidLogDAOJdbc;
+import items.model.ItemsBean;
+import items.model.ItemsDAO;
+import items.model.dao.ItemsDAOjdbc;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import member.model.dao.MemberDAOjdbc;
+
 
 public class MemberService {
 	
@@ -81,5 +91,27 @@ public class MemberService {
 	public int unbanMember(String[] userName) {
 		MemberDAO dao = new MemberDAOjdbc();
 		return dao.unbanMember(userName);
+	}
+	
+	public List<Map<String, Object>> selectMyItems(String username){
+		ItemsDAO dao = new ItemsDAOjdbc();
+		BidLogDAO bld = new BidLogDAOJdbc();
+		List<ItemsBean> list = dao.selectThreeBySeller(username);
+		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+		for(ItemsBean bean : list){
+			double price = 0;
+			BidLogBean bb = bld.getTopPrice(bean.getItemId());
+			if(bb!=null){
+				price = bb.getBidPrice();
+			} else {
+				price = bean.getStartPrice();
+			}
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("item", bean);
+			map.put("price",price);
+			result.add(map);
+		}
+		
+		return result;
 	}
 }

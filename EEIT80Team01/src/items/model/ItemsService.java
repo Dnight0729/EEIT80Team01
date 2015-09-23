@@ -64,40 +64,11 @@ public class ItemsService {
 		return timer;
 	}
 	
+	public List<ItemsBean> getSeller(String seller){
+		List<ItemsBean> result = null;
+		ItemsDAO dao = new ItemsDAOjdbc();
+		result = dao.selectSeller(seller);
+		return result;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	public boolean changeItemStatusDown(int itemId){
-//		ItemsBean bean = null;
-//		ItemsDAO dao = new ItemsDAOjdbc();
-//		
-//		bean = dao.selectId(itemId);
-//		if(bean!=null && bean.getItemStatus()==0){
-//			bean.setItemStatus(1);
-//			bean = dao.update(bean);
-//			return true;
-//		}
-//		return false;
-//	}
-	
-//	public boolean changeItemStatusSell(int itemId){
-//		ItemsBean bean = null;
-//		ItemsDAO dao = new ItemsDAOjdbc();
-//		
-//		bean = dao.selectId(itemId);
-//		if(bean!=null && bean.getItemStatus()==0){
-//			bean.setItemStatus(2);
-//			bean = dao.update(bean);
-//			return true;
-//		}
-//		return false;
-//	}
 }

@@ -132,7 +132,7 @@
 					<tbody>
 						<c:forEach var="item" items="${sessionScope.myBuyItemsFinished}">
 							<tr>
-								<td>${item.tradeBean.itemId}</td>
+								<td>${item.itemId}</td>
 								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
 								<td>${item.buyer}</td>

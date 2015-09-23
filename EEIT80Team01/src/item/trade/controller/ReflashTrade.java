@@ -72,7 +72,6 @@ public class ReflashTrade extends HttpServlet {
 					itemDto.setSeller(myBuyItem.getSeller());
 					itemDto.setBuyerCheck(myBuyItem.getBuyerCheck());
 					itemDto.setSellerCheck(myBuyItem.getSellerCheck());
-					myBuyItemsUncheck.add(itemDto);
 					myBuyItemsFinished.add(itemDto);
 					
 				}else if(myBuyItem.getBuyerCheck()==1 && myBuyItem.getSellerCheck()==0){
@@ -88,7 +87,6 @@ public class ReflashTrade extends HttpServlet {
 					itemDto.setSeller(myBuyItem.getSeller());
 					itemDto.setBuyerCheck(myBuyItem.getBuyerCheck());
 					itemDto.setSellerCheck(myBuyItem.getSellerCheck());
-					myBuyItemsUncheck.add(itemDto);
 					myBuyItemsCheck.add(itemDto);
 				}else{
 					itemDto = new ItemDTO();
@@ -139,7 +137,7 @@ public class ReflashTrade extends HttpServlet {
 					itemDto.setSeller(mySellItem.getSeller());
 					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
 					itemDto.setSellerCheck(mySellItem.getSellerCheck());
-					mySellItemsFinished.add(itemDto);				
+					mySellItemsCheck.add(itemDto);				
 				}else{
 					itemDto = new ItemDTO();
 					itemId = mySellItem.getItemId();
@@ -153,7 +151,7 @@ public class ReflashTrade extends HttpServlet {
 					itemDto.setSeller(mySellItem.getSeller());
 					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
 					itemDto.setSellerCheck(mySellItem.getSellerCheck());
-					mySellItemsFinished.add(itemDto);
+					mySellItemsUncheck.add(itemDto);
 				}
 			}
 		}

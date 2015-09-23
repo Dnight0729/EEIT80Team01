@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.category.model.ItemCategoryBean;
+import items.model.ItemsBean;
 import items.model.ItemsService;
 
-@WebServlet("/item/itemSelectOne.controller")
+@WebServlet("/items/itemSelectOne.controller")
 public class ItemSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemsService service;
@@ -26,7 +28,6 @@ public class ItemSelectOneServlet extends HttpServlet {
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -41,6 +42,22 @@ public class ItemSelectOneServlet extends HttpServlet {
 		if("getOne_For_Update".equals(action)){
 			Map<String, String> errors = new HashMap<String, String>();
 			request.setAttribute("error", errors);
+			
+			try {
+//				//接收資料
+//				String itemIdStr =  request.getParameter("itemId");
+//				//格式轉換
+//				int itemId = 0;
+//				if(itemIdStr!=null && itemIdStr.length()!=0){
+//					itemId = Integer.parseInt(itemIdStr);
+//				}
+//				ItemsBean selectItemId = service.getOneItemId(itemId);
+//				request.setAttribute("selectItemId", selectItemId);         // 資料庫取出的bean物件,存入request
+				request.getRequestDispatcher("/items/itemUpdate.jsp").forward(request, response);	
+			} catch (Exception e) {
+				errors.put("action", "無法取得要修改的資料");
+				request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);
+			}
 		}
 		
 	}

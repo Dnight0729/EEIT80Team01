@@ -10,23 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import item.bid.model.BidLogDAOService;
+import item.bid.model.BidService;
 import items.model.ItemsService;
 
 @WebServlet("/items/itemList.controller")
 public class ItemRemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private ItemsService service;
+    private BidService service;
     public ItemRemoveServlet() {
         super();
     }
 
 	@Override
 	public void init() throws ServletException {
-		service = new ItemsService();
+		service = new BidService();
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -51,13 +52,13 @@ public class ItemRemoveServlet extends HttpServlet {
 					deleteButton = Integer.parseInt(deleteButtonStr);
 				}
 				//呼叫永續層
-				service.delete(deleteButton);
+				service.changeItemStatusToOne(deleteButton);
 				
 				//轉交
 				String url = "/items/itemList.jsp";
 				request.getRequestDispatcher(url).forward(request, response);
 			} catch (NumberFormatException e) {
-				errors.put("deleteError", "商品刪除失敗");
+				errors.put("deleteError", "商品下架失敗");
 				request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);
 			}
 			

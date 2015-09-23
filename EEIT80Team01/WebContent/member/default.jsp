@@ -10,7 +10,10 @@
   			MemberService service = new MemberService();
 			String id = request.getParameter("id");
 			MemberBean mb = service.findMemberData(id);
-			List<Map<String, Object>> list = service.selectMyItems(mb.getUserName());
+			List<Map<String, Object>> list= null;
+			if(mb!=null){
+				list = service.selectMyItems(mb.getUserName());	
+			}			 
 			pageContext.setAttribute("member",mb);
 			pageContext.setAttribute("myItems",list);
 		%>
@@ -19,7 +22,10 @@
 		<%
 			MemberBean mb = (MemberBean)session.getAttribute("LoginOK");
 			MemberService service = new MemberService();
-			List<Map<String, Object>> list = service.selectMyItems(mb.getUserName());
+			List<Map<String, Object>> list= null;
+			if(mb!=null){
+				list = service.selectMyItems(mb.getUserName());	
+			}
 			pageContext.setAttribute("member",mb);
 			pageContext.setAttribute("myItems",list);
 		%>
@@ -101,6 +107,7 @@ body { padding-top: 50px; }
 	}
 </script>
 				</div>
+				<div  class="col-md-12 ">
 					<h2>最近的商品</h2>
 						<table class="table table-bordered">
 							<thead>
@@ -123,12 +130,17 @@ body { padding-top: 50px; }
 					</c:forEach>
 							</tbody>
 						</table>
+					</div>
+					<div  class="col-md-12 ">
 					<c:if test="${!member.userName.equals(LoginOK.userName)}">
 						<a href="message/sendmessage.jsp?id=${member.userName}">寄信給他</a>
 					</c:if>	
+					</div>
 				</c:when>
 				<c:otherwise>
+				<div  class="col-md-12 ">
 					<h2>查無此會員</h2>
+				</div>
 				</c:otherwise>
 				</c:choose>
 	        </div>

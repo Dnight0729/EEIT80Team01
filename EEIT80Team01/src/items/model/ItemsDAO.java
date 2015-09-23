@@ -17,5 +17,7 @@ public interface ItemsDAO {
 	ItemsBean update(ItemsBean bean);
 
 	boolean delete(int itemId);
+	
+	List<ItemsBean> selectThreeBySeller(String username);
 
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="member.model.*" %>
+<%@ page import="member.model.*,items.model.*" %>
 <!DOCTYPE html>
 <c:choose>
   	<c:when test="${!empty param.id}">
@@ -10,13 +10,18 @@
   			MemberService service = new MemberService();
 			String id = request.getParameter("id");
 			MemberBean mb = service.findMemberData(id);
+			List<ItemsBean> list = service.selectMyItems(mb.getUserName());
 			pageContext.setAttribute("member",mb);
+			pageContext.setAttribute("myItems",list);
 		%>
 	</c:when>
 	<c:otherwise>
 		<%
 			MemberBean mb = (MemberBean)session.getAttribute("LoginOK");
+			MemberService service = new MemberService();
+			List<ItemsBean> list = service.selectMyItems(mb.getUserName());
 			pageContext.setAttribute("member",mb);
+			pageContext.setAttribute("myItems",list);
 		%>
 	</c:otherwise>
 </c:choose>
@@ -90,10 +95,33 @@ body { padding-top: 50px; }
 						</tr>
 					</tbody>				
 				</table>
+
+				</div>
+					<h2>最近的商品</h2>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>商品標題</th>
+									<th>起標價格</th>
+									<th>直購價格</th>
+									<th>結標時間</th>
+								</tr>
+							</thead>
+							<tbody>
+					<c:forEach items="${myItems}" var="item">
+						<tr>
+							<td>${item.title}</td>
+							<td>${item.startPrice}</td>
+							<td>${item.directPrice}</td>
+							<fmt:formatDate value="${item.endTime}" var="formatTime" pattern="yyyy年MM月dd日HH時mm分" />
+							<td>${formatTime}</td>
+						</tr>							
+					</c:forEach>
+							</tbody>
+						</table>
 					<c:if test="${!member.userName.equals(LoginOK.userName)}">
 						<a href="message/sendmessage.jsp?id=${member.userName}">寄信給他</a>
 					</c:if>	
-				</div>		
 				</c:when>
 				<c:otherwise>
 					<h2>查無此會員</h2>

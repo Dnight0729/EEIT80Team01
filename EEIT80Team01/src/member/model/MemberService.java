@@ -1,9 +1,13 @@
 package member.model;
 
+import global.GlobalService;
+import items.model.ItemsBean;
+import items.model.ItemsDAO;
+import items.model.dao.ItemsDAOjdbc;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import global.GlobalService;
 import member.model.dao.MemberDAOjdbc;
 
 public class MemberService {
@@ -81,5 +85,12 @@ public class MemberService {
 	public int unbanMember(String[] userName) {
 		MemberDAO dao = new MemberDAOjdbc();
 		return dao.unbanMember(userName);
+	}
+	
+	public List<ItemsBean> selectMyItems(String username){
+		ItemsDAO dao = new ItemsDAOjdbc();
+		List<ItemsBean> list = dao.selectThreeBySeller(username);
+		
+		return list;
 	}
 }

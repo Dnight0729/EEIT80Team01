@@ -387,71 +387,62 @@ public class ItemsDAOjdbc implements ItemsDAO{
 	}
 	
 	
+	private static final String SELECT_THREE_BY_SELLER = "SELECT top(3) * FROM ITEMS WHERE SELLER = ? and ITEM_STATUS=0 order by item_id desc";
 	
-	
-	
-	public static void main(String[] args){
-//		ItemsDAOjdbc dao = new ItemsDAOjdbc();
-		//新增
-//		ItemsBean bean = new ItemsBean();
-//		bean.setSeller("aaaaa");	//FK到MEMBER的USERNAME
-//		bean.setItemCategory(1);	//FK到ITEMCLASS的ITEM_CATEGORY
-//		bean.setTitle("杯子");
-//		bean.setStartPrice(new Double(10));
-//		bean.setDirectPrice(new Double(1000));
-//		bean.setBid(10);
-//		bean.setEndTime(java.sql.Date.valueOf("2015-09-11"));
-//		bean.setItemDescribe("這是一個杯子");
-//		bean.setItemStatus(0);
-//		bean.setThreadLock(0);
-//		dao.insert(bean);
-//		System.out.println("執行新增");
+	public List<ItemsBean> selectThreeBySeller(String username){
+		List<ItemsBean> result=null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SELECT_THREE_BY_SELLER);
+			stmt.setString(1, username);
+			rset = stmt.executeQuery();
+			result = new ArrayList<ItemsBean>();
+			while(rset.next()){
+				ItemsBean item = new ItemsBean();
+				item.setItemId(rset.getInt("ITEM_ID"));
+				item.setSeller(rset.getString("SELLER"));
+				item.setItemCategory(rset.getInt("ITEM_CATEGORY"));
+				item.setTitle(rset.getString("TITLE"));
+				item.setStartPrice(rset.getDouble("START_PRICE"));
+				item.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
+				item.setBid(rset.getInt("BID"));
+				item.setEndTime(rset.getTimestamp("END_TIME"));
+				item.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
+				item.setItemStatus(rset.getInt("ITEM_STATUS"));
+				item.setThreadLock(rset.getInt("THREAD_LOCK"));
+				result.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rset!=null){
+				try {
+					rset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
-		//修改
-//		ItemsBean bean2 = new ItemsBean();
-//		bean2.setSeller("bbbbb");
-//		bean2.setItemCategory(2);
-//		bean2.setTitle("茶杯子");
-//		bean2.setStartPrice(new Double(15));
-//		bean2.setDirectPrice(new Double(1500));
-//		bean2.setBid(10);
-//		bean2.setEndTime(java.sql.Date.valueOf("2011-01-01"));
-//		bean2.setItemDescribe("xxxxxxxxxxxxxx");
-//		bean.setItemStatus(0);
-//		bean2.setThreadLock(0);
-//		bean2.setItemId(4);
-//		dao.update(bean2);
-//		System.out.println("執行修改");
-		
-		//刪除
-//		dao.delete(5);
-//				System.out.println("執行刪除");
-		
-		//查詢一筆
-//		ItemsBean bean3 = dao.selectId(4);
-//		System.out.println(bean3.getItemId()+","+bean3.getSeller()+","+bean3.getItemCategory()
-//		+","+bean3.getTitle()+","+bean3.getStartPrice()+","+bean3.getDirectPrice()+","
-//		+bean3.getBid()+","+bean3.getEndTime()+","+bean3.getItemDescribe()+","
-//		+bean3.getItemStatus()+","+bean3.getThreadLock());
-//		System.out.println("查詢一筆");
-		
-		//查詢全部
-//		List<ItemsBean> bean4 = dao.getAll();
-//		for(ItemsBean list : bean4){
-//			System.out.println(list.getItemId()+","+list.getSeller()+","+list.getItemCategory()
-//			+","+list.getTitle()+","+list.getStartPrice()+","+list.getDirectPrice()+","
-//			+list.getBid()+","+list.getEndTime()+","+list.getItemDescribe()+","
-//			+list.getItemStatus()+","+list.getThreadLock());
-//		}
-//		System.out.println("查詢全部");
-		
-		
-		
-		
-		
-		
+		return result;
 	}
-	
 	
 	
 }

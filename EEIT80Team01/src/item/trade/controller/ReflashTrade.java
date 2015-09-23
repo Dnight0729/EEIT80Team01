@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import global.GlobalService;
+import item.trade.model.ItemDTO;
 import item.trade.model.TradeBean;
 import item.trade.model.TradeDAOService;
 import items.model.ItemImagesService;
@@ -29,6 +30,7 @@ public class ReflashTrade extends HttpServlet {
 	private int itemImgNum = -1;
 	private String itemTitle = null;
 	private ItemsBean itemsBean = null;
+	private ItemDTO itemDto = null;
 	public ReflashTrade(){
 		tradeDAOService = new TradeDAOService();
 		itemsService = new ItemsService();
@@ -46,36 +48,80 @@ public class ReflashTrade extends HttpServlet {
 		usr = memberBean.getUserName();
 		List<TradeBean> myBuyItems = tradeDAOService.getByBuyer(usr);
 		List<TradeBean> mySellItems = tradeDAOService.getBySeller(usr);
-		List<TradeBean> myBuyItemsFinished = new ArrayList<>();
-		List<TradeBean> myBuyItemsCheck = new ArrayList<>();
-		List<TradeBean> myBuyItemsUncheck = new ArrayList<>();
-		List<TradeBean> mySellItemsFinished  = new ArrayList<>();
-		List<TradeBean> mySellItemsCheck = new ArrayList<>();
-		List<TradeBean> mySellItemsUncheck = new ArrayList<>();
+		List<ItemDTO> myBuyItemsFinished = new ArrayList<>();
+		List<ItemDTO> myBuyItemsCheck = new ArrayList<>();
+		List<ItemDTO> myBuyItemsUncheck = new ArrayList<>();
+		List<ItemDTO> mySellItemsFinished  = new ArrayList<>();
+		List<ItemDTO> mySellItemsCheck = new ArrayList<>();
+		List<ItemDTO> mySellItemsUncheck = new ArrayList<>();
 		if(myBuyItems!=null){
 			for(TradeBean myBuyItem:myBuyItems){
 				if(myBuyItem.getBuyerCheck()==1 && myBuyItem.getSellerCheck()==1){
-					myBuyItemsFinished.add(myBuyItem);
+					itemDto = new ItemDTO();
 					itemId = myBuyItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
 					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(myBuyItem);
+					myBuyItemsFinished.add(itemDto);
 					
 				}else if(myBuyItem.getBuyerCheck()==1 && myBuyItem.getSellerCheck()==0){
-					myBuyItemsCheck.add(myBuyItem);
+					itemDto = new ItemDTO();
+					itemId = myBuyItem.getItemId();
+					itemsBean = itemsService.getOneItemId(itemId);
+					itemTitle = itemsBean.getTitle();
+					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(myBuyItem);
+					myBuyItemsCheck.add(itemDto);
 				}else{
-					myBuyItemsUncheck.add(myBuyItem);
+					itemDto = new ItemDTO();
+					itemId = myBuyItem.getItemId();
+					itemsBean = itemsService.getOneItemId(itemId);
+					itemTitle = itemsBean.getTitle();
+					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(myBuyItem);
+					myBuyItemsUncheck.add(itemDto);
 				}
 			}
 		}
 		if(mySellItems!=null){
 			for(TradeBean mySellItem:mySellItems){
 				if(mySellItem.getBuyerCheck()==1 && mySellItem.getSellerCheck()==1){
-					mySellItemsFinished.add(mySellItem);
+					itemDto = new ItemDTO();
+					itemId = mySellItem.getItemId();
+					itemsBean = itemsService.getOneItemId(itemId);
+					itemTitle = itemsBean.getTitle();
+					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(mySellItem);
+					mySellItemsFinished.add(itemDto);
 				}else if(mySellItem.getBuyerCheck()==0 && mySellItem.getSellerCheck()==1){
-					mySellItemsCheck.add(mySellItem);
+					itemDto = new ItemDTO();
+					itemId = mySellItem.getItemId();
+					itemsBean = itemsService.getOneItemId(itemId);
+					itemTitle = itemsBean.getTitle();
+					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(mySellItem);
+					mySellItemsFinished.add(itemDto);				
 				}else{
-					mySellItemsUncheck.add(mySellItem);
+					itemDto = new ItemDTO();
+					itemId = mySellItem.getItemId();
+					itemsBean = itemsService.getOneItemId(itemId);
+					itemTitle = itemsBean.getTitle();
+					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					itemDto.setImageNo(itemImgNum);
+					itemDto.setTitle(itemTitle);
+					itemDto.setTradeBean(mySellItem);
+					mySellItemsFinished.add(itemDto);
 				}
 			}
 		}

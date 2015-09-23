@@ -29,14 +29,13 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	}
 	private DataSource ds = null;
 	private Connection conn = null;
-	private PreparedStatement ptmt = null;
-	private ResultSet rs = null;
-	private List<BidLogBean> beans = null;
-	private BidLogBean bean = null;
 	
 	private String getTopPrice = "select top 1 * from bidlog where item_id=? order by bid_price desc";
 	@Override
 	public BidLogBean getTopPrice(int itemId){
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getTopPrice);
@@ -121,6 +120,10 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getAll = "select * from bidlog";
 	@Override
 	public List<BidLogBean> getAll() {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<BidLogBean> beans = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getAll);
@@ -165,6 +168,9 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getByPK ="select * from bidlog where item_id=? buyer=?";
 	@Override
 	public BidLogBean getByPK(int itemId, String buyer) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByPK);
@@ -209,6 +215,10 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getByItem = "select * from bidlog where item_id=?";
 	@Override
 	public List<BidLogBean> getByItem(int itemId) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<BidLogBean> beans = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByItem);
@@ -254,6 +264,10 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getByBidPrice = "select * from bidlog where bid_price=?";
 	@Override
 	public List<BidLogBean> getByBidPrice(double bidPrice) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<BidLogBean> beans = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByBidPrice);
@@ -299,6 +313,10 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getByBidTime = "select * from bidlog where bid_time=?";
 	@Override
 	public List<BidLogBean> getByBidTime(Timestamp bidTime) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<BidLogBean> beans = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByBidTime);
@@ -344,6 +362,10 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	private String getByBuyer = "select * from bidlog where buyer=?";
 	@Override
 	public List<BidLogBean> getByBuyer(String buyer) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<BidLogBean> beans = null;
+		BidLogBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByBuyer);
@@ -392,6 +414,7 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	@Override
 	public int insert(BidLogBean bean) {
 		int result = 0;
+		PreparedStatement ptmt = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(insert);
@@ -425,6 +448,7 @@ public class BidLogDAOJdbc implements BidLogDAO {
 			+ "where item_id=? and buyer=?";
 	@Override
 	public int update(BidLogBean bean) {
+		PreparedStatement ptmt = null;
 		int result = 0;
 		try {
 			conn = ds.getConnection();
@@ -460,6 +484,7 @@ public class BidLogDAOJdbc implements BidLogDAO {
 	@Override
 	public int delete(int itemId, String buyer) {
 		int result = 0;
+		PreparedStatement ptmt = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(delete);

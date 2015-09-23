@@ -31,7 +31,7 @@
 		<div class="col-md-offset-1 col-md-10" style="background-color:#FCFCFC">
 		
 		  <!-- Nav tabs -->
-		  <ul class="nav nav-tabs nav-justified" role="tablist">
+		  <ul class="nav nav-tabs nav-justified" role="tablist" id="myTabs">
 		    <li role="presentation" class="active"><a href="#uncheck" aria-controls="sellerCheck" role="tab" data-toggle="tab">待確認的交易</a></li>
 		    <li role="presentation"><a href="#checked" aria-controls="sellerUncheck" role="tab" data-toggle="tab">已確認的交易</a></li>
 		    <li role="presentation"><a href="#finished" aria-controls="buyerCheck" role="tab" data-toggle="tab">已完成的交易</a></li>
@@ -155,5 +155,8 @@
 <footer>
 
 </footer>
+<script>
+
+</script>
 </body>
 </html>

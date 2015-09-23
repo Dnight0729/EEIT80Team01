@@ -39,17 +39,18 @@
 			 	 <FORM METHOD="post" ACTION="${pageContext.request.contextPath }/support/manage/itemCategory/itemCategorySelectOne.controller">
 				     <input type="submit" value="修改">
 				     <input type="hidden" name="itemCategory" value="${item.itemCategory}">
+				     <input type="hidden" name="categoryName" value="${item.categoryName}">
 				     <input type="hidden" name="action"	value="getOne_For_Update">
-				     <font color="red" size="-1"><span class="error">${error.UpdateError }</span></font>
+				     <font color="red" size="-1"><span class="error">${error.action }</span></font>
 			     </FORM>
 			     
 			</td>
 			<td>
 			  	<FORM METHOD="post" ACTION="${pageContext.request.contextPath }/support/manage/itemCategory/itemCategoryList.controller">
 				    <input type="submit" value="刪除">
-				    <input type="hidden" name="itemCategory" value="${item.itemCategory}">
 				    <input type="hidden" name="action"value="delete">
-				    <font color="red" size="-1"><span class="error">${error.DeleteError }</span></font>
+				    <input type="hidden" name="itemCategory" value="${item.itemCategory}">
+				    <font color="red" size="-1"><span class="error">${error.action }</span></font>
 			    </FORM>
 			</td>
 		</tr>

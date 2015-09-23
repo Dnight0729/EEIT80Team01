@@ -27,14 +27,15 @@ public class TradeDAOJdbc implements TradeDAO {
 	}
 	private DataSource ds = null;
 	private Connection conn = null;
-	private PreparedStatement ptmt = null;
-	private ResultSet rs = null;
-	private List<TradeBean> beans = null;
-	private TradeBean bean = null;
+
 	
 	private String getAll = "select * from trade";
 	@Override
 	public List<TradeBean> getAll() {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<TradeBean> beans = null;
+		TradeBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getAll);
@@ -80,6 +81,9 @@ public class TradeDAOJdbc implements TradeDAO {
 	private String getByPK ="select * from trade where item_id=?";
 	@Override
 	public TradeBean getByPK(int itemId) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		TradeBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByPK);
@@ -125,6 +129,10 @@ public class TradeDAOJdbc implements TradeDAO {
 	private String getBySeller = "select * from trade where seller=?";
 	@Override
 	public List<TradeBean> getBySeller(String seller) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<TradeBean> beans = null;
+		TradeBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getBySeller);
@@ -171,6 +179,10 @@ public class TradeDAOJdbc implements TradeDAO {
 	private String getByBuyer = "select * from trade where buyer=?";
 	@Override
 	public List<TradeBean> getByBuyer(String buyer) {
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<TradeBean> beans = null;
+		TradeBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getByBuyer);
@@ -219,6 +231,7 @@ public class TradeDAOJdbc implements TradeDAO {
 			+ "values(?,?,?,?,?)";
 	@Override
 	public int insert(TradeBean bean) {
+		PreparedStatement ptmt = null;
 		int result = 0;
 		try {
 			conn = ds.getConnection();
@@ -254,6 +267,7 @@ public class TradeDAOJdbc implements TradeDAO {
 			+ "where item_id=? and seller=? and buyer=?";
 	@Override
 	public int update(TradeBean bean) {
+		PreparedStatement ptmt = null;
 		int result = 0;
 		try {
 			conn = ds.getConnection();
@@ -289,6 +303,7 @@ public class TradeDAOJdbc implements TradeDAO {
 			"delete from trade where item_id=? and buyer=? and seller=?";
 	@Override
 	public int delete(int itemId) {
+		PreparedStatement ptmt = null;
 		int result = 0;
 		try {
 			conn = ds.getConnection();

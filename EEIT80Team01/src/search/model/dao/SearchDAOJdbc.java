@@ -20,10 +20,7 @@ public class SearchDAOJdbc implements SearchDAO {
 	
 	private DataSource ds = null;
 	private Connection conn = null;
-	private PreparedStatement ptmt = null;
-	private ResultSet rs = null;
-	private List<ItemsBean> beans = null;
-	private ItemsBean bean = null;
+
 	public SearchDAOJdbc(){
 		Context ctx;
 		try {
@@ -41,6 +38,10 @@ public class SearchDAOJdbc implements SearchDAO {
 	 */
 	@Override
 	public List<ItemsBean> getItemsByKeyword(String keyword){
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<ItemsBean> beans = null;
+		ItemsBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getItemsByKeyword);
@@ -96,6 +97,10 @@ public class SearchDAOJdbc implements SearchDAO {
 	 */
 	@Override
 	public List<ItemsBean> getItemsWithOption(int option,String keyword){
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
+		List<ItemsBean> beans = null;
+		ItemsBean bean = null;
 		try {
 			conn = ds.getConnection();
 			ptmt = conn.prepareStatement(getItemsWithOption);

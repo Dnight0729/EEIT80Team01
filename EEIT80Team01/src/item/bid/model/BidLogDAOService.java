@@ -33,10 +33,20 @@ public class BidLogDAOService {
 		return dao.getByItem(itemId);
 	}
 	public BidLogBean insert(BidLogBean bean){
-		int i = dao.insert(bean);
-		if(i==1){
-			return bean;
+		BidLogBean temp = dao.getByPK(bean.getItemId(), bean.getBuyer());
+		
+		if(temp!=null){
+			int i = dao.update(bean);
+			if(i==1){
+				return bean;
+			}
+		}else{
+			int i = dao.insert(bean);
+			if(i==1){
+				return bean;
+			}
 		}
+
 		return null;
 	}
 	public BidLogBean update(BidLogBean bean){

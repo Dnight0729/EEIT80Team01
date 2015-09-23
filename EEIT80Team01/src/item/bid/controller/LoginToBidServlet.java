@@ -19,13 +19,27 @@ public class LoginToBidServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String itemid = request.getParameter("itemid");
-		response.sendRedirect(request.getContextPath()+"/search/item?itemid="+itemid);
+		StringBuilder url = new StringBuilder();
+		url.append(request.getContextPath());
+		url.append("/search/item");
+		if(itemid!=null){
+			url.append("?itemid=");
+			url.append(itemid);
+		}
+		response.sendRedirect(url.toString());
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String itemid = request.getParameter("itemid");
-		response.sendRedirect(request.getContextPath()+"/search/item?itemid="+itemid);
+		StringBuilder url = new StringBuilder();
+		url.append(request.getContextPath());
+		url.append("/search/item");
+		if(itemid!=null){
+			url.append("?itemid=");
+			url.append(itemid);
+		}
+		response.sendRedirect(url.toString());
 	}
 
 }

@@ -47,11 +47,11 @@ body {
 							<legend>檢舉/諮詢</legend>
 							<div class="form-group">
 								<label>標題：</label><input class="form-control" type="text" name="qtitle" style="width:100%">
-								&nbsp;<small><font color="red" size="-3">${errorTitle}</font></small>
+								&nbsp;<small><font color="red" size="-3">${errors.errorTitle}</font></small>
 							</div>
 							<label>內容：</label>
 							<textarea name="qmsg" id="editor1" rows="10" cols="60"></textarea>
-							&nbsp;<small><font color="red" size="-3">${errorQMsg}</font></small>
+							&nbsp;<small><font color="red" size="-3">${errors.errorQMsg}</font></small>
 							<script>
 								CKEDITOR.replace('editor1');
 							</script>

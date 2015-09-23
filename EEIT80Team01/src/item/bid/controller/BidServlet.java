@@ -48,13 +48,20 @@ public class BidServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
-		buyer = memberBean.getUserName();
+		if(memberBean!=null){
+			buyer = memberBean.getUserName();	
+		}
 		try {
 			itemId = Integer.parseInt(request.getParameter("itemId"));
 		} catch (NumberFormatException e) {
 			System.out.println("NumberFormatException");
 			e.printStackTrace();
 		}
+		StringBuilder url = new StringBuilder();
+		url.append(request.getContextPath());
+		url.append("/search/item");
+		url.append("?itemid=");
+		url.append(itemId);
 		bidTime = new java.sql.Timestamp(new java.util.Date().getTime());
 		seller = bidService.getSeller(itemId);
 		if(seller!=buyer){
@@ -73,19 +80,22 @@ public class BidServlet extends HttpServlet {
 						if(tradeBean!=null){
 							Timer timer = new Timer();
 							timer.schedule(new TradeTimer(itemId),new java.util.Date().getTime()+7*24*60*60*1000);
-							request.setAttribute("message","購買成功");
-							request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+							session.setAttribute("message","購買成功");
+							response.sendRedirect(url.toString());
+							return;
 						}else{
-							request.setAttribute("errorMsg","購買失敗");
-							request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+							session.setAttribute("errorMsg","購買失敗");
+							response.sendRedirect(url.toString());
+							return;
 						}
 					} else{
 						bidService.changeItemStatusToZero(itemId);
 					}
 				}
 				else{
-					request.setAttribute("errorMsg","已售出!");
-					request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+					session.setAttribute("errorMsg","已售出!");
+					response.sendRedirect(url.toString());
+					return;
 				}
 			}
 			
@@ -110,23 +120,26 @@ public class BidServlet extends HttpServlet {
 						if(result!=null){
 							bidService.toggleThread(itemId);
 							request.setAttribute("bean",result);
-							request.setAttribute("message","下標成功");
-							request.getRequestDispatcher("/search/itempage.jsp").forward(request,response);
+							session.setAttribute("message","下標成功");
+							response.sendRedirect(url.toString());
 						}else{
 							bidService.toggleThread(itemId);
-							request.setAttribute("errorMsg","錯誤!出價請高於最高下標價");
-							request.getRequestDispatcher("/search/itempage.jsp").forward(request,response);
+							session.setAttribute("errorMsg","錯誤!出價請高於最高下標價");
+							response.sendRedirect(url.toString());
+							return;
 						}
 					} else{
 						bidService.toggleThread(itemId);
-						request.setAttribute("errorMsg","下標失敗!");
-						request.getRequestDispatcher("/search/itempage.jsp").forward(request,response);
+						session.setAttribute("errorMsg","下標失敗!");
+						response.sendRedirect(url.toString());
+						return;
 					}
 					
 				}
 				else{
-					request.setAttribute("errorMsg","錯誤!其他會員下標中或拍賣已結束");
-					request.getRequestDispatcher("/search/itempage.jsp").forward(request,response);
+					session.setAttribute("errorMsg","錯誤!其他會員下標中或拍賣已結束");
+					response.sendRedirect(url.toString());
+					return;
 				}
 				
 				
@@ -134,8 +147,9 @@ public class BidServlet extends HttpServlet {
 			
 		}//check seller!=buyer
 		else{
-			request.setAttribute("errorMsg","對不起,您是此商品的賣家!");
-			request.getRequestDispatcher("/search/itempage.jsp").forward(request, response);
+			session.setAttribute("errorMsg","對不起,您是此商品的賣家!");
+			response.sendRedirect(url.toString());
+			return;
 		}
 		
 		

@@ -54,12 +54,14 @@ color:#0088A8;
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			  <strong>${errorMsg}</strong>
 			</div>
+			<c:remove var="errorMsg" scope="session" />
 		</c:if>
 		<c:if test="${!empty message }">
 			<div class="alert alert-success alert-dismissible text-center" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			  <strong>${message}</strong>
 			</div>
+			<c:remove var="message" scope="session" />
 		</c:if>
 		<div class="container-fluid">
 	      <div class="row">

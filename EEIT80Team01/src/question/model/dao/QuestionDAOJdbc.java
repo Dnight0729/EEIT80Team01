@@ -117,7 +117,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 
 	/* MEMBER AREA */
 	// member ask question
-	private static final String MEMBER_NEW_QUESTION = "INSERT INTO QUESTIONS SET MEMBER=?,TITLE=?,QMSG=?,QT=?";
+	private static final String MEMBER_NEW_QUESTION = "INSERT INTO QUESTIONS (MEMBER,TITLE,QMSG,QT) VALUES (?,?,?,?)";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#memberAskQuestion(java.lang.String, java.lang.String, java.lang.String)
@@ -133,7 +133,8 @@ public class QuestionDAOJdbc implements QuestionDAO {
 			pstmt.setString(2, title);
 			pstmt.setString(3, qmsg);
 			pstmt.setLong(4, qt);
-			result = pstmt.execute();
+			pstmt.execute();
+			result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -141,7 +142,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 	}
 
 	// member list answered questions
-	private static final String MEMBER_LIST_ANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT,SUPPORTER,AMSG,AT FROM QUESTIONS WHERE MEMBER=? AND SUPPORTER IS NOT NULL AND ORDER BY QNO DESC";
+	private static final String MEMBER_LIST_ANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT,SUPPORTER,AMSG,AT FROM QUESTIONS WHERE MEMBER=? AND SUPPORTER IS NOT NULL ORDER BY QNO DESC";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#memberListAnsweredQuestions(java.lang.String)
@@ -172,7 +173,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 	}
 
 	// member list unanswered questions
-	private static final String MEMBER_LIST_UNANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTIONS WHERE MEMBER=? AND SUPPORTER IS NULL AND ORDER BY QNO DESC";
+	private static final String MEMBER_LIST_UNANSWERED_QUESTIONS = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTIONS WHERE MEMBER=? AND SUPPORTER IS NULL ORDER BY QNO DESC";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#memberListUnAnsweredQuestions(java.lang.String)
@@ -200,7 +201,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 	}
 
 	// member watch unanswered question detail
-	private static final String MEMBER_WATCH_UNANSWERED_QUESTION_DETAIL = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTIONS WHERE MEMBER=? AND QNO=? AND SUPPORTER IS NULL AND ORDER BY QNO DESC";
+	private static final String MEMBER_WATCH_UNANSWERED_QUESTION_DETAIL = "SELECT QNO,MEMBER,TITLE,QMSG,QT FROM QUESTIONS WHERE MEMBER=? AND QNO=? AND SUPPORTER IS NULL ORDER BY QNO DESC";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#memberUnansweredQuestionDetail(java.lang.String, int)
@@ -228,7 +229,7 @@ public class QuestionDAOJdbc implements QuestionDAO {
 	}
 
 	// member watch answered question detail
-	private static final String MEMBER_WATCH_ANSWERED_QUESTION_DETAIL = "SELECT QNO,MEMBER,TITLE,QMSG,QT,SUPPORTER,AMSG,AT FROM QUESTIONS WHERE MEMBER=? AND QNO=? AND SUPPORTER IS NOT NULL AND ORDER BY QNO DESC";
+	private static final String MEMBER_WATCH_ANSWERED_QUESTION_DETAIL = "SELECT QNO,MEMBER,TITLE,QMSG,QT,SUPPORTER,AMSG,AT FROM QUESTIONS WHERE MEMBER=? AND QNO=? AND SUPPORTER IS NOT NULL ORDER BY QNO DESC";
 
 	/* (non-Javadoc)
 	 * @see question.model.dao.QuestionDAO#memberAnsweredQuestionDetail(java.lang.String, int)
@@ -238,8 +239,8 @@ public class QuestionDAOJdbc implements QuestionDAO {
 		QuestionBean result = null;
 		try (Connection connection = ds.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(MEMBER_WATCH_ANSWERED_QUESTION_DETAIL);) {
-			pstmt.setInt(1, qno);
-			pstmt.setString(2, member);
+			pstmt.setString(1, member);
+			pstmt.setInt(2, qno);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = new QuestionBean();

@@ -52,9 +52,12 @@ body {
 												<td>${item.qno}</td>
 												<td>${item.member}</td>
 												<td>${item.title}</td>
-												<td>${item.qt}</td>
-												<td><a
-													href="${pageContext.request.contextPath}/support/manage/question/supportQuestionDetail.do?qno=${item.qno}">內容</a></td>
+												<td>
+													<jsp:useBean id="myDate" class="java.util.Date"/>  
+											    	<c:set target="${myDate}" property="time" value="${item.qt}"/>
+											    	<fmt:formatDate value="${myDate}" pattern="yyyy/MM/dd HH:mm:ss" timeZone="Asia/Taipei"/>
+											    </td>
+												<td><a href="${pageContext.request.contextPath}/support/manage/question/supportQuestionDetail.do?qno=${item.qno}">內容</a></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -62,8 +65,8 @@ body {
 							</div>
 						</fieldset>
 						<div style="margin: 5px">
-							<span style="float: left"><input type="button"
-								value="重新載入列表" onclick="goToPage()"></span>
+							<span style="float: left"><input type="button" value="重新載入列表" onclick="goToPage()">
+						</span>
 						</div>
 					</form>
 				</div>

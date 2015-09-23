@@ -32,7 +32,7 @@ public class QuestionService {
 	
 	public List<QuestionBean> memberListAnsweredQuestions(String member) {
 		QuestionDAO dao = new QuestionDAOJdbc();
-		return dao.memberListUnAnsweredQuestions(member);
+		return dao.memberListAnsweredQuestions(member);
 	}
 	
 	public QuestionBean memberUnansweredQuestionDetail(String member, int qno) {

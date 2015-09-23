@@ -23,6 +23,7 @@ body {
 }
 </style>
 </head>
+<script src="http://cdn.ckeditor.com/4.5.3/basic/ckeditor.js"></script>
 <body>
 	<header><%@include file="/include/header-support"%></header>
 	<article>
@@ -39,41 +40,40 @@ body {
 						</div>
 						<div class="panel-body">
 							<div class="form-group">
-								<label for="Qmember">會員</label> <input id="Qmember"
-									class="form-control" value="${questionDetail.member}" readonly>
+								<label>會員</label>
+								<div class="form-control">${questionDetail.member}</div>
 							</div>
 							<div class="form-group">
-								<label for="Qtitle">標題</label> <input id="Qtitle"
-									class="form-control" value="${questionDetail.title}" readonly>
+								<label>標題</label>
+								<pre>${questionDetail.title}</pre>
 							</div>
 							<div class="form-group">
-								<label for="Qtime">發問時間</label>
-								<jsp:useBean id="dateObject" class="java.util.Date" />
-								<jsp:setProperty name="dateObject" property="time" value="${questionDetail.qt}" />
-								<input id="Qtime" class="form-control" value="<fmt:formatDate value="${dateObject}" pattern="yyyy/MM/dd hh:mm:ss" />" readonly>
+								<label>發問時間</label>
+								<div class="form-control">
+									<jsp:useBean id="dateObject" class="java.util.Date" />
+									<jsp:setProperty name="dateObject" property="time" value="${questionDetail.qt}" />
+									<fmt:formatDate value="${dateObject}" pattern="yyyy/MM/dd HH:mm:ss" />
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="user-question">問題內容：</label>
-								<textarea class="form-control" rows="10" name="user-question"
-									form="answerform" readonly>${questionDetail.qmsg}</textarea>
+								<label>問題內容：</label>
+								<pre>${questionDetail.qmsg}</pre>
 							</div>
+							<hr/>
 							<div class="form-group">
-								<label for="supporter-answer">回答：</label>
-								<textarea class="form-control" rows="5" name="supporter-answer"
-									form="answerform"></textarea>
-							</div>
-							<div class="form-group">
-								<form method="post" action="supporterAnswerQuestion.do"
-									id="answerform">
-									<input class="btn btn-default" type="submit" value="送出">
-									<input class="btn btn-danger" type="reset" value="清除">
-									<input type="hidden" name="hidden-qno"
-										value="${questionDetail.qno}"> <input type="hidden"
-										name="hidden-member" value="${questionDetail.member}">
-									<input type="hidden" name="hidden-title"
-										value="${questionDetail.title}"> <input type="hidden"
-										name="hidden-qmsg" value="${questionDetail.qmsg}"> <input
-										type="hidden" name="hidden-qt" value="${questionDetail.qt}">
+								<label>回答：</label>
+								<form method="post" action="supporterAnswerQuestion.do" id="answerform">
+									<textarea id="editor1" class="form-control" rows="10" name="supporter-answer"></textarea>
+									<script>CKEDITOR.replace('editor1')</script>
+									<div style="margin:20px">
+										<input class="btn btn-default" type="submit" value="送出">
+										<input class="btn btn-danger" type="reset" value="清除">
+									</div>
+									<input type="hidden" name="hidden-qno" value="${questionDetail.qno}">
+									<input type="hidden" name="hidden-member" value="${questionDetail.member}">
+									<input type="hidden" name="hidden-title" value="${questionDetail.title}">
+									<input type="hidden" name="hidden-qmsg" value="${questionDetail.qmsg}">
+									<input type="hidden" name="hidden-qt" value="${questionDetail.qt}">
 								</form>
 							</div>
 						</div>

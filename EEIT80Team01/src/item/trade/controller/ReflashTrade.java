@@ -79,7 +79,10 @@ public class ReflashTrade extends HttpServlet {
 					itemId = myBuyItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
-					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					List<Integer> itemImgNums = itemImgService.selectImagesNumbers(itemId);
+					if(!itemImgNums.isEmpty()){
+						itemImgNum = itemImgNums.get(0);
+					}
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
 					itemDto.setItemId(itemId);
@@ -115,7 +118,10 @@ public class ReflashTrade extends HttpServlet {
 					itemId = mySellItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
-					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					List<Integer> itemImgNums = itemImgService.selectImagesNumbers(itemId);
+					if(!itemImgNums.isEmpty()){
+						itemImgNum = itemImgNums.get(0);
+					}
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
 					itemDto.setItemId(itemId);
@@ -129,7 +135,10 @@ public class ReflashTrade extends HttpServlet {
 					itemId = mySellItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
-					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					List<Integer> itemImgNums = itemImgService.selectImagesNumbers(itemId);
+					if(!itemImgNums.isEmpty()){
+						itemImgNum = itemImgNums.get(0);
+					}
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
 					itemDto.setItemId(itemId);
@@ -143,7 +152,10 @@ public class ReflashTrade extends HttpServlet {
 					itemId = mySellItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);
 					itemTitle = itemsBean.getTitle();
-					itemImgNum = itemImgService.selectImagesNumbers(itemId).get(0);
+					List<Integer> itemImgNums = itemImgService.selectImagesNumbers(itemId);
+					if(!itemImgNums.isEmpty()){
+						itemImgNum = itemImgNums.get(0);
+					}
 					itemDto.setImageNo(itemImgNum);
 					itemDto.setTitle(itemTitle);
 					itemDto.setItemId(itemId);

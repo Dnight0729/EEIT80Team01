@@ -9,6 +9,7 @@
 <%@include file="/include/include" %>
 <title>Login</title>
 <style>
+body{background-color:#F0F0F0;}
 .container-fluid{margin-top:150px;}
 .row{margin-bottom:50px;}
 #logo{width:90px;height:90px;}

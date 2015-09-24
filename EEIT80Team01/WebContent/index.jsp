@@ -81,7 +81,15 @@
 	</div>
 </article>
 <footer>
-
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<p>&copy; EEIT80TeamOne-All Rights Reserved</p>
+			</div>
+		</div>
+	</div>
+	
 </footer>
 <%@include file="/include/modal" %>
 

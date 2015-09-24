@@ -18,8 +18,7 @@ body { padding-top: 50px; }
 #contentPart { padding-top: 50px;
 font-size:180%; }
 .itemimg{
-	width:100px;
-	hight:100px
+	width:200px;
 }
 
 #directPrice{
@@ -31,6 +30,7 @@ font-size:150%;
 cursor: pointer; 
 color:#0088A8;
 }
+
 
 #directPrice1{padding-left:60px; 
 }
@@ -86,7 +86,7 @@ color:#0088A8;
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
 					<div class="col-md-12 ">
 					<form action="${pageContext.request.contextPath}/product/bid.do" method="post" class="form-inline">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span>
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}元</span>
 	        		<button type="submit" class="btn btn-primary">直購</button></span><br><BR>
 	        		</div>	        		
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
@@ -130,17 +130,18 @@ color:#0088A8;
 	        		        	        	
 	        		<c:if test="${empty LoginOK}">
 	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}</span></span><br><BR>
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}元</span></span><br><BR>
 	        		</div>
 	        		<div  class="col-md-12">
 	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
 	        		</div>
 	        		</c:if>	        				
-	        		<div class="col-md-12">
+	        		<div class="col-md-8">
 	        		<h4>商品內容描述：</h4>
 	        		${item.itemDescribe}
 	        		</div>
-	        		<div  class="col-md-12">
+	        		<div  class="col-md-4">
+	        		<h4>商品圖片：</h4>
 	        		<c:if test="${!empty images}">
 	        		<c:forEach items="${images}" var="image">
 	        			<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${image}" class="itemimg">

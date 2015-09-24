@@ -96,12 +96,7 @@ public class NewMessageServlet extends HttpServlet {
 				request.setAttribute("errorMessage", "訊息傳送失敗");
 				rd.forward(request, response);
 			}
-			
-			
-			
-			
-		
-		
+					
 	}
 
 }

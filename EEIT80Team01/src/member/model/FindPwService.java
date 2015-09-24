@@ -75,8 +75,7 @@ public class FindPwService {
 				  SendEmail.sendemail(email, url);						
 			}
 		}).start();
-		
-		
+				
 	}
 	
 }

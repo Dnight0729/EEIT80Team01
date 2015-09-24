@@ -41,15 +41,17 @@ public class MemberAskQuestionServlet extends HttpServlet {
 		String member = mb.getUserName();
 		XSSValidate xss = new XSSValidate();
 		Map<String, String> errorMsgMap = new HashMap<String, String>();
-		
+
 		boolean titleOK = false;
 		boolean msgOK = false;
-		
+
 		String title = request.getParameter("qtitle");
 		if (title == null) {
 			errorMsgMap.put("errorTitle", "請填寫標題");
 		} else if (xss.validate(title)) {
 			errorMsgMap.put("errorTitle", "偵測到script語法");
+		} else if (title.trim().length() == 0) {
+			errorMsgMap.put("errorTitle", "請填寫標題");
 		} else {
 			titleOK = true;
 		}
@@ -59,6 +61,8 @@ public class MemberAskQuestionServlet extends HttpServlet {
 			errorMsgMap.put("errorQMsg", "請填寫內容");
 		} else if (xss.validate(qmsg)) {
 			errorMsgMap.put("errorQMsg", "偵測到script語法");
+		} else if (qmsg.trim().length()==0) {
+			errorMsgMap.put("errorQMsg", "請填寫內容");
 		} else {
 			msgOK = true;
 		}
@@ -72,6 +76,7 @@ public class MemberAskQuestionServlet extends HttpServlet {
 				return;
 			}
 		} else {
+			request.setAttribute("errors",errorMsgMap);
 			request.setAttribute("quesstionFailed", "問題傳送失敗");
 			RequestDispatcher rd = request.getRequestDispatcher("/member/question/NewQuestion.jsp");
 			rd.forward(request, response);

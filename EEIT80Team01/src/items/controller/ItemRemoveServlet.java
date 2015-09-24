@@ -55,7 +55,7 @@ public class ItemRemoveServlet extends HttpServlet {
 				service.changeItemStatusToOne(deleteButton);
 				
 				//轉交
-				String url = "/items/itemList.jsp";
+				String url = "/items/itemList";
 				request.getRequestDispatcher(url).forward(request, response);
 			} catch (NumberFormatException e) {
 				errors.put("deleteError", "商品下架失敗");

@@ -23,7 +23,10 @@ import items.model.ItemImagesService;
 
 
 @WebServlet("/items/itemImageAdd.controller")
-@MultipartConfig(maxFileSize=999999)
+@MultipartConfig(location="",
+fileSizeThreshold = 1024 * 1024,
+maxFileSize=1024 * 1024 * 500,
+maxRequestSize = 1024 * 1024 * 500 * 3)
 public class ItemImageAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemImagesService service;

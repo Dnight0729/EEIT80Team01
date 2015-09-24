@@ -46,12 +46,12 @@ body {
 						<fieldset>
 							<legend>檢舉/諮詢</legend>
 							<div class="form-group">
-								<label>標題：</label><input class="form-control" type="text" name="qtitle" value="${param.qtitle}" style="width:100%">
-								&nbsp;<small><font color="red" size="-3">${errorTitle}</font></small>
+								<label>標題：</label><input class="form-control" type="text" name="qtitle" style="width:100%">
+								&nbsp;<small><font color="red" size="-3">${errors.errorTitle}</font></small>
 							</div>
 							<label>內容：</label>
-							<textarea name="qmsg" id="editor1" rows="10" cols="60">${param.qmsg}</textarea>
-							&nbsp;<small><font color="red" size="-3">${errorQMsg}</font></small>
+							<textarea name="qmsg" id="editor1" rows="10" cols="60"></textarea>
+							&nbsp;<small><font color="red" size="-3">${errors.errorQMsg}</font></small>
 							<script>
 								CKEDITOR.replace('editor1');
 							</script>
@@ -62,9 +62,35 @@ body {
 							</div>
 						</fieldset>
 					</form>
-
-					&nbsp;<small><Font color='red' size="-3">${questionSuccess}</Font></small>
-					&nbsp;<small><Font color='red' size="-3">${quesstionFailed}</Font></small>
+					<c:if test="${!empty questionSuccess || !empty quesstionFailed }">
+					<div id="dialog" title="${questionSuccess}${quesstionFailed}">
+					<H3><Font color='red'>${questionSuccess}</Font></H3>
+					<H3><Font color='red'>${quesstionFailed}</Font></H3>					
+					</div>
+					<script>
+					$(function() {
+				    $( "#dialog" ).dialog({
+				      hide: {
+				        effect: "fade",
+				        duration: 500
+				      },
+				      height:200,
+				      width:300,
+				      modal: true,
+				      closeOnEscape: false,//按ESC不能關閉
+				      open: function(event, ui) {
+				    	    //隱藏「x」關閉按鈕
+				    	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+				    	    },
+				      buttons: {
+				    	  "關閉":function() {
+				              $( this ).dialog( "close" );
+				          }
+				      }
+				    })
+				  });
+					</script>
+					</c:if>
 				</div>
 				<%@include file="/include/blockPart"%>
 			</div>

@@ -1,13 +1,11 @@
 package items.controller;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -18,18 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import global.GlobalService;
-import item.category.model.ItemCategoryBean;
-import items.model.ImageInput;
 import items.model.ItemsBean;
 import items.model.ItemsService;
 import member.model.MemberBean;
-@MultipartConfig(location="",
-		fileSizeThreshold = 1024 * 1024,
-		maxFileSize=1024 * 1024 * 500,
-		maxRequestSize = 1024 * 1024 * 500 * 3)
+
 @WebServlet("/items/itemUpdate.controller")
 public class ItemUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -69,7 +61,7 @@ public class ItemUpdateServlet extends HttpServlet {
 				String bidStr = request.getParameter("bid");
 				String endTimeStr = request.getParameter("endTime");
 				String itemDescribe = request.getParameter("itemDescribe");
-				
+				String itemIdStr = request.getParameter("itemId");
 				//資料驗證
 				if(userName==null || userName.trim().length()==0){
 					errors.put("loginError", "請重新登入");
@@ -132,7 +124,13 @@ public class ItemUpdateServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+				int itemId = 0;
+				if(itemIdStr!=null && itemIdStr.length()!=0){
+					itemId = Integer.parseInt(itemIdStr);
+				}
+				
 				ItemsBean bean = new ItemsBean();
+				bean.setSeller(userName);
 				bean.setItemCategory(itemCategory);
 				bean.setTitle(title);
 				bean.setStartPrice(startPrice);
@@ -140,11 +138,13 @@ public class ItemUpdateServlet extends HttpServlet {
 				bean.setBid(bid);
 				bean.setEndTime(endTime);
 				bean.setItemDescribe(itemDescribe);
-				System.out.println("準備修改資料");							
+				bean.setItemStatus(0);
+				bean.setThreadLock(0);
+				bean.setItemId(itemId);					
 				
 				ItemsBean update = service.update(bean);
-				System.out.println("update="+update);
-				System.out.println("存入資料");
+//				request.setAttribute("update", update); // 資料庫update成功後,正確的的bean物件,存入request
+				
 				
 //				if (!errors.isEmpty()) {
 //					request.setAttribute("bean", bean); // 含有輸入格式錯誤的bean物件,也存入request
@@ -154,17 +154,12 @@ public class ItemUpdateServlet extends HttpServlet {
 //					return; //程式中斷
 //				}
 				
-				System.out.println("錯誤轉交");
-//				ItemsBean update = service.update(bean);
-//				System.out.println(update);
-//				request.setAttribute("update", update); // 資料庫update成功後,正確的的bean物件,存入request
+				
 				
 				request.getRequestDispatcher("/items/itemList").forward(request, response); // 修改成功後,轉交itemList.jsp
-				System.out.println("成功轉交下一支");
 			} catch (Exception e) {
 				errors.put("action", "修改資料失敗");
 				request.getRequestDispatcher("/items/itemUpdate.jsp").forward(request, response);
-				System.out.println("catch到");
 			}
 		}
 	}

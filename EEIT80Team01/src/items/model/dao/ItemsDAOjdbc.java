@@ -263,8 +263,8 @@ public class ItemsDAOjdbc implements ItemsDAO{
 				}
 								
 				if(i>0){
-					conn.commit();
 					result =  bean;
+					conn.commit();
 				}
 			}						
 		} catch (SQLException e) {
@@ -313,6 +313,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		try {
 //			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			conn = ds.getConnection();
+			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(UPDATE);
 			stmt.setString(1, bean.getSeller());
 			stmt.setInt(2, bean.getItemCategory());
@@ -328,10 +329,16 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			int i = stmt.executeUpdate();
 			if(i == 1){
 				result = bean;
+				conn.commit();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			if(stmt!=null){
 				try {
 					stmt.close();
@@ -394,8 +401,8 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			}
 							
 			if(i>0){
-				conn.commit();
 				result =  bean;
+				conn.commit();
 			}
 		} catch (SQLException e) {
 			if (conn!=null) {

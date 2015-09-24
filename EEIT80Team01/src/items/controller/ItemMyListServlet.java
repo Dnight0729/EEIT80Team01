@@ -38,21 +38,18 @@ public class ItemMyListServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		//取得session
 		HttpSession session = request.getSession();	//用來抓取seller資料用
 		MemberBean memberBean = (MemberBean)session.getAttribute(GlobalService.LOGIN_TOKEN);
 		String userName=null;
 		if(memberBean!=null){
 			userName = memberBean.getUserName();
 		}
-//		System.out.println("userName="+userName);
 		
 		ItemsService dao = new ItemsService();
 		BidLogDAOService bidDaoSvc = new BidLogDAOService();
 		ItemImagesService imgSvc = new ItemImagesService();
-		//取出seller欄位資料
-		List<ItemsBean> getseller = dao.getSeller(userName);
-//		System.out.println("getseller="+getseller);	檢查取得seller資料
+		
+		List<ItemsBean> getseller = dao.getSeller(userName);	//取出seller欄位資料
 		List<Object> list = new ArrayList<Object>();
 		int itemId = 0;
 		List<Integer> images = null;
@@ -64,19 +61,16 @@ public class ItemMyListServlet extends HttpServlet {
 
 			images = imgSvc.selectImagesNumbers(itemId);
 			if(!images.isEmpty()){
-				image = images.get(0);
-//				System.out.println("image="+image);	//測試圖片編號
+				image = images.get(0);	//抓商品第一張圖
 				map.put("image", image);
 			}else{
 				getServletContext().getResourceAsStream("/imgs/NoImage.jpg");
 			}
 
-//			System.out.println("itemIdxxx="+itemId);	//檢查有無抓到itemId
 			String buyer = "尚未有人出價";
 			double price = 0;
 			BidLogBean topPrice = bidDaoSvc.getTopPrice(itemId);
 			if(topPrice!=null){
-//				System.out.println(topPrice.getBidPrice());	//測試抓到的最高金額為多少
 				price = topPrice.getBidPrice();
 				buyer = topPrice.getBuyer();
 			} else {
@@ -95,7 +89,6 @@ public class ItemMyListServlet extends HttpServlet {
 			list.add(map);
 		}
 
-//		System.out.println("list="+list);	//檢查有無抓到list資料
 		request.setAttribute("list", list);
 				
 		request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);

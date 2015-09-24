@@ -1,11 +1,9 @@
 package items.model.dao;
 
 
-//import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-//import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +21,6 @@ import items.model.ItemImagesDAO;
 
 public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	private DataSource ds;
-	
-//	private static final String URL="jdbc:sqlserver://localhost:1433;database=EEIT80TEAM01";
-//	private static final String USER="sa";
-//	private static final String PASSWORD="sa123456";
 	
 	public ItemImagesDAOjdbc(){
 		Context ctx;
@@ -58,10 +52,14 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 				}
 				reuslt = stmt.executeUpdate();
 				conn.commit();
-				conn.setAutoCommit(true);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
+				try {
+					conn.setAutoCommit(true);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				if(stmt!=null){
 					try {
 						stmt.close();
@@ -107,10 +105,14 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 			
 			result = stmt.executeUpdate();
 			conn.commit();
-			conn.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			if(stmt!=null){
 				try {
 					stmt.close();
@@ -313,36 +315,5 @@ private static final String SELECT_PICTURE = "SELECT IMAGE FROM ITEM_IMAGES WHER
 		}		
 		return result;		
 	}
-	
-	
-	public static void main(String[] args) throws IOException{
-//		ItemImagesDAO dao = new ItemImagesDAOjdbc();
-		
-		//新增
-//		ImagesBean bean = new ImagesBean();
-//		bean.setItemId(3);
-//		File file = new File("C:/Users/Student/Desktop/01.jpg");
-//		long size = file.length();
-//		FileInputStream fis = new FileInputStream(file);
-//		dao.insert(bean, fis, size);
-//		
-//		System.out.println("執行新增");
-		
-		//修改
-//		ImagesBean bean2 = new ImagesBean();
-//		bean2.setImageNo(2);
-//		File file = new File("C:/Users/Student/Desktop/02.jpg");
-//		long size = file.length();
-//		FileInputStream fis = new FileInputStream(file);
-//		dao.update(bean2, fis, size);
-//	
-//		System.out.println("執行修改");
-		
-		//刪除
-//		dao.delete(2);
-//		System.out.println("執行刪除");
-		
-		
-	}
-	
+
 }

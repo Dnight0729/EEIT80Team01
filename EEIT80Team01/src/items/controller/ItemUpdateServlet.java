@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import global.GlobalService;
 import items.model.ItemsBean;
@@ -23,6 +24,10 @@ import items.model.ItemsService;
 import member.model.MemberBean;
 
 @WebServlet("/items/itemUpdate.controller")
+@MultipartConfig(location="",
+fileSizeThreshold = 1024 * 1024,
+maxFileSize=1024 * 1024 * 500,
+maxRequestSize = 1024 * 1024 * 500 * 3)
 public class ItemUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemsService service;
@@ -62,6 +67,7 @@ public class ItemUpdateServlet extends HttpServlet {
 				String endTimeStr = request.getParameter("endTime");
 				String itemDescribe = request.getParameter("itemDescribe");
 				String itemIdStr = request.getParameter("itemId");
+
 				//資料驗證
 				if(userName==null || userName.trim().length()==0){
 					errors.put("loginError", "請重新登入");

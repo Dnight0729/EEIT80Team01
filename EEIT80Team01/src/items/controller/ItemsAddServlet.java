@@ -84,14 +84,12 @@ public class ItemsAddServlet extends HttpServlet {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
-		// 2. 檢查使用者輸入資料
-		
-		
+
 		// 存放錯誤訊息物件
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("error", errors);
 		
+		// 2. 檢查使用者輸入資料
 		if(userName==null || userName.trim().length()==0){
 			errors.put("loginError", "請重新登入");
 		}
@@ -162,9 +160,8 @@ public class ItemsAddServlet extends HttpServlet {
 		
 		//呼叫Model
 		ItemsBean bean = new ItemsBean();
-		bean.setSeller(userName);	//可以使用session or 呼叫member
-//		bean.setSeller("aaaaa");	//測試用，強制塞值
-		bean.setItemCategory(itemCategory);	//須轉為int存入資料庫
+		bean.setSeller(userName);	
+		bean.setItemCategory(itemCategory);	
 		bean.setTitle(title);
 		bean.setStartPrice(startPrice);
 		bean.setDirectPrice(directPrice);
@@ -192,8 +189,6 @@ public class ItemsAddServlet extends HttpServlet {
 			ItemsBean result = service.insert(bean, list);
 			
 			Date date = new Date(endTime.getTime());
-			System.out.println(date);
-//			Timer timer = new Timer();
 			Timer timer = service.timerForEndTime();
 			timer.schedule(new ItemTimer(result), date);
 			

@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="items.model.*"%>
-<%@ page import="item.category.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	ItemsBean bean = (ItemsBean) request.getAttribute("bean"); //存入request的Bean物件
-%>
-<%
-ItemCategoryService service = new ItemCategoryService();
-List<ItemCategoryBean> list = service.selectCategory(null);
-pageContext.setAttribute("list", list);
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,13 +14,13 @@ pageContext.setAttribute("list", list);
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath }/items/itemUpdate.controller" method="post"> 
+<form action="${pageContext.request.contextPath }/items/itemUpdate.controller" method="post" enctype="multipart/form-data"> 
 	<table>
 		<tr>
 			<td>商品分類</td>
 			<td>
 				<select name="itemCategory">
-				<c:forEach var="list" items="${list }">
+				<c:forEach var="list" items="${categoryList }">
 					<option value="${list.itemCategory}">${list.categoryName}
 				</c:forEach>
 				</select>
@@ -63,12 +52,6 @@ pageContext.setAttribute("list", list);
 			<td><input id="dateTime" type="text" name="endTime" value="${param.endTime }" readonly="readonly"></td>
 			<td><font color="red" size="-1"><span class="error">${error.endTimeError }</span></font></td>
 		</tr>
-<!-- 		<tr> -->
-<!-- 			<td>商品圖片</td> -->
-<!-- 			<td><input type="file" name="image1"></td> -->
-<!-- 			<td><input type="file" name="image2"></td> -->
-<!-- 			<td><input type="file" name="image3"></td> -->
-<!-- 		</tr> -->
 	</table>
 	<script>
     $(document).ready(function(){ 
@@ -88,6 +71,7 @@ pageContext.setAttribute("list", list);
       	$('#dateTime').datetimepicker(opt);
       	});
 	</script>
+	<br>
 	<div>
 		<p>商品描述</p>
 		<textarea name="itemDescribe" cols="50" rows="5" id="describe"></textarea>
@@ -95,13 +79,27 @@ pageContext.setAttribute("list", list);
 			var ta = document.getElementById('describe').value ="${param.itemDescribe}";
 		</script>
 	</div>
-	
+	<br>
+	<div>
+		<p>商品圖片</p>
+		<c:forEach var="i" begin="0" end="2">
+		<c:if test="${!empty images.get(i) }">
+			<img height="200" width="200" src="${pageContext.request.contextPath}/search/showImage?imageNo=${images.get(i)}">
+		</c:if>
+		<c:if test="${empty images.get(i) }">
+			<input type="file" name="image">
+		</c:if>
+		</c:forEach>
+	</div>
+	<br>
 	<input type="hidden" name="itemId" value="${param.itemId}">
 	<input type="submit" value="進行修改">
 	<input type="hidden" name="action" value="update">
 	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
 	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
 </form>
+
+
 <script type="text/javascript">
 	(function($){
 		$('option:eq(${param.itemCategory-1})').attr("selected", true);

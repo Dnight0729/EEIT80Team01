@@ -31,15 +31,9 @@
 		    <li role="presentation" class="active"><a href="#uncheck" role="tab" data-toggle="tab">出售中商品</a></li>
 		    <li role="presentation"><a href="#checked" role="tab" data-toggle="tab">已下架商品</a></li>
 		  	<li role="presentation" class="myInput">
-				<a id="toggle" data-toggle="dropdown" role="button" aria-haspopup="true">新增我的商品</a>
+				<a  href="#" id="toggle" data-toggle="modal" data-target="#modal fade login" role="button">新增我的商品</a>
 			</li>
 		  </ul>
-		  <script>
-		  $('#modal').on('modal.fail', function () {
-			  $('#myInput').focus()
-			})
-		  </script>
-		  
 		  
 			<!-- Tab panes -->
 			<div class="tab-content">

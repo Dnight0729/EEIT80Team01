@@ -31,7 +31,7 @@ import items.model.ItemsService;
 import member.model.MemberBean;
 
 @WebServlet("/items/itemAdd.controller")
-@MultipartConfig(maxFileSize=999999999)
+@MultipartConfig(maxFileSize=1024 * 1024 * 500)
 public class ItemsAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemsService service;

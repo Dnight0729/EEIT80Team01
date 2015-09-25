@@ -1,9 +1,12 @@
 package items.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 
+import items.model.dao.ItemImagesDAOjdbc;
 import items.model.dao.ItemsDAOjdbc;
 
 public class ItemsService {
@@ -48,12 +51,12 @@ public class ItemsService {
 		return result;
 	}
 	
-	public ItemsBean update(ItemsBean bean, List<ImageInput> list ){
+	public ItemsBean update(ItemsBean bean, List<Integer> delete,List<ImageInput> list ){
 		ItemsDAO dao = new ItemsDAOjdbc();
 		
 		ItemsBean result = null;
 		if(bean!=null){
-			result = dao.update(bean, list);
+			result = dao.update(bean, delete, list);
 		}
 		return result;
 	}
@@ -84,6 +87,25 @@ public class ItemsService {
 		List<ItemsBean> result = null;
 		ItemsDAO dao = new ItemsDAOjdbc();
 		result = dao.selectSellerDown(seller);
+		return result;
+	}
+	
+	public List<Map<String, Object>> frontpage(){
+		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+		List<ItemsBean> list = null;
+		ItemsDAO dao = new ItemsDAOjdbc();
+		ItemImagesDAO iid = new ItemImagesDAOjdbc();
+		list = dao.selectLatest();
+		for(ItemsBean bean:list){
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("itemId", bean.getItemId());
+			List<Integer> imageNos = iid.selectImages(bean.getItemId());
+			if(imageNos!=null && !imageNos.isEmpty()){
+				map.put("imageNo", imageNos.get(0));
+			}
+			result.add(map);
+		}	
 		return result;
 	}
 }

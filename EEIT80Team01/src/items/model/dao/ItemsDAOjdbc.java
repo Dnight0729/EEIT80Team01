@@ -364,7 +364,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 	 * @see items.model.dao.ItemsDAO#update(java.lang.String, java.lang.String, int, java.lang.String, double, double, int, java.util.Date, java.lang.String, int, int, int)
 	 */
 	@Override
-	public ItemsBean update(ItemsBean bean, List<ImageInput> list){
+	public ItemsBean update(ItemsBean bean, List<Integer> deletes, List<ImageInput> list){
 		ItemsBean result = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -372,7 +372,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 //			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
-			stmt = conn.prepareStatement(UPDATE , Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement(UPDATE);
 			stmt.setString(1, bean.getSeller());
 			stmt.setInt(2, bean.getItemCategory());
 			stmt.setString(3, bean.getTitle());
@@ -385,16 +385,22 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			stmt.setInt(10, bean.getThreadLock());
 			stmt.setInt(11, bean.getItemId());
 			int i = stmt.executeUpdate();
-			
-			ResultSet rs= stmt.getGeneratedKeys();
-
-			if(rs.next()){
-				int itemId = rs.getInt(1);
+			if(i==1){
+				if(deletes!=null && !deletes.isEmpty()){
+					for(int delete : deletes){
+						stmt = conn.prepareStatement(DELETE_PICTURE);
+						stmt.setInt(1, delete);
+						i = stmt.executeUpdate();
+					}
+				}
+				int itemId = bean.getItemId();
+				
 				if(list!=null && !list.isEmpty()){
+					System.out.println(itemId);
 					for(ImageInput input : list){
-						stmt = conn.prepareStatement(UPDATE_PICTURE);
+						stmt = conn.prepareStatement(INSERT_PICTURE);
 						stmt.setInt(1, itemId);
-						stmt.setBinaryStream(2, input.getFis(), input.getSize());	
+						stmt.setBinaryStream(2, input.getFis(), input.getSize());						
 						i = stmt.executeUpdate();
 					}
 				}
@@ -709,6 +715,61 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			}
 		}
 		
+		return result;
+	}
+	
+	private static final String GET_LATEST = "SELECT top(5) * FROM ITEMS where item_status = 0";
+	@Override
+	public List<ItemsBean> selectLatest() {
+		ArrayList<ItemsBean> result=null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(GET_LATEST);
+			rset = stmt.executeQuery();
+			result = new ArrayList<ItemsBean>();
+			while(rset.next()){
+				ItemsBean item = new ItemsBean();
+				item.setItemId(rset.getInt("ITEM_ID"));
+				item.setSeller(rset.getString("SELLER"));
+				item.setItemCategory(rset.getInt("ITEM_CATEGORY"));
+				item.setTitle(rset.getString("TITLE"));
+				item.setStartPrice(rset.getDouble("START_PRICE"));
+				item.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
+				item.setBid(rset.getInt("BID"));
+				item.setEndTime(rset.getTimestamp("END_TIME"));
+				item.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
+				item.setItemStatus(rset.getInt("ITEM_STATUS"));
+				item.setThreadLock(rset.getInt("THREAD_LOCK"));
+				result.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rset!=null){
+				try {
+					rset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
 		return result;
 	}
 	

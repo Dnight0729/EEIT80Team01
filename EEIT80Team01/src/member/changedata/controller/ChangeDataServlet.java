@@ -29,7 +29,7 @@ public class ChangeDataServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/member/changeData.jsp");
 	}
 
 

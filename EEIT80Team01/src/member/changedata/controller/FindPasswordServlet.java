@@ -48,7 +48,7 @@ public class FindPasswordServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/service/illeagallink.jsp");
 	}
 
 }

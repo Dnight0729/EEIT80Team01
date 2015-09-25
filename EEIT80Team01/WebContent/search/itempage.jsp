@@ -34,6 +34,17 @@ color:#0088A8;
 
 #directPrice1{padding-left:60px; 
 }
+
+
+#itemDescribe{
+border-width:1px;border-style:solid;border-color:#aaaaaa;padding:20px;
+position:relative;
+/*     left:25px; */
+    top:0;
+    width:600px;
+    border-top:3px solid #aaaaaa;
+word-break: break-all;
+}
 </style>
 <c:choose>
 	<c:when test="${!empty item}">
@@ -50,6 +61,7 @@ color:#0088A8;
 		<%@include file="/include/header" %>
 </header>	
 <article>
+<fmt:formatNumber value="${ item.directPrice }"  var="directPrice" pattern="#" type="number"/>
 		<c:if test="${!empty errorMsg }">
 			<div class="alert alert-danger alert-dismissible text-center" role="alert">
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -70,15 +82,20 @@ color:#0088A8;
 	        <div class="col-md-7 main" id="contentPart">
 	        	<c:choose>
 				<c:when test="${!empty item}">
-				
-					<div id="opener">賣家：${item.seller}</div>        	
-	        		商品分類：${itemCategory.categoryName}<br>
+				<div class="row">
+				<div class="col-md-7">
+				<div id="opener">賣家：${item.seller}</div>   
+				商品分類：${itemCategory.categoryName}<br>
 	        		商品主題：${item.title}	<br>
-	        		商品價格：${price}<br>
+	        		<fmt:formatNumber value="${ price }"  var="pri" pattern="#" type="number"/>
+	        		商品價格：${pri}元<br>
 	        		<fmt:formatDate value="${item.endTime}" var="formatDate" type="date" pattern="yyyy年MM月dd日HH時mm分" />	
 	        		結標時間：${formatDate}<br>
 	        		最小加價：${item.bid}<br><br>
-	        	
+				
+				     
+				     
+ <!--=================登入後出現 ===========================-->
 	        		<c:if test="${!empty LoginOK}">
 	        		<c:choose>
 	        		<c:when test="${item.itemStatus==0}">
@@ -86,7 +103,7 @@ color:#0088A8;
 	        		<c:if test="${!LoginOK.userName.equals(item.seller)}">
 					<div class="col-md-12 ">
 					<form action="${pageContext.request.contextPath}/product/bid.do" method="post" class="form-inline">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}元</span>
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span>
 	        		<button type="submit" class="btn btn-primary">直購</button></span><br><BR>
 	        		</div>	        		
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
@@ -101,7 +118,8 @@ color:#0088A8;
 	        			<input type="hidden" name="itemId" value="${item.itemId}">
 	        			<input type="hidden" name="action" value="bid">
 	        			 <div class="input-group">
-	        			<input type="number" min="${price + item.bid}" value="${price + item.bid}" name="bidPrice" class="form-control">
+	        			 <fmt:formatNumber value="${price + item.bid }"  var="bid" pattern="#" type="number"/>
+	        			<input type="number" min="${bid}" value="${bid}" name="bidPrice" class="form-control">
 	        			 <div class="input-group-btn">
 	        			<button type="submit" class="btn btn-primary">出價</button>
 	        			</div>
@@ -127,21 +145,10 @@ color:#0088A8;
 	        		</c:when>
 					</c:choose>
 	        		</c:if>	
-	        		        	        	
-	        		<c:if test="${empty LoginOK}">
-	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${item.directPrice}元</span></span><br><BR>
-	        		</div>
-	        		<div  class="col-md-12">
-	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
-	        		</div>
-	        		</c:if>	        				
-	        		<div class="col-md-8">
-	        		<h4>商品內容描述：</h4>
-	        		${item.itemDescribe}
-	        		</div>
-	        		<div  class="col-md-4">
-	        		<h4>商品圖片：</h4>
+<!-- ========================================================--> 			     	
+				</div>
+				<div class="col-md-2 col-md-offset-3">
+					        		<h4>商品圖片：</h4>
 	        		<c:if test="${!empty images}">
 	        		<c:forEach items="${images}" var="image">
 	        			<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${image}" class="itemimg">
@@ -151,6 +158,26 @@ color:#0088A8;
 	        			<img src="${pageContext.request.contextPath}/search/showImage" class="itemimg">
 	        		</c:if>
 	        		</div>
+				
+					</div>        			        		
+	        		
+<!-- ===================沒登入出現==================================-->
+				<c:if test="${empty LoginOK}">
+	        		<div class="col-md-12 ">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
+	        		<div  class="col-md-12">
+	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
+	        		</div>
+	        		</c:if>	 
+<!-- 	======================================================== -->
+	        		<h4>商品內容描述：</h4>
+					<div id="itemDescribe" class="col-md-7">
+<!-- 	        		<h4>商品內容描述：</h4> -->
+	        		${item.itemDescribe}
+	        		</div>
+				</div>
+
 				</c:when>
 				<c:otherwise>
 					<h3>查無此商品</h3>

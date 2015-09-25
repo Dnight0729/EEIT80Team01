@@ -2,6 +2,6 @@
 <Context>
 	<Resource name="jdbc/eeit80team01" auth="Container" type="javax.sql.DataSource"
                maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-               username="sa" password="eeit80123456" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-               url="jdbc:sqlserver://sql.eavictor.com:1433;database=EEIT80TEAM01"/>
+               username="tiee@lumavbfq1p" password="EEit80123456" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+               url="jdbc:sqlserver://lumavbfq1p.database.windows.net:1433;database=EEIT80TEAM01"/>
 </Context>

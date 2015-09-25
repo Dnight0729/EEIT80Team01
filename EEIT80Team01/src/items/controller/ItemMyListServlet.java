@@ -33,6 +33,11 @@ public class ItemMyListServlet extends HttpServlet {
     }
 
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -48,7 +53,7 @@ public class ItemMyListServlet extends HttpServlet {
 		ItemsService dao = new ItemsService();
 		BidLogDAOService bidDaoSvc = new BidLogDAOService();
 		ItemImagesService imgSvc = new ItemImagesService();
-		
+		//會員上架區塊
 		List<ItemsBean> getseller = dao.getSeller(userName);	//取出seller欄位資料
 		List<Object> list = new ArrayList<Object>();
 		int itemId = 0;
@@ -89,18 +94,51 @@ public class ItemMyListServlet extends HttpServlet {
 			list.add(map);
 		}
 
-		request.setAttribute("list", list);
+		//會員下架區塊
+		List<ItemsBean> getsellerDown = dao.getSellerDown(userName);
+		List<Object> listDown = new ArrayList<Object>();
+		int itemIdDown = 0;
+		List<Integer> imagesDown = null;
+		Integer imageDown = null;
+		for(ItemsBean findItemId: getsellerDown){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("itemsBean", findItemId);
+			itemIdDown = findItemId.getItemId();
+
+			imagesDown = imgSvc.selectImagesNumbers(itemIdDown);
+			if(!imagesDown.isEmpty()){
+				imageDown = imagesDown.get(0);	//抓商品第一張圖
+				map.put("image", imageDown);
+			}else{
+				getServletContext().getResourceAsStream("/imgs/NoImage.jpg");
+			}
+
+			String buyer = "尚未有人出價";
+			double price = 0;
+			BidLogBean topPrice = bidDaoSvc.getTopPrice(itemIdDown);
+			if(topPrice!=null){
+				price = topPrice.getBidPrice();
+				buyer = topPrice.getBuyer();
+			} else {
+				price = findItemId.getStartPrice();
+			}
+			int count = 0;
+			int itemCount = bidDaoSvc.getItemBidCount(itemIdDown);
+			if(itemCount!=0){
+				count = itemCount;
+			}else{
+				count = 0;
+			}
+			map.put("count", count);
+			map.put("price", price);
+			map.put("buyer", buyer);
+			listDown.add(map);
+		}
+		request.setAttribute("listPac", list);
+		request.setAttribute("listDownPac", listDown);
 				
 		request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);
 	}
 
-	
-	
-	
-	
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
 }

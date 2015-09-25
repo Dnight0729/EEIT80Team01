@@ -80,4 +80,10 @@ public class ItemsService {
 		return result;
 	}
 	
+	public List<ItemsBean> getSellerDown(String seller){
+		List<ItemsBean> result = null;
+		ItemsDAO dao = new ItemsDAOjdbc();
+		result = dao.selectSellerDown(seller);
+		return result;
+	}
 }

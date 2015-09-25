@@ -25,6 +25,8 @@ public interface ItemsDAO {
 	boolean delete(int imageNo, int itemId);
 	
 	public List<ItemsBean> selectSeller(String seller);
+	
+	public List<ItemsBean> selectSellerDown(String seller);
 
 
 }

@@ -133,7 +133,31 @@ public class BidService {
 		return false;
 	}
 	
+	public boolean changeItemStatusOneToZero(int itemId){
+		ItemsBean result = null;
+		itemsBean = itemsDao.selectId(itemId);
+		if(itemsBean!=null && itemsBean.getItemStatus()==1){
+			itemsBean.setItemStatus(0);
+			result = itemsDao.update(itemsBean);
+			if(result!=null){
+				return true;
+			}
+		}
+		return false;
+	}
 	
+	public boolean changeItemStatusToHide(int itemId){
+		ItemsBean result = null;
+		itemsBean = itemsDao.selectId(itemId);
+		if(itemsBean!=null && itemsBean.getItemStatus()==1){
+			itemsBean.setItemStatus(3);
+			result = itemsDao.update(itemsBean);
+			if(result!=null){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public BidLogBean insertDirectBuyer(int itemId,Timestamp bidTime,String buyer){
 		itemsBean = itemsDao.selectId(itemId);

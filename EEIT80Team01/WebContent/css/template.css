@@ -11,13 +11,20 @@ body { padding-top: 50px;
 .navbar{ 
  	margin-bottom: 0px;
 }
-#section{
+#section1{
 	background:#007979;
 }
-#section a{
+#section1 a{
 	color:#D7FFEE; 
 }
-#section li .active a{
+#section1 a:hover{
+	color:#007979; 
+}
+#section1 .active a{
 	color:#007979;
 	background:#D7FFEE;
+}
+#section2{
+	background:#007979;
+	height:800px;
 }

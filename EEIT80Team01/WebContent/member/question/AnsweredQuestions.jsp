@@ -79,5 +79,8 @@ body {
 			</div>
 		</div>
 	</article>
+<script>
+$("#sectionItem5").addClass("active");
+</script>
 </body>
 </html>

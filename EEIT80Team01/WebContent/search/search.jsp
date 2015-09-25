@@ -30,6 +30,7 @@
   margin-right:5px;
   float:right;
 }
+
 //---------------------------------
 * {
   -webkit-box-sizing: border-box;
@@ -99,17 +100,19 @@
 	<%@include file="/include/header" %>
 </header>
 <article>
-	<div class="page-header text-center">
 		 <c:choose>
 		 	<c:when test="${!empty error}">
 <%--  		 		<h1>${error}</h1> --%>
-<img style="padding-left:10%" style=" opacity:.70 "  src="${pageContext.request.contextPath}/imgs/search1.jpg" width="60%">
+					<div style="margin-left:450px;margin-top:70px">
+						<img style="opacity:.70"  src="${pageContext.request.contextPath}/imgs/search1.jpg" width="60%">
+					</div>
  		 	</c:when>
  		 	<c:otherwise>
-	 		 	<h1>搜尋結果 </h1>
+				<div class="page-header text-center">
+	 		 		<h1>搜尋結果 </h1>
+				</div>
  		 	</c:otherwise>
  		 </c:choose>
-	</div>
 	<div class="packery">
 		<c:forEach var="item" items="${items}">
 			  <div class="item" >

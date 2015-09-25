@@ -14,6 +14,7 @@
   height:30%;
   background-color:#2F4F4F;
   opacity:0.9;
+  cursor:default;
 }
 .detail{
   padding-left:7px;
@@ -57,6 +58,7 @@
 }
 
 .item-content {
+  cursor:zoom-in;
   width:  100%;
   height: 70%;
   background-color:#2F4F4F;    
@@ -65,6 +67,9 @@
      -moz-transition: width 0.4s, height 0.4s;
        -o-transition: width 0.4s, height 0.4s;
           transition: width 0.4s, height 0.4s;
+}
+.zoomout{
+	cursor:zoom-out;
 }
 
 /* item has expanded size */
@@ -148,6 +153,8 @@ $( function() {
     percentPosition: true
   });
   $container.on( 'click', '.item-content', function( event ) {
+	 $(".item-content").toggleClass("zoomout");
+	  
     var target = event.target;
     var $target = $( target );
 
@@ -191,6 +198,8 @@ $( function() {
 
   });
 });
+
+
 </script>
 </body>
 </html>

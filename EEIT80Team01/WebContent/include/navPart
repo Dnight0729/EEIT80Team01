@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	        <div class="col-md-2 " style="background:#00DDDD;height:789px;padding-right:0px;padding-left:0px;" >
+	        <div id="section" class="col-md-2 " style="height:789px;padding-right:0px;padding-left:0px;" >
 	        	<c:if test="${empty LoginOK}">
-		          <ul class="nav nav-pills nav-stacked">
+		          <ul style="color:#D7FFEE;" class="nav nav-pills nav-stacked">
 		          	<li><br/></li>
 		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>會員帳戶</b></span></a></li>
 		            <li role="presentation" class="" id="sectionItem1"><a href="${pageContext.request.contextPath}/member/default.jsp" class="btn"><span class="">會員中心</span></a></li>

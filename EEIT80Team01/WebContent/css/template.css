@@ -11,3 +11,13 @@ body { padding-top: 50px;
 .navbar{ 
  	margin-bottom: 0px;
 }
+#section{
+	background:#007979;
+}
+#section a{
+	color:#D7FFEE; 
+}
+#section li .active a{
+	color:#007979;
+	background:#D7FFEE;
+}

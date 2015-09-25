@@ -13,6 +13,7 @@
   width:100%;
   height:30%;
   background-color:#2F4F4F;
+  opacity:0.9;
 }
 .detail{
   padding-left:7px;
@@ -20,7 +21,7 @@
 }
 .title h4{
   margin:0px;
-  background-color:#8B0000;
+  background-color:#003E3E;
   padding:5px;
   color:#FFE4C4;
 }
@@ -114,7 +115,7 @@
 		    		<img alt="" class="item-content" src="${pageContext.request.contextPath}/search/showImage">
 		    	</c:if>
 		    	<div class="content">
-				    <div class="title"><h4>${item.title}<small><a href="${pageContext.request.contextPath}/search/item?itemid=${item.itemId}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>參觀專頁</a></small></h4></div>
+				    <div class="title"><h4>${item.title}<small><a style="color:	#FFECEC" href="${pageContext.request.contextPath}/search/item?itemid=${item.itemId}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>詳細資訊</a></small></h4></div>
 				    <div class="detail">
 				    	<span>起始標價：<strong>${item.startPrice}</strong></span>
 				    	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直購價：<strong>${item.directPrice}</strong></span>

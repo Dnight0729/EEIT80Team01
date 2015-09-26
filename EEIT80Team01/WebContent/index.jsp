@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.List,items.model.*,java.util.Map" %>
+<%
+	ItemsService is = new ItemsService();
+	List<Map<String,Object>> listmap = is.frontpage();
+	pageContext.setAttribute("latestproducts", listmap);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,11 +75,29 @@
 	    				<h3 class="panel-title">最新上架商品</h3>
 	  				</div>
 	  				<div class="panel-body">
+	  				<c:if test="${empty latestproducts}">  					  				
 	    				<img src="http://cdn.kingstone.com.tw/cvlife/images/product/30100/3010000029712/3010000029712Abs1.JPG" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="http://www.everrich-group.com/Upload/fcd42f03-236f-4211-93b4-d1b31fee2fb8/EN/01.jpg" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="http://pic.eslite.com/Upload/Attachment/201306/635077767310229711.jpg" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="http://www.eayko.com/wp-content/uploads/2013/07/20101221nufirstimage.jpg" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="..." alt="..." class="img-thumbnail img-responsive">
+	    			</c:if>
+	    			<c:if test="${!empty latestproducts}"> 
+					 <c:forEach items="${latestproducts}" var="product">  		
+	    				<c:if test="${!empty product}">	
+	    				<a href="${pageContext.request.contextPath}/search/item?itemid=${product.itemId}">
+	    					<c:choose>
+	    					<c:when test="${!empty product.imageNo}">
+	    					<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${product.imageNo}" alt="..." class="img-thumbnail img-responsive">
+	    					</c:when>
+	    					<c:otherwise>
+	    					<img src="${pageContext.request.contextPath}/search/showImage" alt="..." class="img-thumbnail img-responsive">
+	    					</c:otherwise>
+	    					</c:choose>
+	    				</a>
+	    				</c:if>
+	    			</c:forEach>
+	    			</c:if>
 	  				</div>
 				</div>
 			</div>

@@ -62,7 +62,7 @@ public class RegisterServlet extends HttpServlet {
 							if(email!=null && emailcheck.validate(email));{
 								bean.setEmail(email);
 								String birthDay = request.getParameter("birthDay");
-								SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 								DateValidator datecheck = new DateValidator();
 								if(birthDay!=null && datecheck.validate(birthDay)){
 									try {

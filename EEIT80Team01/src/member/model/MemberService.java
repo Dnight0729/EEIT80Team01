@@ -98,20 +98,21 @@ public class MemberService {
 		BidLogDAO bld = new BidLogDAOJdbc();
 		List<ItemsBean> list = dao.selectThreeBySeller(username);
 		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
-		for(ItemsBean bean : list){
-			double price = 0;
-			BidLogBean bb = bld.getTopPrice(bean.getItemId());
-			if(bb!=null){
-				price = bb.getBidPrice();
-			} else {
-				price = bean.getStartPrice();
+		if(list!=null){
+			for(ItemsBean bean : list){
+				double price = 0;
+				BidLogBean bb = bld.getTopPrice(bean.getItemId());
+				if(bb!=null){
+					price = bb.getBidPrice();
+				} else {
+					price = bean.getStartPrice();
+				}
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("item", bean);
+				map.put("price",price);
+				result.add(map);
 			}
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("item", bean);
-			map.put("price",price);
-			result.add(map);
 		}
-		
 		return result;
 	}
 }

@@ -96,16 +96,17 @@ public class ItemsService {
 		ItemsDAO dao = new ItemsDAOjdbc();
 		ItemImagesDAO iid = new ItemImagesDAOjdbc();
 		list = dao.selectLatest();
-		for(ItemsBean bean:list){
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("itemId", bean.getItemId());
-			List<Integer> imageNos = iid.selectImages(bean.getItemId());
-			if(imageNos!=null && !imageNos.isEmpty()){
-				map.put("imageNo", imageNos.get(0));
+		if(list!=null){
+			for(ItemsBean bean:list){			
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("itemId", bean.getItemId());
+				List<Integer> imageNos = iid.selectImages(bean.getItemId());
+				if(imageNos!=null && !imageNos.isEmpty()){
+					map.put("imageNo", imageNos.get(0));
+				}
+				result.add(map);
 			}
-			result.add(map);
-		}	
+		}
 		return result;
 	}
 }

@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="item.category.model.*"%>
-<%@ page import="java.util.List" %>
 
-<%
-ItemCategoryService service = new ItemCategoryService();
-List<ItemCategoryBean> list = service.selectCategory(null);
-pageContext.setAttribute("list", list);
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,7 +13,11 @@ pageContext.setAttribute("list", list);
 <script src="jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 <script src="jquery-ui-sliderAccess.js" type="text/javascript"></script>
 
-<style type="text/css"></style>
+<style type="text/css">
+.goCenter{
+text-align: center;
+}
+</style>
 <script type="text/javascript">
 function clearForm(){
 	var inputs = document.getElementsByTagName("input");
@@ -34,81 +31,119 @@ function clearForm(){
 </head>
 
 <body>
-<h3>商品頁面</h3>
-<form action="${pageContext.request.contextPath }/items/itemAdd.controller" method="post" enctype="multipart/form-data"> 
-	<table>
-		<tr>
-			<td>商品分類</td>
-			<td>
-				<select name="itemCategory">
-				<option selected="selected" value="">請選擇商品分類
-				<c:forEach var="list" items="${list }">
-					<option value="${list.itemCategory}">${list.categoryName}
-				</c:forEach>
+<header>
+<%@include file="/include/header" %>
+</header>
+<article>
+<h2 align="center">新增我的商品</h2>
+<hr><br>
+<div align="center">
+<form action="${pageContext.request.contextPath }/items/itemAdd.controller" method="post" enctype="multipart/form-data" role="form" class="horizontal"> 
+	<div class="form-group">
+	<label for="inputCategory" class="col-sm-2 control-label">商品分類</label>
+		<div class="row">
+			<div class="col-sm-3">
+				<select name="itemCategory" class="form-control" id="inputCategory">
+					<option selected="selected" value="" >請選擇商品分類
+					<c:forEach var="list" items="${list }">
+						<option value="${list.itemCategory}">${list.categoryName}
+					</c:forEach>
 				</select>
-			</td>
-			<td><font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font></td>
-		</tr>
-		<tr>
-			<td>商品名稱</td>
-			<td><input type="text" name="title" value="${param.title }"></td>
-			<td><font color="red" size="-1"><span class="error">${error.titleError }</span></font></td>
-		</tr>
-		<tr>
-			<td>起標價格</td>
-			<td><input type="text" name="startPrice" value="${param.startPrice }"></td>
-			<td><font color="red" size="-1"><span class="error">${error.startPriceError }</span></font></td>
-		</tr>
-		<tr>
-			<td>直購價</td>
-			<td><input type="text" name="directPrice" value="${param.directPrice }"></td>
-			<td><font color="red" size="-1"><span class="error">${error.directPriceError }</span></font></td>
-		</tr>
-		<tr>
-			<td>加價金額</td>
-			<td><input type="text" name="bid" value="${param.bid }"></td>
-			<td><font color="red" size="-1"><span class="error">${error.bidError }</span></font></td>
-		</tr>
-		<tr>
-			<td>結標時間</td>
-			<td><input id="dateTime" type="text" name="endTime" value="${param.endTime }" readonly="readonly"></td>
-			<td><font color="red" size="-1"><span class="error">${error.endTimeError }</span></font></td>
-		</tr>
-		<tr>
-			<td>商品圖片</td>
-			<td><input type="file" name="image1"></td>
-			<td><input type="file" name="image2"></td>
-			<td><input type="file" name="image3"></td>
-		</tr>
-	</table>
-	<script>
-    $(document).ready(function(){ 
-    	var opt={dateFormat: 'yy-mm-dd',
-    			timeFormat: 'HH:mm',
-                showSecond: false,
-                showMinute: false,
-                showTime:	false,
-                showButtonPanel: false,
-                hourText:"請選擇幾點結標",
-                controlType:"select" ,
-                prevText:"上月",
-                nextText:"下月",
-                dayNamesMin:["日","一","二","三","四","五","六"],
-                monthNames:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
-                };
-      	$('#dateTime').datetimepicker(opt);
-      	});
-  </script>
-	<div>
-		<p>商品描述</p>
-		<textarea name="itemDescribe" cols="50" rows="5"></textarea>
+			</div>
+			<font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font>
+		</div>	
+	</div>
+	<div class="form-group">
+	<label for="inputTitle" class="col-sm-2 control-label">商品名稱</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="text" name="title" class="form-control" id="inputTitle" placeholder="請輸入商品名稱" value="${param.title }">
+			</div>
+			<font color="red" size="-1"><span class="error">${error.titleError }</span></font>
+		</div>		
+	</div>
+	<div class="form-group">
+	<label for="inputStartPrice" class="col-sm-2 control-label">起標價格</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="text" name="startPrice" class="form-control" id="inputStartPrice" placeholder="請輸入起標價格" value="${param.startPrice }">
+			</div>
+			<font color="red" size="-1"><span class="error">${error.startPriceError }</span></font>
+		</div>		
+	</div>
+	<div class="form-group">
+	<label for="inputDirectPrice" class="col-sm-2 control-label">直購價格</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="text" name="directPrice" class="form-control" id="inputDirectPrice" placeholder="請輸入直購價格" value="${param.directPrice }">
+			</div>
+			<font color="red" size="-1"><span class="error">${error.directPriceError }</span></font>
+		</div>		
+	</div>
+	<div class="form-group">
+	<label for="inputBid" class="col-sm-2 control-label">加價金額</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="text" name="bid" class="form-control" id="inputBid" placeholder="請輸入加價金額" value="${param.bid }">
+			</div>
+			<font color="red" size="-1"><span class="error">${error.bidError }</span></font>
+		</div>		
+	</div>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">結標時間</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="text" name="endTime" class="form-control" id="dateTime"   placeholder="請點擊選擇時間" value="${param.endTime }" readonly="readonly">
+			</div>
+			<font color="red" size="-1"><span class="error">${error.endTimeError }</span></font>
+		</div>		
+	</div>
+<script>
+   $(document).ready(function(){ 
+   	var opt={dateFormat: 'yy-mm-dd',
+   			timeFormat: 'HH:mm',
+               showSecond: false,
+               showMinute: false,
+               showTime:	false,
+               showButtonPanel: false,
+               hourText:"請選擇幾點結標",
+               controlType:"select" ,
+               prevText:"上月",
+               nextText:"下月",
+               dayNamesMin:["日","一","二","三","四","五","六"],
+               monthNames:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+               };
+     	$('#dateTime').datetimepicker(opt);
+     	});
+ </script>
+ 	<br>
+ 	<div class="form-group">
+	<label for="inputPic" class="col-sm-2 control-label">商品圖片</label>
+		<div class="row">
+			<div class="col-sm-3" >
+				<input type="file" name="image1" id="inputPic">
+				<input type="file" name="image2" id="inputPic">
+				<input type="file" name="image3" id="inputPic">
+			</div>
+		</div>		
+	</div>
+	<div class="form-group">
+		<label for="inputPic" class="col-sm-2 control-label">商品描述</label>
+			<div class="row">
+				<div class="col-sm-5" >
+					<textarea name="itemDescribe" rows="3" class="form-control"></textarea>
+				</div>
+			</div>		
 	</div>
 	<input type="submit" value="新增商品">
 	<input type="hidden" name="itemsButton" value="Insert">
 	<input type="button" value="Clear" onclick="clearForm()">
 	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
 	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
-
 </form>
+</div>
+</article>
+<footer>
+</footer>
 </body>
 </html>

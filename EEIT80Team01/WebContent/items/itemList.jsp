@@ -14,6 +14,7 @@
 	text-align:center;
 }
 </style>
+
 </head>
 <body>
 <header>
@@ -28,16 +29,16 @@
 		<div class="col-md-offset-1 col-md-10" style="background-color:#FCFCFC">
 			<!-- Nav tabs -->
 		  <ul class="nav nav-tabs nav-justified" role="tablist" id="myTabs">
-		    <li role="presentation" class="active"><a href="#uncheck" role="tab" data-toggle="tab">出售中商品</a></li>
-		    <li role="presentation"><a href="#checked" role="tab" data-toggle="tab">已下架商品</a></li>
+		    <li role="presentation" class="active"><a href="#itemSell" role="tab" data-toggle="tab">出售中商品</a></li>
+		    <li role="presentation"><a href="#itemUnsel" role="tab" data-toggle="tab">已下架商品</a></li>
 		  	<li role="presentation" class="myInput">
-				<a  href="#" id="toggle" data-toggle="modal" data-target="#modal fade login" role="button">新增我的商品</a>
+				<a  href="${pageContext.request.contextPath}/items/itemAdd.jsp" data-toggle="xxx" data-target="xxx" role="button">新增我的商品</a>
 			</li>
 		  </ul>
 		  
 			<!-- Tab panes -->
 			<div class="tab-content">
-		    <div role="tabpanel" class="tab-pane fade in active" id="uncheck">
+		    <div role="tabpanel" class="tab-pane fade in active" id="itemSell">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -91,7 +92,7 @@
 				</table>
 			</div>
 			
-			<div role="tabpanel" class="tab-pane fade" id="checked">
+			<div role="tabpanel" class="tab-pane fade" id="itemUnsell">
 				<table class="table table-hover">
 					<thead>
 						<tr>

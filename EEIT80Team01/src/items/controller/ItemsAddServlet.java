@@ -194,7 +194,7 @@ public class ItemsAddServlet extends HttpServlet {
 			}else{
 				request.setAttribute("insert", result);
 			}
-			request.getRequestDispatcher("/items/itemSuccess.jsp").forward(request, response);
+			request.getRequestDispatcher("/items/itemList").forward(request, response);
 		}
 		
 		

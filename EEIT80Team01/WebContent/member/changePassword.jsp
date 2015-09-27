@@ -44,7 +44,8 @@ body { padding-top: 50px; }
 				  <div class="form-group" >
 				    <label for="username" class="col-sm-3 control-label">帳號：</label>
 				    <div class="col-sm-7">
-				      <input type="text" class="form-control" id="username" name="username" value="${LoginOK.userName}" readonly="readonly">
+				      <label class="col-sm-3 control-label">${LoginOK.userName}</label>
+				      <input type="hidden" id="username" name="username" value="${LoginOK.userName}">
 				    </div>
 				  </div>
 				  <div class="form-group">

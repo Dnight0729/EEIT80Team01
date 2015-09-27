@@ -26,6 +26,7 @@ body {
 .table{
 	border: 1px solid #E3E3E3;
 }
+
 </style>
 <title>商品分類修改</title>
 <script type="text/javascript">
@@ -57,7 +58,7 @@ body {
 <table class="table table-hover">
 	<tr>
 		<td>商品分類編號:</td>
-		<td><input type="text" class="form-control" name="itemCategory" value="${param.itemCategory}" readonly="readonly"></td>
+		<td>${param.itemCategory}<input type="hidden" name="itemCategory" value="${param.itemCategory}"></td>
 		<td><font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font></td>
 	</tr>
 	<tr>

@@ -23,17 +23,16 @@
 				<br>
 				<br>
 				<a
-					href="${pageContext.request.contextPath}/support/password/changePassword.jsp">修改客服密碼</a>
+					href="${pageContext.request.contextPath}/support/manage/itemCategory/itemCategoryList.jsp">商品分類清單</a>
 				<br>
+				<br>
+				<a
+					href="${pageContext.request.contextPath}/support/password/changePassword.jsp">修改客服密碼</a>
 				<br>
 				<a
 					href="${pageContext.request.contextPath}/support/login/logout.jsp">登出</a>
 				<br>
-				<a
-					href="${pageContext.request.contextPath}/support/manage/itemCategoryAdd.jsp">新增商品分類</a>
-				<br>
-				<a
-					href="${pageContext.request.contextPath}/support/manage/itemCategoryList.jsp">商品分類清單</a>	
+					
 			</c:if>
 		</div>
 	</div>

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import item.category.model.ItemCategoryService;
 @WebServlet("/support/manage/itemCategory/itemCategoryList.controller")
@@ -30,14 +31,14 @@ public class ItemCategoryRemoveServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		
 		if ("delete".equals(action)) { // 來自itemCategoryList.jsp
 
 			Map<String, String> errors = new HashMap<String, String>();
 			request.setAttribute("error", errors);
-	
+
 			try {
 				/***************************1.接收請求參數***************************************/
 				String itemCategoryStr = request.getParameter("itemCategory");
@@ -49,19 +50,19 @@ public class ItemCategoryRemoveServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始刪除資料***************************************/
-				service.delete(itemCategory);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/support/manage/itemCategory/itemCategoryList.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(request, response);
-				
-				/***************************其他可能的錯誤處理**********************************/
+				boolean result = service.delete(itemCategory);
+				if(result){
+					session.setAttribute("Success", "資料已成功刪除");
+					response.sendRedirect(request.getContextPath()+"/support/manage/itemCategory/itemCategoryList.jsp");
+				} else {
+					session.setAttribute("Failure", "資料刪除失敗");
+					response.sendRedirect(request.getContextPath()+"/support/manage/itemCategory/itemCategoryList.jsp");
+				}
+		
 			} catch (Exception e) {
-				errors.put("DeleteError", "刪除資料失敗");
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/support/manage/itemCategory/itemCategoryList.jsp");
-				failureView.forward(request, response);
+				session.setAttribute("Failure", "資料刪除失敗");
+				response.sendRedirect(request.getContextPath()+"/support/manage/itemCategory/itemCategoryList.jsp");
+
 			}
 		}
 	}

@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import item.category.model.ItemCategoryBean;
 import item.category.model.ItemCategoryService;
 
@@ -70,16 +72,17 @@ public class ItemCategoryAddServlet extends HttpServlet {
 		ItemCategoryBean bean = new ItemCategoryBean();
 		bean.setItemCategory(itemCategory);
 		bean.setCategoryName(categoryName);
+		HttpSession session = request.getSession();
 		
 		//根據model結果轉向view
 		if(categoryButton!=null &&categoryButton.equals("Insert")){
 			ItemCategoryBean result = service.insert(bean);
 			if(result==null){
-				errors.put("action", "商品分類執行錯誤");
+				session.setAttribute("action", "商品分類新增失敗");
 			}else{
-				request.setAttribute("insert", result);
-			}
-			request.getRequestDispatcher("/support/manage/itemCategory/itemCategorySuccess.jsp").forward(request, response);
+				session.setAttribute("Success", "商品分類新增成功");
+			}			
+			response.sendRedirect(request.getContextPath()+"/support/manage/itemCategory/itemCategoryList.jsp");
 			
 		}
 		

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import item.category.model.ItemCategoryBean;
 import item.category.model.ItemCategoryService;
@@ -37,7 +38,7 @@ public class ItemCategorySelectOneServlet extends HttpServlet {
 
 				Map<String, String> errors = new HashMap<String, String>();
 				request.setAttribute("error", errors);
-				
+				HttpSession session = request.getSession();
 				try {
 					/***************************1.接收請求參數****************************************/
 					String itemCategoryStr =  request.getParameter("itemCategory");
@@ -58,8 +59,8 @@ public class ItemCategorySelectOneServlet extends HttpServlet {
 
 					/***************************其他可能的錯誤處理**********************************/
 				} catch (Exception e) {
-					errors.put("UpdateError", "無法取得要修改的資料");
-					request.getRequestDispatcher("/support/manage/itemCategory/itemCategoryList.jsp").forward(request, response);
+					session.setAttribute("Failure", "無法讀取資料");
+					response.sendRedirect(request.getContextPath()+"/support/manage/itemCategory/itemCategoryList.jsp");
 				}
 			}
 		}	

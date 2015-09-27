@@ -263,35 +263,5 @@ private DataSource ds = null;
 		return false;
 	}
 	
-	
-	public static void main(String[] args) {
-//		CategoryDAO dao = new CategoryDAOjdbc();
-		
-		//新增
-//		ItemClassBean bean = new ItemClassBean();
-//		bean.setItemCategory(3);
-//		bean.setCategoryName("生活用品");
-//		dao.insert(bean);
-//		System.out.println("執行新增");
-		//修改
-//		ItemCategoryBean bean2  = new ItemCategoryBean();
-//		bean2.setItemCategory(2);
-//		bean2.setCategoryName("日常用品xx");
-//		dao.update(bean2);
-//		System.out.println("執行修改");
-		//刪除
-//		dao.delete(3);
-//		System.out.println("執行刪除");
-		//查一筆
-//		ItemClassBean bean3 = dao.selectItemCategory(1);
-//		System.out.println(bean3.getItemCategory()+","+bean3.getCategoryName());
-//		System.out.println("查詢一筆");
-		//查全部
-//		List<ItemClassBean> bean4 = dao.selectAll();
-//		for(ItemClassBean list : bean4){
-//			System.out.println(list.getItemCategory()+","+list.getCategoryName());
-//		}
-//		System.out.println("查詢全部");
-	}
 
 }

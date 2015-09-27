@@ -4,14 +4,29 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-// 	ItemCategoryBean bean = (ItemCategoryBean) request.getAttribute("bean"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="/include/include"%>
+<style>
+.navbar {
+	margin-bottom: 0px;
+}
+
+#carousel1 {
+	margin-bottom: 20px;
+}
+
+body {
+	padding-top: 50px;
+}
+
+.table{
+	border: 1px solid #E3E3E3;
+}
+</style>
 <title>商品分類修改</title>
 <script type="text/javascript">
 // function clearForm(){
@@ -25,39 +40,43 @@
 </script>
 </head>
 <body>
-<h3>商品資料修改:</h3>
-<%-- 錯誤表列 --%>
-<%-- <c:if test="${not empty error}"> --%>
-<!-- 	<font color='red'>請修正以下錯誤: -->
-<!-- 	<ul> -->
-<%-- 		<c:forEach var="message" items="${error}"> --%>
-<%-- 			<li>${message}</li> --%>
-<%-- 		</c:forEach> --%>
-<!-- 	</ul> -->
-<!-- 	</font> -->
-<%-- </c:if> --%>
 
+<header><%@include file="/include/header-support"%></header>
+	<article>	
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3">
+					<%@include file="/support/toolbar"%>
+				</div>
+				<div class="col-md-9">
+<br>
+<a class="btn btn-default" href="${pageContext.request.contextPath}/support/manage/itemCategory/itemCategoryList.jsp" role="button">回商品分類</a>						
+<br>				
+<h3>商品分類修改:</h3>	
 <FORM METHOD="post" ACTION="${pageContext.request.contextPath }/support/manage/itemCategory/itemCategoryUpdate.controller">
-<table border="0">
+<table class="table table-hover">
 	<tr>
 		<td>商品分類編號:</td>
-		<td><input type="text" name="itemCategory" value="${param.itemCategory }" readonly="readonly"></td>
+		<td><input type="text" class="form-control" name="itemCategory" value="${param.itemCategory}" readonly="readonly"></td>
 		<td><font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font></td>
 	</tr>
 	<tr>
 		<td>商品分類名稱:</td>
-		<td><input type="text" name="categoryName" value="${param.categoryName }"></td>
+		<td><input type="text" class="form-control" name="categoryName" value="${param.categoryName }"></td>
 		<td><font color="red" size="-1"><span class="error">${error.categoryNameError }</span></font></td>
 	</tr>
 </table>
 <br>
 
-<input type="submit" value="進行修改">
+<input type="submit" class="btn btn-default" value="進行修改">
 <input type="hidden" name="action" value="update">
-<!-- <input type="button" value="Clear" onclick="clearForm()"> -->
+
 
 <h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
 </FORM>
-
+</div>
+</div>
+</div>
+</article>
 </body>
 </html>

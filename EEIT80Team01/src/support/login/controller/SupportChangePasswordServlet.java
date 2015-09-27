@@ -1,6 +1,8 @@
 package support.login.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,25 +36,47 @@ public class SupportChangePasswordServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		SupportBean bean = (SupportBean) session.getAttribute(GlobalService.LOGIN_TOKEN_SUPPORT);
-		String supportername = request.getParameter("username");
+		String supportername = bean.getSupportername();
 		String oldpassword = request.getParameter("oldpassword");
 		String password = request.getParameter("password");
-		if (password != null && password.length()>=5){
-			bean.setPassword(GlobalService.getMD5Encoding(password));
-		}
+		String passwordCheck = request.getParameter("passwordCheck");
+
 		
 		SupportBean sb = new SupportBean();
 		SupportService service = new SupportService();
 		sb = service.supporterCheckSupporterNamePassword(supportername, oldpassword);
 		
-		if(bean != null && sb != null){
+		// error handle block
+		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		if (oldpassword == null || oldpassword.trim().length() == 0) {
+			errorMsgMap.put("oldPasswordError", "請輸入舊密碼");
+		}
+		if (sb == null) {
+			errorMsgMap.put("oldPasswordError", "舊密碼錯誤");
+		}
+		if (password == null || password.trim().length() == 0) {
+			errorMsgMap.put("passwordError", "請輸入新密碼");
+		}
+		if (passwordCheck == null || passwordCheck.trim().length() == 0) {
+			errorMsgMap.put("passwordCheckError", "請再次確認密碼");
+		}
+		if (!password.equals(passwordCheck)) {
+			errorMsgMap.put("passwordCheckError", "新密碼不相符");
+				}
+		
+		
+		if (password != null && password.length()>=5 && password.equals(passwordCheck)){
+			bean.setPassword(GlobalService.getMD5Encoding(password));
+		}
+		
+		if(errorMsgMap.isEmpty()){
 			service.changeSupporterPassword(bean);
-			RequestDispatcher rd = request.getRequestDispatcher("/support/password/success.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/support/index.jsp");
 			session.removeAttribute(GlobalService.LOGIN_TOKEN_SUPPORT);
 			session.setAttribute(GlobalService.LOGIN_TOKEN_SUPPORT, bean);
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/support/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("changePassword.jsp");
 			rd.forward(request, response);
 		}
 	}

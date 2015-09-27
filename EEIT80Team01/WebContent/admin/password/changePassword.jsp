@@ -20,7 +20,6 @@ body {
 	padding-top: 50px;
 }
 </style>
-
 </head>
 <body>
 	<header><%@include file="/include/header-admin"%></header>
@@ -41,25 +40,23 @@ body {
 							<div class="panel-body">
 								<form method="post" action="adminChangePassword.do">
 									<div class="form-group">
-										<label for="oldpassword">舊密碼：</label> <input type="password"
-											name="oldpassword" title="請輸入舊密碼"
-											class="form-control">
+										<label for="oldpassword">舊密碼：</label>
+										<input type="password" name="oldpassword" title="請輸入舊密碼" class="form-control">
+										<font color="red" size="-1">${errors.oldPasswordError}</font>
 									</div>
 									<div class="form-group">
-										<label for="password">新密碼：</label> <input type="password"
-											name="password" title="請輸入新密碼"
-											class="form-control">
+										<label for="password">新密碼：</label>
+										<input type="password" name="password" title="請輸入新密碼" class="form-control">
+										<font color="red" size="-1">${errors.passwordError}</font>
 									</div>
 									<div class="form-group">
-										<label for="passwordCheck">確認新密碼：</label> <input type="password"
-											name="passwordCheck" title="請確認新密碼"
-											class="form-control">
+										<label for="passwordCheck">確認新密碼：</label>
+										<input type="password" name="passwordCheck" title="請確認新密碼" class="form-control">
+										<font color="red" size="-1">${errors.passwordCheckError}</font>
 									</div>
-									<input class="btn btn-default" type="submit" id="submit"
-										value="確定"> <input class="btn btn-danger" type="reset"
-										id="reset" value="清除">
+									<input class="btn btn-default" type="submit" id="submit" value="確定">
+									<input class="btn btn-danger" type="reset" id="reset" value="清除">
 								</form>
-								<font color="red" size="-1">${ErrorMsgKey.LoginError}&nbsp;</font>
 							</div>
 						</div>
 						<script type="text/javascript" src="login.js"></script>
@@ -68,8 +65,8 @@ body {
 			</div>
 		</div>
 	</article>
+	
 	<footer> </footer>
 	<%@include file="/include/modal"%>
-	<script src="changeData.js"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package admin.login.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,26 +36,46 @@ public class AdminChangePasswordServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		AdminBean bean = (AdminBean) session.getAttribute(GlobalService.LOGIN_TOKEN_ADMIN);
-		String adminname = request.getParameter("username");
+		String adminname = bean.getAdminname();
 		String oldpassword = request.getParameter("oldpassword");
 		String password = request.getParameter("password");
-		if (password != null && password.length() >= 5) {
-			bean.setPasswd(GlobalService.getMD5Encoding(password));
-		}
+		String passwordCheck = request.getParameter("passwordCheck");
 		
 		AdminBean ab = new AdminBean();
 		AdminService service = new AdminService();
 		ab = service.CheckAdminNamePassword(adminname, oldpassword);
 		
-		if (bean != null && ab != null) {
+		// error handle block
+		Map<String, String> errorMsgMap = new HashMap<String, String>();
+		if (oldpassword == null || oldpassword.trim().length() == 0) {
+			errorMsgMap.put("oldPasswordError", "請輸入舊密碼");
+		}
+		if (ab == null) {
+			errorMsgMap.put("oldPasswordError", "舊密碼錯誤");
+		}
+		if (password == null || password.trim().length() == 0) {
+			errorMsgMap.put("passwordError", "請輸入新密碼");
+		}
+		if (passwordCheck == null || passwordCheck.trim().length() == 0) {
+			errorMsgMap.put("passwordCheckError", "請再次確認密碼");
+		}
+		if (!password.equals(passwordCheck)) {
+			errorMsgMap.put("passwordCheckError", "新密碼不相符");
+		}
+		
+		if (password != null && password.length() >= 5 && password.equals(passwordCheck)) {
+			bean.setPasswd(GlobalService.getMD5Encoding(password));
+		}
+		
+		if (errorMsgMap.isEmpty()) {
 			service.changeAdminPassword(bean);
-			RequestDispatcher rd = request
-					.getRequestDispatcher("/admin/password/success.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
 			session.removeAttribute(GlobalService.LOGIN_TOKEN_ADMIN);
 			session.setAttribute(GlobalService.LOGIN_TOKEN_ADMIN, bean);
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
+			request.setAttribute("errors", errorMsgMap);
+			RequestDispatcher rd = request.getRequestDispatcher("changePassword.jsp");
 			rd.forward(request, response);
 		}
 	}

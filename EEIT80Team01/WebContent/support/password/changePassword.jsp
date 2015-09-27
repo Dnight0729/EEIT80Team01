@@ -38,20 +38,22 @@ body {
 						<div class="panel-body">
 							<form method="post" action="supportChangePassword.do">
 								<div class="form-group">
-									<label for="oldpassword">舊密碼：</label> <input type="password"
-										name="oldpassword" title="請輸入舊密碼" class="form-control">
+									<label for="oldpassword">舊密碼：</label>
+									<input type="password" name="oldpassword" title="請輸入舊密碼" class="form-control">
+									<font color="red" size="-1">${errors.oldPasswordError}</font>
 								</div>
 								<div class="form-group">
-									<label for="password">新密碼：</label> <input type="password"
-										name="password" title="請輸入新密碼" class="form-control">
+									<label for="password">新密碼：</label>
+									<input type="password" name="password" title="請輸入新密碼" class="form-control">
+									<font color="red" size="-1">${errors.passwordError}</font>
 								</div>
 								<div class="form-group">
-									<label for="password">確認密碼：</label> <input type="password"
-										name="passwordCheck" title="請再次輸入新密碼" class="form-control">
+									<label for="password">確認密碼：</label>
+									<input type="password" name="passwordCheck" title="請再次輸入新密碼" class="form-control">
+									<font color="red" size="-1">${errors.passwordCheckError}</font>
 								</div>
-								<input class="btn btn-default" type="submit" id="submit"
-									value="送出"> <input class="btn btn-danger" type="reset"
-									id="reset" value="還原">
+								<input class="btn btn-default" type="submit" id="submit" value="送出">
+								<input class="btn btn-danger" type="reset" id="reset" value="還原">
 							</form>
 						</div>
 					</div>

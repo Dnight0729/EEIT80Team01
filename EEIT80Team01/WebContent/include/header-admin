@@ -14,7 +14,7 @@
 	      </button>
 	      <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp" >
   			<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-	      	<span>Osz</span>
+	      	<span>E7mm</span>
 	      </a>
 	    </div>
 	

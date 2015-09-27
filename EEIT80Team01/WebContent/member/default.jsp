@@ -52,22 +52,19 @@ body { padding-top: 50px; }
 		
 	
 	<article>
+	<c:if test="${!empty ChangeSuccess}">
+		
+		<div id="alertBar"class="alert alert-success alert-dismissible text-center" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>${ChangeSuccess}</strong>
+		</div>
+		<c:remove var="ChangeSuccess" scope="session" />
+	</c:if>
 		<div class="container-fluid">
 	      <div class="row">
 			<%@include file="/include/navPart" %>
 	        <div class="col-md-7 main" id="contentPart">
 	        <div class="col-md-offset-2 col-md-8 ">
-	        	<div class="form-group">
-	         	 <form action="default.jsp" method="get">
-	         	 <div class="input-group">	
-	         	 	 <span class="input-group-addon">會員搜尋</span>
-	       			<input type="text" class="form-control" name="id" id="input" autocomplete="off">
-	       			 <div class="input-group-btn">
-	       			 <button type="submit" class="btn btn-primary">搜尋</button>
-	       			 </div>  	 
-	         	 </div>
-	         	 </form>
-	         	 </div>
 	    		</div>
 	        	<c:choose>
   				<c:when test="${!empty member}">

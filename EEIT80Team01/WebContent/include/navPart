@@ -15,9 +15,9 @@
 		            <li role="presentation" class="" id="sectionItem5"><a href="${pageContext.request.contextPath}/customerService/caseControl.jsp" class="btn"><span class="">客服案件</span></a></li>
 		            <li><hr /></li>
 		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>站內信系統</b></span></a></li>
-		            <li role="presentation" class="" id="sectionItem6"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
-		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>
-		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp" class="btn"><span class="">發送信件</span></a></li>
+		            <li role="presentation" class="" id="sectionItem6"><a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp" class="btn"><span class="">發送信件</span></a></li>
+		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
+		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>
 		             <li><hr /></li>
 		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>新手指南</b></span></a></li>
 		            <li role="presentation" class="" id="sectionItem9"><a href="${pageContext.request.contextPath}/tutorial/tutorial.jsp" class="btn"><span class="">新手教學</span></a></li>
@@ -37,9 +37,9 @@
 		            <li role="presentation" class="" id="sectionItem5"><a href="${pageContext.request.contextPath}/member/question/memberListAnsweredQuestionServlet.jsp" class="btn"><span class="">問題列表</span></a></li>
 		            <li><hr /></li>
 		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>站內信系統</b></span></a></li>
-		            <li role="presentation" class="" id="sectionItem6"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
-		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>
-		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp" class="btn"><span class="">發送信件</span></a></li>
+		            <li role="presentation" class="" id="sectionItem6"><a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp" class="btn"><span class="">發送信件</span></a></li>
+		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
+		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>		            
 		             <li><hr /></li>
 		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>新手指南</b></span></a></li>
 		            <li role="presentation" class="" id="sectionItem9"><a href="${pageContext.request.contextPath}/tutorial/tutorial.jsp" class="btn"><span class="">新手教學</span></a></li>

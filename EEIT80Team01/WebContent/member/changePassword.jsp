@@ -21,19 +21,13 @@ body { padding-top: 50px; }
 		<%@include file="/include/header" %>
 	</header>
 	<article>
-	<c:if test="${!empty ChangeSuccess}">
-		<c:remove var="ChangeSuccess" scope="session" />
-		<div id="alertBar"class="alert alert-success alert-dismissible text-center" role="alert">
+
+	<c:if test="${!empty ChangeFailure}">		
+		<div id="alertBar"class="alert alert-danger alert-dismissible text-center" role="alert">
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <strong>密碼修改成功!</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="#">拍賣小店</a>。
+		  <strong>${ChangeFailure}</strong>		  
 		</div>
-	</c:if>
-	<c:if test="${!empty ChangeFailure}">
 		<c:remove var="ChangeFailure" scope="session" />
-				<div id="alertBar"class="alert alert-danger alert-dismissible text-center" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <strong>密碼修改失敗!</strong>
-		</div>
 	</c:if>
 	
 		<div class="container-fluid">
@@ -78,6 +72,7 @@ body { padding-top: 50px; }
 			<%@include file="/include/blockPart" %>
          </div>
         </div>
+        <script type="text/javascript" src="changePassword.js"></script>
 	</article>
 	<footer>
 	

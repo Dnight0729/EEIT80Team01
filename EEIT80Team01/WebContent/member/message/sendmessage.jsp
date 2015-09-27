@@ -67,6 +67,6 @@ body { padding-top: 50px; }
 	</article>
 </body>
 <script>
-$("#sectionItem8").addClass("active");
+$("#sectionItem6").addClass("active");
 </script>
 </html>

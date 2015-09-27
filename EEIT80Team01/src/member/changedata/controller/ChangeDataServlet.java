@@ -58,11 +58,11 @@ public class ChangeDataServlet extends HttpServlet {
 		if(bean!=null){
 			session.removeAttribute(GlobalService.LOGIN_TOKEN);
 			session.setAttribute(GlobalService.LOGIN_TOKEN, bean);
-			session.setAttribute("ChangeSuccess", "修改成功");
-			response.sendRedirect(request.getContextPath()+"/member/changeData.jsp");
+			session.setAttribute("ChangeSuccess", "資料修改成功");
+			response.sendRedirect(request.getContextPath()+"/member/default.jsp");
 			return;
 		} else {
-			session.setAttribute("ChangeFailure", "修改失敗");
+			session.setAttribute("ChangeFailure", "資料修改失敗");
 			response.sendRedirect(request.getContextPath()+"/member/changeData.jsp");
 			return;
 		}

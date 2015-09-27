@@ -129,6 +129,9 @@ word-break: break-all;
 	        		</div>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
+	        		<div class="col-md-12 ">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
 	        		<div class="col-md-12 ">	        		
 	        			您是目前最高出價者
 	        		</div>

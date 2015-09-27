@@ -41,7 +41,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		String oldPassword = request.getParameter("oldPassword");
 		MemberBean mb = service.checkPasswordWithUsername(username, oldPassword);
 		if(mb==null){
-			session.setAttribute("ChangeFailure", "修改失敗");
+			session.setAttribute("ChangeFailure", "舊的密碼不正確");
 			response.sendRedirect(request.getContextPath()+"/member/changePassword.jsp");
 			return;
 		}
@@ -55,7 +55,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		if(password!=null && password.length() >= 5 && password.equals(checkpassword)){		
 			result = service.changePassword(username, password);
 		} else{
-			session.setAttribute("ChangeFailure", "修改失敗");
+			session.setAttribute("ChangeFailure", "新的密碼格式不符或兩次密碼不一致");
 			response.sendRedirect(request.getContextPath()+"/member/changePassword.jsp");
 			return;
 		}
@@ -63,8 +63,8 @@ public class ChangePasswordServlet extends HttpServlet {
 		
 		
 		if(result){	
-			session.setAttribute("ChangeSuccess", "修改成功");
-			response.sendRedirect(request.getContextPath()+"/member/changePassword.jsp");
+			session.setAttribute("ChangeSuccess", "修改密碼成功");
+			response.sendRedirect(request.getContextPath()+"/member/default.jsp");
 			return;
 		} else {
 			session.setAttribute("ChangeFailure", "修改失敗");

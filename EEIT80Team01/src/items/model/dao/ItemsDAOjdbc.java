@@ -718,7 +718,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		return result;
 	}
 	
-	private static final String GET_LATEST = "SELECT top(5) * FROM ITEMS where item_status = 0";
+	private static final String GET_LATEST = "SELECT top(5) * FROM ITEMS where item_status = 0 order by ITEM_ID desc";
 	@Override
 	public List<ItemsBean> selectLatest() {
 		ArrayList<ItemsBean> result=null;

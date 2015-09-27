@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.core.DateValidator;
 import member.core.EmailValidator;
@@ -78,9 +79,9 @@ public class RegisterServlet extends HttpServlet {
 										bean.setCertified(0);
 										MemberBean result = service.register(bean);
 										if(result!=null && result.getUserName().toUpperCase().equals(bean.getUserName().toUpperCase())){
-											RequestDispatcher rd = request.getRequestDispatcher("/register/register.jsp");									
-											request.setAttribute("registerTrue", bean);
-											rd.forward(request,response);
+											HttpSession session = request.getSession();									
+											session.setAttribute("registerTrue", bean);
+											response.sendRedirect(request.getContextPath() + "/login/login.jsp");
 											return;
 										}							
 									}									
@@ -89,7 +90,7 @@ public class RegisterServlet extends HttpServlet {
 						}						
 					}					
 				}
-				
+		
 				RequestDispatcher rd = request.getRequestDispatcher("/register/register.jsp");
 				request.setAttribute("registerFalse", "註冊失敗");
 				rd.forward(request,response);

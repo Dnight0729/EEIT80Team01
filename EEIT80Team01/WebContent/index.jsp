@@ -80,7 +80,6 @@
 	    				<img src="http://www.everrich-group.com/Upload/fcd42f03-236f-4211-93b4-d1b31fee2fb8/EN/01.jpg" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="http://pic.eslite.com/Upload/Attachment/201306/635077767310229711.jpg" alt="..." class="img-thumbnail img-responsive">
 	    				<img src="http://www.eayko.com/wp-content/uploads/2013/07/20101221nufirstimage.jpg" alt="..." class="img-thumbnail img-responsive">
-	    				<img src="..." alt="..." class="img-thumbnail img-responsive">
 	    			</c:if>
 	    			<c:if test="${!empty latestproducts}"> 
 					 <c:forEach items="${latestproducts}" var="product">  		

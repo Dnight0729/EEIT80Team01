@@ -88,10 +88,10 @@
 	    				<a href="${pageContext.request.contextPath}/search/item?itemid=${product.itemId}">
 	    					<c:choose>
 	    					<c:when test="${!empty product.imageNo}">
-	    					<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${product.imageNo}" alt="..." class="img-thumbnail img-responsive">
+	    					<img src="${pageContext.request.contextPath}/search/showImage?imageNo=${product.imageNo}" title="${product.title}" alt="..." class="img-thumbnail img-responsive">
 	    					</c:when>
 	    					<c:otherwise>
-	    					<img src="${pageContext.request.contextPath}/search/showImage" alt="..." class="img-thumbnail img-responsive">
+	    					<img src="${pageContext.request.contextPath}/search/showImage" title="${product.title}" alt="..." class="img-thumbnail img-responsive">
 	    					</c:otherwise>
 	    					</c:choose>
 	    				</a>

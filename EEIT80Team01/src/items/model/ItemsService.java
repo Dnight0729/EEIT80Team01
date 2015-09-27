@@ -100,6 +100,7 @@ public class ItemsService {
 			for(ItemsBean bean:list){			
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("itemId", bean.getItemId());
+				map.put("title", bean.getTitle());
 				List<Integer> imageNos = iid.selectImages(bean.getItemId());
 				if(imageNos!=null && !imageNos.isEmpty()){
 					map.put("imageNo", imageNos.get(0));

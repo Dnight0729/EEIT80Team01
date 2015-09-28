@@ -13,20 +13,16 @@
 								<br>
 							</c:if>
 							<c:if test="${!empty LoginAdmin }">
-								<a
-									href="${pageContext.request.contextPath}/admin/manage/AddNewSupporter.jsp">新增客服帳號</a>
+								<a href="${pageContext.request.contextPath}/admin/manage/AddNewSupporter.jsp">新增客服帳號</a>
 								<br>
 								<br>
-								<a
-									href="${pageContext.request.contextPath}/admin/manage/listSupporters.jsp">客服人員列表</a>
+								<a href="${pageContext.request.contextPath}/admin/manage/listSupporters.jsp">客服人員列表</a>
 								<br>
 								<br>
-								<a
-									href="${pageContext.request.contextPath}/admin/password/changePassword.jsp">修改系統管理員密碼</a>
+								<a href="${pageContext.request.contextPath}/admin/password/changePassword.jsp">修改系統管理員密碼</a>
 								<br>
 								<br>
-								<a
-									href="${pageContext.request.contextPath}/admin/login/logout.jsp">登出</a>
+								<a href="${pageContext.request.contextPath}/admin/login/logout.jsp">登出</a>
 							</c:if>
 						</div>
 					</div>

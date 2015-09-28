@@ -22,17 +22,13 @@
 				<a href="${pageContext.request.contextPath}/support/manage/question/listUnansweredQuestionsServlet.jsp">會員問題列表</a>
 				<br>
 				<br>
-				<a
-					href="${pageContext.request.contextPath}/support/manage/itemCategory/itemCategoryList.jsp">商品分類清單</a>
+				<a href="${pageContext.request.contextPath}/support/manage/itemCategory/itemCategoryList.jsp">商品分類清單</a>
 				<br>
 				<br>
-				<a
-					href="${pageContext.request.contextPath}/support/password/changePassword.jsp">修改客服密碼</a>
+				<a href="${pageContext.request.contextPath}/support/password/changePassword.jsp">修改客服密碼</a>
 				<br>
-				<a
-					href="${pageContext.request.contextPath}/support/login/logout.jsp">登出</a>
 				<br>
-					
+				<a href="${pageContext.request.contextPath}/support/login/logout.jsp">登出</a>
 			</c:if>
 		</div>
 	</div>

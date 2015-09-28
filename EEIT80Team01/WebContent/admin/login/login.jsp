@@ -27,14 +27,11 @@ body {
 	<article>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-3">
-					<%@include file="/admin/toolbar" %>
-				</div>
-				<div class="col-md-9">
+				<div class="col-md-12">
 					<c:if test="${empty LoginAdmin }">
 						<c:set var="funcName" value="LOG" scope="session" />
 						<div class="panel panel-default"
-							style="margin: auto; margin-top: 20px; width: 40%">
+							style="margin: auto; margin-top: 20px; width: 50%">
 							<div class="panel-heading">
 								<h3 class="panel-title">系統管理員登入</h3>
 							</div>

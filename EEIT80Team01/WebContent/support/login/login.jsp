@@ -26,14 +26,11 @@ body {
 	<article>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-3">
-					<%@include file="/support/toolbar" %>
-				</div>
-				<div class="col-md-9">
+				<div class="col-md-12">
 					<c:if test="${empty LoinSupport}">
 						<c:set var="funcName" value="LOG" scope="session" />
 						<div class="panel panel-default"
-							style="margin: auto; margin-top: 20px; width: 40%">
+							style="margin: auto; margin-top: 20px; width: 50%">
 							<div class="panel-heading">
 								<h3 class="panel-title">客服帳號登入</h3>
 							</div>
@@ -41,13 +38,11 @@ body {
 								<form method="post" action="login.do">
 									<div class="form-group">
 										<label for="username">帳號：</label> <input type="text"
-											name="username" title="請輸入帳號"
-											class="form-control">
+											name="username" title="請輸入帳號" class="form-control">
 									</div>
 									<div class="form-group">
 										<label for="password">密碼：</label> <input type="password"
-											name="password" title="請輸入密碼"
-											class="form-control">
+											name="password" title="請輸入密碼" class="form-control">
 									</div>
 									<input class="btn btn-default" type="submit" id="submit"
 										value="登入"> <input class="btn btn-danger" type="reset"

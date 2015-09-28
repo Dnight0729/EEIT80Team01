@@ -195,22 +195,6 @@ word-break: break-all;
 	        		</div>
 				
 					</div>        			        		
-	        		
-<!-- ===================沒登入出現==================================--> 
-<%-- 				<c:if test="${empty LoginOK}"> --%>
-<!-- 	        		<div class="col-md-12 "> -->
-<%-- 	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR> --%>
-<!-- 	        		</div> -->
-<!-- 	        		<div  class="col-md-12"> -->
-<%-- 	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br> --%>
-<!-- 	        		</div> -->
-<%-- 	        		</c:if>	  --%>
- <!-- 	======================================================== --> 
-<!-- 	        		<h4>商品內容描述：</h4> -->
-<!-- 					<div id="itemDescribe" class="col-md-7"> -->
-<!-- <!-- 	        		<h4>商品內容描述：</h4> --> 
-<%-- 	        		${item.itemDescribe} --%>
-<!-- 	        		</div> -->
 				</div>
 
 				</c:when>

@@ -18,7 +18,7 @@ body { padding-top: 50px; }
 #contentPart { padding-top: 50px;
 font-size:180%; }
 .itemimg{
-	width:200px;
+	width:300px;
 }
 
 #directPrice{
@@ -130,7 +130,7 @@ word-break: break-all;
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
 	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+<%-- 	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR> --%>
 	        		</div>
 	        		<div class="col-md-12 ">	        		
 	        			您是目前最高出價者
@@ -148,7 +148,28 @@ word-break: break-all;
 	        		</c:when>
 					</c:choose>
 	        		</c:if>	
-<!-- ========================================================--> 			     	
+<!-- ========================================================--> 
+
+<!-- ===================沒登入出現==================================-->
+				<c:if test="${empty LoginOK}">
+	        		<div class="col-md-12 ">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
+	        		<div  class="col-md-12">
+	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
+	        		</div>
+	        		</c:if>	 
+<!-- 	======================================================== -->
+
+
+
+<!-- =============商品內容描述====== -->
+	        		<h4>商品內容描述：</h4>
+					<div id="itemDescribe" class="col-md-7">
+<!-- 	        		<h4>商品內容描述：</h4> -->
+	        		${item.itemDescribe}
+	        		</div>	
+<!-- ===========================================================		     	 -->
 				</div>
 				<div class="col-md-2 col-md-offset-3">
 					        		<h4>商品圖片：</h4>
@@ -164,21 +185,21 @@ word-break: break-all;
 				
 					</div>        			        		
 	        		
-<!-- ===================沒登入出現==================================-->
-				<c:if test="${empty LoginOK}">
-	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
-	        		</div>
-	        		<div  class="col-md-12">
-	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
-	        		</div>
-	        		</c:if>	 
-<!-- 	======================================================== -->
-	        		<h4>商品內容描述：</h4>
-					<div id="itemDescribe" class="col-md-7">
+<!-- ===================沒登入出現==================================--> 
+<%-- 				<c:if test="${empty LoginOK}"> --%>
+<!-- 	        		<div class="col-md-12 "> -->
+<%-- 	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR> --%>
+<!-- 	        		</div> -->
+<!-- 	        		<div  class="col-md-12"> -->
+<%-- 	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br> --%>
+<!-- 	        		</div> -->
+<%-- 	        		</c:if>	  --%>
+ <!-- 	======================================================== --> 
 <!-- 	        		<h4>商品內容描述：</h4> -->
-	        		${item.itemDescribe}
-	        		</div>
+<!-- 					<div id="itemDescribe" class="col-md-7"> -->
+<!-- <!-- 	        		<h4>商品內容描述：</h4> --> 
+<%-- 	        		${item.itemDescribe} --%>
+<!-- 	        		</div> -->
 				</div>
 
 				</c:when>

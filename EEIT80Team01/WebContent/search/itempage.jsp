@@ -129,23 +129,34 @@ word-break: break-all;
 	        		</div>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
-	        		<div class="col-md-12 ">
-<%-- 	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR> --%>
-	        		</div>
+
 	        		<div class="col-md-12 ">	        		
 	        			您是目前最高出價者
 	        		</div>
 	        		</c:if>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(item.seller)}">
+	        		<div class="col-md-12 ">
+	        			<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
 	        		<div class="col-md-12 ">	 
 	        			您是這個商品的賣家
 	        		</div>
 	        		</c:if>
 	        		</c:when>
-	        		<c:when test="${item.itemStatus==2}">
+	        		<c:otherwise>
+	        		<div class="col-md-12 ">
+	        			<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
+	        		<c:if test="${item.itemStatus==1}">
+
+	           			<h1>此商品下架中</h1>
+	        		</c:if>
+	        		<c:if test="${item.itemStatus==2}">
+
 	           			<h1>此商品已售出</h1>
-	        		</c:when>
+	        		</c:if>
+	        		</c:otherwise>
 					</c:choose>
 	        		</c:if>	
 <!-- ========================================================--> 

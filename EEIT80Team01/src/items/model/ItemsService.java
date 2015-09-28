@@ -90,6 +90,13 @@ public class ItemsService {
 		return result;
 	}
 	
+	public List<ItemsBean> getSellerSold(String seller){
+		List<ItemsBean> result = null;
+		ItemsDAO dao = new ItemsDAOjdbc();
+		result = dao.selectSellerSold(seller);
+		return result;
+	}
+	
 	public List<Map<String, Object>> frontpage(){
 		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
 		List<ItemsBean> list = null;

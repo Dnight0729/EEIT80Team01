@@ -71,7 +71,7 @@ body { padding-top: 50px; }
 			<%@include file="/include/blockPart" %>
          </div>
         </div>
-        <script type="text/javascript" src="changeData.js"></script>
+        <script type="text/javascript" src="scripts/changeData.js"></script>
 	</article>
 	<footer>
 	

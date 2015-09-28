@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="member.model.*,items.model.*,java.util.Map,java.util.List" %>
-<!DOCTYPE html>
-<c:choose>
-  	<c:when test="${!empty param.id}">
+
+<c:if test="${!empty param.id}">
   		<%
   			MemberService service = new MemberService();
 			String id = request.getParameter("id");
@@ -17,55 +17,10 @@
 			pageContext.setAttribute("member",mb);
 			pageContext.setAttribute("myItems",list);
 		%>
-	</c:when>
-	<c:otherwise>
-		<%
-			MemberBean mb = (MemberBean)session.getAttribute("LoginOK");
-			MemberService service = new MemberService();
-			List<Map<String, Object>> list= null;
-			if(mb!=null){
-				list = service.selectMyItems(mb.getUserName());	
-			}
-			pageContext.setAttribute("member",mb);
-			pageContext.setAttribute("myItems",list);
-		%>
-	</c:otherwise>
-</c:choose>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<%@include file="/include/include" %>
-<style>
-.navbar{ 
- 	margin-bottom: 0px;
-}
-body { padding-top: 50px; }
-#contentPart { padding-top: 50px; }
-</style>
-<title>會員中心</title>
-</head>
-<body>
-	<header>
-		<%@include file="/include/header" %>
-	</header>	
-		
-	
-	<article>
-	<c:if test="${!empty ChangeSuccess}">
-		
-		<div id="alertBar"class="alert alert-success alert-dismissible text-center" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <strong>${ChangeSuccess}</strong>
-		</div>
-		<c:remove var="ChangeSuccess" scope="session" />
-	</c:if>
-		<div class="container-fluid">
-	      <div class="row">
-			<%@include file="/include/navPart" %>
-	        <div class="col-md-7 main" id="contentPart">
-	        <div class="col-md-offset-2 col-md-8 ">
-	    		</div>
+</c:if>
+
+<div class="col-md-12 main" id="contentPart">
+
 	        	<c:choose>
   				<c:when test="${!empty member}">
   				<div class="col-md-12 ">
@@ -105,7 +60,7 @@ body { padding-top: 50px; }
 </script>
 				</div>
 				<div  class="col-md-12 ">
-					<h2>最近的商品</h2>
+					<h2>最近上架中商品</h2>
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -135,7 +90,7 @@ body { padding-top: 50px; }
 					</div>
 					<div  class="col-md-12 ">
 					<c:if test="${!member.userName.equals(LoginOK.userName)}">
-						<a href="message/sendmessage.jsp?id=${member.userName}">寄信給他</a>
+						<a href="message/sendmessage.jsp?id=${member.userName}" target="_blank">寄信給他</a>
 					</c:if>	
 					</div>
 				</c:when>
@@ -147,19 +102,4 @@ body { padding-top: 50px; }
 				</div>
 				</c:otherwise>
 				</c:choose>
-	        </div>
-			<%@include file="/include/blockPart" %>
-         </div>
-        </div>
-	</article>
-	<footer>
-	
-	</footer>
-	<%@include file="/include/modal" %>
-
-
-</body>
-<script>
-$("#sectionItem1").addClass("active");
-</script>
-</html>
+</div>

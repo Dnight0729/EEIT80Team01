@@ -72,7 +72,7 @@ body { padding-top: 50px; }
 			<%@include file="/include/blockPart" %>
          </div>
         </div>
-        <script type="text/javascript" src="changePassword.js"></script>
+        <script type="text/javascript" src="scripts/changePassword.js"></script>
 	</article>
 	<footer>
 	

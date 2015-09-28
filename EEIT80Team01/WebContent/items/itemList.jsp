@@ -28,11 +28,12 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10" style="background-color:#FCFCFC">
 			<!-- Nav tabs -->
-		  <ul class="nav nav-tabs nav-justified" role="tablist" id="myTabs">
+		   <ul class="nav nav-tabs nav-justified" role="tablist" id="myTabs">
 		    <li role="presentation" class="active"><a href="#itemSell" role="tab" data-toggle="tab">出售中商品</a></li>
-		    <li role="presentation"><a href="#itemUnsel" role="tab" data-toggle="tab">已下架商品</a></li>
-		  	<li role="presentation" class="myInput">
-				<a  href="${pageContext.request.contextPath}/items/itemAdd.jsp" data-toggle="xxx" data-target="xxx" role="button">新增我的商品</a>
+		    <li role="presentation"><a href="#itemUnsell" role="tab" data-toggle="tab">已下架商品</a></li>
+		    <li role="presentation"><a href="#itemSold" role="tab" data-toggle="tab">已售出商品記錄</a></li>
+		  	<li role="presentation">
+				<a  href="${pageContext.request.contextPath}/items/itemAdd.jsp" role="button">新增我的商品</a>
 			</li>
 		  </ul>
 		  
@@ -134,6 +135,39 @@
 									    <input type="hidden" name="action"value="itemUp">
 								</form>
 							</td>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			
+			<div role="tabpanel" class="tab-pane fade" id="itemSold">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>商品圖片</th>
+							<th>商品名稱</th>
+							<th>最高出價金額</th>
+							<th>最高出價者</th>
+							<th>出價人數</th>
+							<th>結標時間</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="item" items="${listSoldPac }">
+						<tr>
+							<td>
+								<c:if test="${!empty item.image}">
+									<img height="80" width="80" src="${pageContext.request.contextPath}/search/showImage?imageNo=${item.image}">
+								</c:if>
+								<c:if test="${empty item.image}">
+									<img height="80" width="80" src="${pageContext.request.contextPath}/search/showImage">
+								</c:if>
+							</td>
+							<td>${item.itemsBean.title }</td>
+							<td>${item.price}</td>
+							<td>${item.buyer}</td>
+							<td>${item.count }</td>
+							<td>${item.itemsBean.endTime }</td>
 					</c:forEach>
 					</tbody>
 				</table>

@@ -718,6 +718,64 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		return result;
 	}
 	
+	private static final String GET_SELLER_SOLD = "SELECT * FROM ITEMS WHERE SELLER = ? and item_status = 2";
+	@Override
+	public List<ItemsBean> selectSellerSold(String seller){
+		ArrayList<ItemsBean> result=null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+//			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(GET_SELLER_SOLD);
+			stmt.setString(1, seller);
+			rset = stmt.executeQuery();
+			result = new ArrayList<ItemsBean>();
+			while(rset.next()){
+				ItemsBean item = new ItemsBean();
+				item.setItemId(rset.getInt("ITEM_ID"));
+				item.setSeller(rset.getString("SELLER"));
+				item.setItemCategory(rset.getInt("ITEM_CATEGORY"));
+				item.setTitle(rset.getString("TITLE"));
+				item.setStartPrice(rset.getDouble("START_PRICE"));
+				item.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
+				item.setBid(rset.getInt("BID"));
+				item.setEndTime(rset.getTimestamp("END_TIME"));
+				item.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
+				item.setItemStatus(rset.getInt("ITEM_STATUS"));
+				item.setThreadLock(rset.getInt("THREAD_LOCK"));
+				result.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rset!=null){
+				try {
+					rset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(stmt!=null){
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return result;
+	}
+	
 	private static final String GET_LATEST = "SELECT top(5) * FROM ITEMS where item_status = 0 order by ITEM_ID desc";
 	@Override
 	public List<ItemsBean> selectLatest() {

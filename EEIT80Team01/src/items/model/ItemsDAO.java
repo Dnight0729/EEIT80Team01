@@ -28,6 +28,8 @@ public interface ItemsDAO {
 	
 	public List<ItemsBean> selectSellerDown(String seller);
 	
+	public List<ItemsBean> selectSellerSold(String seller);
+	
 	List<ItemsBean> selectLatest();
 
 

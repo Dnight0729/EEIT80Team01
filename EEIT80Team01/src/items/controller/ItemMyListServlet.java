@@ -134,8 +134,50 @@ public class ItemMyListServlet extends HttpServlet {
 			map.put("buyer", buyer);
 			listDown.add(map);
 		}
+		
+		//會員已售出區塊
+				List<ItemsBean> getsellerSold = dao.getSellerSold(userName);
+				List<Object> listSold = new ArrayList<Object>();
+				int itemIdSold = 0;
+				List<Integer> imagesSold = null;
+				Integer imageSold = null;
+				for(ItemsBean findItemId: getsellerSold){
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("itemsBean", findItemId);
+					itemIdSold = findItemId.getItemId();
+
+					imagesSold = imgSvc.selectImagesNumbers(itemIdSold);
+					if(!imagesSold.isEmpty()){
+						imageSold = imagesSold.get(0);	//抓商品第一張圖
+						map.put("image", imageSold);
+					}else{
+						getServletContext().getResourceAsStream("/imgs/NoImage.jpg");
+					}
+
+					String buyer = "尚未有人出價";
+					double price = 0;
+					BidLogBean topPrice = bidDaoSvc.getTopPrice(itemIdSold);
+					if(topPrice!=null){
+						price = topPrice.getBidPrice();
+						buyer = topPrice.getBuyer();
+					} else {
+						price = findItemId.getStartPrice();
+					}
+					int count = 0;
+					int itemCount = bidDaoSvc.getItemBidCount(itemIdSold);
+					if(itemCount!=0){
+						count = itemCount;
+					}else{
+						count = 0;
+					}
+					map.put("count", count);
+					map.put("price", price);
+					map.put("buyer", buyer);
+					listSold.add(map);
+				}
 		request.setAttribute("listPac", list);
 		request.setAttribute("listDownPac", listDown);
+		request.setAttribute("listSoldPac", listSold);	
 				
 		request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);
 	}

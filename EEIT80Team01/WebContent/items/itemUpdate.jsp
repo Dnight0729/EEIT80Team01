@@ -46,25 +46,19 @@
 <hr><br>
 <div align="center">
 <form action="${pageContext.request.contextPath }/items/itemUpdate.controller" method="post" enctype="multipart/form-data" role="form" class="horizontal"> 
-	<!-- 商品分類能正常修改運作，但是暫無法seleted之前新增商品的分類   -->
 	<div class="form-group">
 	<label for="inputCategory" class="col-sm-2 control-label">商品分類</label>
 		<div class="row">
 			<div class="col-sm-3">
 				<select name="itemCategory" class="form-control" id="inputCategory">
 					<c:forEach var="list" items="${list }">
-						<option value="${list.itemCategory}">${list.categoryName}
+						<option value="${list.itemCategory}" ${param.itemCategory == list.itemCategory ? 'selected' : ''}>${list.categoryName}
 					</c:forEach>
 				</select>
 			</div>
 			<font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font>
 		</div>	
 	</div>
-	<script type="text/javascript">
-	(function($){
-		$('option:eq(${param.itemCategory-1})').attr("selected", true);
-	})(jQuery)
-	</script>
 	<div class="form-group">
 	<label for="inputTitle" class="col-sm-2 control-label">商品名稱</label>
 		<div class="row">

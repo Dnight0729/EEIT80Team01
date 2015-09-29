@@ -30,6 +30,11 @@ body { padding-top: 50px; }
 			<div class="col-md-12 text-center">
 				<%@include file="/include/logo" %>
 			</div>
+			
+			<div class="col-md-12 text-center">
+			<br>
+				<h1><a href="${pageContext.request.contextPath}/login/login.jsp">登入頁面</a></h1>
+			</div>
 		</div>
 	</div>
 </body>

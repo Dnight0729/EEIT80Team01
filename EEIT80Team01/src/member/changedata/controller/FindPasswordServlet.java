@@ -30,25 +30,28 @@ public class FindPasswordServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String pass = request.getParameter("pass");
 		FindPwService service = new FindPwService();
-		if(username!=null && pass!=null){
-			if(service.validateData(username, pass)){
-				HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+		if(username!=null && pass!=null){			
+			if(service.validateData(username, pass)){				
 				session.setAttribute("EmailChecked", username);
 				service.deleteLog(username);			
 				response.sendRedirect(request.getContextPath()+"/service/changePassword.jsp");				
 			}else{
-				service.deleteLog(username);	
-				response.sendRedirect(request.getContextPath()+"/service/illeagallink.jsp");
+				service.deleteLog(username);
+				session.setAttribute("message", "此連結已經失效，請重新申請信件");
+				response.sendRedirect(request.getContextPath()+"/service/forgetpassword.jsp");
 			}
 		} else{
-			response.sendRedirect(request.getContextPath()+"/service/illeagallink.jsp");
+			session.setAttribute("message", "此連結已經失效，請重新申請信件");
+			response.sendRedirect(request.getContextPath()+"/service/forgetpassword.jsp");
 		}
 		
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath()+"/service/illeagallink.jsp");
+	
+		response.sendRedirect(request.getContextPath()+"/service/forgetpassword.jsp");
 	}
 
 }

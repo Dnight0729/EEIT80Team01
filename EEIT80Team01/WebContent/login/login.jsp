@@ -36,6 +36,13 @@ body{background-color:#F0F0F0;}
 	  		<strong>已登出!</strong>&nbsp;點選回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>。
 	  	</div>	
 	</c:if>
+	<c:if test="${!empty message }">	
+	<div class="alert alert-success alert-dismissible text-center" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>${message}</strong>
+	  <c:remove var="message" scope="session" />
+	</div>
+	</c:if>
 	<c:set var="funcName" value="LOG" scope="session"/>	
 	<div class="container-fluid">
 		<div class="row">

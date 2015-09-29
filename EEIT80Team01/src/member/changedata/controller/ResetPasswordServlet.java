@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.MemberBean;
 import member.model.MemberService;
@@ -43,16 +44,14 @@ public class ResetPasswordServlet extends HttpServlet {
 			result = service.changePassword(username, password);
 		}
 		
-		
+		HttpSession session = request.getSession();
 		
 		if(result){
-			RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
-			request.setAttribute("message", "密碼變更完成");
-			rd.forward(request,response);
+			session.setAttribute("message", "密碼變更完成");
+			response.sendRedirect(request.getContextPath() + "/login/login.jsp");
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
-			request.setAttribute("message", "密碼變更失敗");
-			rd.forward(request,response);
+			session.setAttribute("message", "密碼變更失敗");
+			response.sendRedirect(request.getContextPath() + "/login/login.jsp");
 		}
 		
 	}

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
-<title>Login</title>
+<title>登入</title>
 <style>
 body{background-color:#F0F0F0;}
 .container-fluid{margin-top:150px;}
@@ -76,7 +76,7 @@ body{background-color:#F0F0F0;}
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<a href="${pageContext.request.contextPath}/service/forgetpassword.jsp">忘記密碼</a><br><br>
-				<a href="${pageContext.request.contextPath}/register/register.jsp">立即創建帳號</a><br><br>
+				<a href="${pageContext.request.contextPath}/register/register.jsp">註冊帳號</a><br><br>
 				<a href="${pageContext.request.contextPath}">回到首頁</a>
 			</div>
 		</div>

@@ -14,7 +14,7 @@ body { padding-top: 50px; }
 .form-group{height:45px;}
 .error{color:red;}
 </style>
-<title>Register</title>
+<title>註冊</title>
 </head>
 <body>
 	<header>
@@ -38,7 +38,7 @@ body { padding-top: 50px; }
 			<h5>&nbsp;</h5>
 		</div>
 		<div class="row text-center">
-			<h1><strong>建立您的XXX帳號</strong></h1>
+			<h1><strong>建立您的E7MM帳號</strong></h1>
 		</div>
 		<div class="row text-center">
 			<h3>&nbsp;</h3>

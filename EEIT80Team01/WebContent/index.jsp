@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
+<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
 <style >
 #carousel1{
 	margin-bottom: 20px;
@@ -65,21 +66,64 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9">
+				<div class="page-header">
+				  <h4>影音娛樂<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=1">查看更多</a></small></h4>
+				</div>
 				<div class="gallery js-flickity"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
-				  <div class="gallery-cell">
-				  	<img alt="" src="imgs/500.jpg" width="270px" height="270px">
-				  </div>
-				  <div class="gallery-cell">
-				  	<img alt="" src="imgs/501.jpg">
-				  </div>
+				  <img class="gallery-cell" alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  <img class="gallery-cell" alt="" src="imgs/501.jpg">
 				  <div class="gallery-cell"></div>
 				  <div class="gallery-cell"></div>
 				  <div class="gallery-cell"></div>
 				</div>
-				
-								
+				<div class="page-header">
+				  <h4>生活家居<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=8">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  <img class="gallery-cell" alt="" src="imgs/501.jpg">
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				</div>
+				<div class="page-header">
+				  <h4>彩妝保養<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=10">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  <img class="gallery-cell" alt="" src="imgs/501.jpg">
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				</div>
+				<div class="page-header">
+				  <h4>保健食品<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=11">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  <img class="gallery-cell" alt="" src="imgs/501.jpg">
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				</div>
+				<div class="page-header">
+				  <h4>流行服飾<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=5">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  <img class="gallery-cell" alt="" src="imgs/501.jpg">
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				</div>
+
 			</div>
+			
 			<div class="col-md-3">
 				<div class="panel panel-default">
 	  				<div class="panel-heading">

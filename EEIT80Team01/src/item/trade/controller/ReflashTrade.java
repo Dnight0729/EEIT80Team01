@@ -147,7 +147,7 @@ public class ReflashTrade extends HttpServlet {
 					itemDto.setBuyerCheck(mySellItem.getBuyerCheck());
 					itemDto.setSellerCheck(mySellItem.getSellerCheck());
 					mySellItemsCheck.add(itemDto);				
-				}else if(mySellItem.getBuyerCheck()==0 && mySellItem.getSellerCheck()==0 || mySellItem.getBuyerCheck()==0 && mySellItem.getSellerCheck()==1){
+				}else if(mySellItem.getBuyerCheck()==0 && mySellItem.getSellerCheck()==0 || mySellItem.getBuyerCheck()==1 && mySellItem.getSellerCheck()==0){
 					itemDto = new ItemDTO();
 					itemId = mySellItem.getItemId();
 					itemsBean = itemsService.getOneItemId(itemId);

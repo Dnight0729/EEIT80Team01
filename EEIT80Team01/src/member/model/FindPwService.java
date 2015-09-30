@@ -48,7 +48,7 @@ public class FindPwService {
 		sb.append(request.getScheme());
 		sb.append("://");
 		sb.append(request.getServerName());
-		if(request.getServerPort()!=80){
+		if(request.getServerPort()!=80&&request.getServerPort()!=443){
 			sb.append(":");
 			sb.append(request.getServerPort());
 		}

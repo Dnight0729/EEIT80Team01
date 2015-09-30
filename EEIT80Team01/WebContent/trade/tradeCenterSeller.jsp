@@ -58,7 +58,7 @@
 							<th>商品名稱</th>
 							<th>買家</th>
 							<th>賣家</th>
-							<th>aaa</th>
+							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 							<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						</tr>
 					</thead>

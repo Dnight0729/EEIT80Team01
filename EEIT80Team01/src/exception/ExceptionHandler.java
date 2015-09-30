@@ -46,6 +46,6 @@ public class ExceptionHandler extends HttpServlet {
 			request.setAttribute("servletName",servletName);
 			request.setAttribute("requestUri",requestUri);
 			request.setAttribute("statusCode",statusCode);
-			request.getRequestDispatcher("exceptonPage.jsp").forward(request, response);
+			request.getRequestDispatcher("exceptionPage.jsp").forward(request, response);
 	}
 }

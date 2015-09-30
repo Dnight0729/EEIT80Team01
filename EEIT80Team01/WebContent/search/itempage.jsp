@@ -205,7 +205,7 @@ word-break: break-all;
 				</c:choose>	        
  			 </div> 
  			 <%@include file="itempagedialog.jsp" %>
-<%-- 			<%@include file="/include/blockPart" %> --%>
+
          </div>
         </div>
 	</article>

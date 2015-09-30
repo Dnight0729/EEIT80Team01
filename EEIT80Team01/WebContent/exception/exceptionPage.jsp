@@ -8,11 +8,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
 <title>Don't worry! it will be OK!</title>
+<style>
+	body{
+		background-image: url(${pageContext.request.contextPath}/imgs/500.jpg);
+    	background-size: 700px 600px;
+   		background-repeat: no-repeat;
+	}
+</style>
 </head>
 <body>
-<header>
-<%@include file="/include/header" %>
-</header>
+<header></header>
 <article>
 	<table class="table table-bordered">
 		<thead>
@@ -25,10 +30,10 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>{servletName}</td>
-				<td>{exceptionName}</td>
-				<td>{requestUri}</td>
-				<td>{exceptionMsg}</td>
+				<td>${servletName}</td>
+				<td>${exceptionName}</td>
+				<td>${requestUri}</td>
+				<td>${exceptionMsg}</td>
 			</tr>
 		</tbody>
 	</table>

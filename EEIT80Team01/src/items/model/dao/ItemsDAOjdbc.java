@@ -105,10 +105,10 @@ public class ItemsDAOjdbc implements ItemsDAO{
 	
 	private static final String SELECT_BY_CATEGORY = "SELECT * FROM ITEMS WHERE ITEM_CATEGORY = ?";
 
+	@Override
 	@GET
 	@Path("/{itemCategory}")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	@Override
 	public List<ItemsBean> selectCategory(@PathParam("itemCategory") int itemCategory){
 		List<ItemsBean> result=null;
 		Connection conn = null;

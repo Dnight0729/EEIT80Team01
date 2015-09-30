@@ -173,7 +173,7 @@ word-break: break-all;
 	        		</c:if>	 
 <!-- 	======================================================== -->
 
-
+ 
 
 <!-- =============商品內容描述====== -->
 	        		<h4>商品內容描述：</h4>
@@ -205,7 +205,7 @@ word-break: break-all;
 				</c:choose>	        
  			 </div> 
  			 <%@include file="itempagedialog.jsp" %>
-<%-- 			<%@include file="/include/blockPart" %> --%>
+
          </div>
         </div>
 	</article>

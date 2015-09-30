@@ -16,6 +16,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import global.GlobalService;
+import items.model.ImageInput;
 import items.model.ImagesBean;
 import items.model.ItemImagesDAO;
 
@@ -37,7 +38,7 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	 * @see items.model.dao.ItemImagesDAO#insert(items.model.ImagesBean)
 	 */
 	@Override
-	public int insert(ImagesBean bean, FileInputStream fis, long size){
+	public int insert(ImagesBean bean, List<ImageInput> list){
 		int reuslt=0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -47,11 +48,15 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 				conn.setAutoCommit(false);				
 				stmt = conn.prepareStatement(INSERT);
 				if(bean!=null){
-					stmt.setInt(1, bean.getItemId());
-					stmt.setBinaryStream(2, fis, size);
+					if(list!=null && !list.isEmpty()){
+						for(ImageInput input : list){
+							stmt.setInt(1, bean.getItemId());
+							stmt.setBinaryStream(2, input.getFis(), input.getSize());	
+							reuslt = stmt.executeUpdate();
+							conn.commit();
+						}
+					}
 				}
-				reuslt = stmt.executeUpdate();
-				conn.commit();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
@@ -64,13 +69,6 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 					try {
 						stmt.close();
 					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if(fis!=null){
-					try {
-						fis.close();
-					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}

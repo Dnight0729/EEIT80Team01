@@ -134,13 +134,7 @@
 				</div>
 			</div>		
 	</div>
-	<input type="hidden" name="itemId" value="${param.itemId}">
-	<input type="submit" value="進行修改">
-	<input type="hidden" name="action" value="update">
-	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
-	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
-</form>
-<form method="get" action="${pageContext.request.contextPath }/items/ImageRemove.controller" enctype="multipart/form-data" role="form" class="horizontal">
+	
 	<div id="img">
 	<div class="form-group">
 		<label for="inputPic" class="col-sm-2 control-label">商品圖片</label>
@@ -149,9 +143,9 @@
 				<c:forEach var="i" begin="0" end="2">
 					<div id="image${i+1}" class="image">
 						<c:if test="${!empty images.get(i) }">
+				
 							<img height="200" width="200" src="${pageContext.request.contextPath}/search/showImage?imageNo=${images.get(i)}">
-							<input type="button" class="myButton" value="x" name="DelBtn">
-							<input type="hidden" name="action"value="delImg">
+							<input type="button" class="myButton" value="x" id="${images.get(i)}" name="DelBtn">
 						</c:if>
 						<c:if test="${empty images.get(i) }">
 							<div class="imginput">
@@ -160,10 +154,34 @@
 						</c:if>
 					</div>
 				</c:forEach>
+				<script type="text/javascript">
+					$('.myButton').click(function(){
+
+					var value = $(this).attr("id");
+					var dom = $(this).parent();
+					var trace = $(this).parent().attr("id");
+					$.get("ImageRemove",
+ 							{"id":value},
+ 							function(data){
+ 								if(data==="success"){
+ 									dom.html('<div class="imginput"><input type="file" name="'+trace+'"></div>');
+ 								}	
+ 							}
+ 					);
+					})
+					
+					</script>
 			</div>		
 		</div>
 	</div>
 	</div>
+	
+	
+	<input type="hidden" name="itemId" value="${param.itemId}">
+	<input type="submit" value="進行修改">
+	<input type="hidden" name="action" value="update">
+	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
+	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
 </form>
 
 </div>

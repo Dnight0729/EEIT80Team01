@@ -12,12 +12,12 @@ import javax.servlet.http.Part;
 import items.model.dao.ItemImagesDAOjdbc;
 
 public class ItemImagesService {
-	public int insert(ImagesBean bean, FileInputStream fis, long size) throws FileNotFoundException{
+	public int insert(ImagesBean bean, List<ImageInput> list) throws FileNotFoundException{
 		ItemImagesDAO dao = new ItemImagesDAOjdbc();
 			
 			int result = 0;
 			if(bean!=null){
-				result = dao.insert(bean, fis, size);
+				result = dao.insert(bean, list);
 			}
 			return result;
 	}

@@ -46,9 +46,11 @@ body { padding-top: 50px; }
 		<div class="row">
 			<div class="col-md-6">
 				<div class="col-md-offset-2 col-md-10 ">
-       				<h2>Slogan</h2>
-       				<p>details</p>
+
+<br><br>
 				</div>
+				<img  src="${pageContext.request.contextPath}/imgs/register.jpg" width="90%" >
+				
 			</div>
 			<div class="col-md-5 ">
 				<form method="post" class="form-horizontal jumbotron  cmxform" id="form" action="register.do">

@@ -103,7 +103,7 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		return result;
 	}
 	
-	private static final String SELECT_BY_CATEGORY = "SELECT top 5 * FROM ITEMS WHERE ITEM_CATEGORY = ? order by newid()";
+	private static final String SELECT_BY_CATEGORY = "SELECT top 5 * FROM ITEMS WHERE ITEM_CATEGORY = ? and item_status = 0 order by newid()";
 
 	@Override
 	@GET

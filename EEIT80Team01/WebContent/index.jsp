@@ -36,17 +36,17 @@
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner" role="listbox">
 	    <div class="item active">
-	      <img src="imgs/aaa.jpg" alt="...">
+	      <img src="imgs/aaa.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
 	    <div class="item">
-	      <img src="imgs/bbb.jpg" alt="...">
+	      <img src="imgs/bbb.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
 	    <div class="item">
-	      <img src="imgs/ccc.jpg" alt="...">
+	      <img src="imgs/ccc.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
@@ -65,7 +65,18 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9">
-				
+				<div class="gallery js-flickity"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <div class="gallery-cell">
+				  	<img alt="" src="imgs/500.jpg" width="270px" height="270px">
+				  </div>
+				  <div class="gallery-cell">
+				  	<img alt="" src="imgs/501.jpg">
+				  </div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				  <div class="gallery-cell"></div>
+				</div>
 				
 								
 			</div>

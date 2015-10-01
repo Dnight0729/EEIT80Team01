@@ -14,8 +14,8 @@
 <script src="jquery-ui-sliderAccess.js" type="text/javascript"></script>
 
 <style type="text/css">
-.goCenter{
-text-align: center;
+.insertPage{
+text-align:center;
 }
 </style>
 <script type="text/javascript">
@@ -37,7 +37,7 @@ function clearForm(){
 <article>
 <h2 align="center">新增我的商品</h2>
 <hr><br>
-<div align="center">
+<div class="insertPage">
 <form action="${pageContext.request.contextPath }/items/itemAdd.controller" method="post" enctype="multipart/form-data" role="form" class="horizontal"> 
 	<div class="form-group">
 	<label for="inputCategory" class="col-sm-2 control-label">商品分類</label>
@@ -122,7 +122,9 @@ function clearForm(){
 		<div class="row">
 			<div class="col-sm-3" >
 				<input type="file" name="image1" id="inputPic">
+				<br>
 				<input type="file" name="image2" id="inputPic">
+				<br>
 				<input type="file" name="image3" id="inputPic">
 			</div>
 		</div>		

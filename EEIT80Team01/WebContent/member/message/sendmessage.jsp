@@ -32,6 +32,18 @@ body { padding-top: 50px; }
 		<%@include file="/include/header" %>
 	</header>
 <article>
+	<c:if test="${!empty successMessage }">
+	<div class="alert alert-success alert-dismissible text-center" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>${successMessage}</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="${pageContext.request.contextPath}/store/store.jsp">拍賣小店</a>。
+	</div>
+	</c:if>
+	<c:if test="${!empty errorMessage }">
+	<div class="alert alert-danger alert-dismissible text-center" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>${errorMessage}</strong>
+	</div>
+	</c:if>
 	<div class="container-fluid">
 	      <div class="row">
 			<%@include file="/include/navPart" %>
@@ -58,8 +70,6 @@ body { padding-top: 50px; }
 		</fieldset>
 	</form> 
 
-	&nbsp;<small><Font color='red' size="-3">${successMessage}</Font></small>
-	&nbsp;<small><Font color='red' size="-3">${errorMessage}</Font></small>
 	</div>
 		<%@include file="/include/blockPart" %>
 	</div>

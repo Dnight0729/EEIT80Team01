@@ -17,12 +17,13 @@ body{background-color:#F0F0F0;}
 </style>
 </head>
 <body>
-	<c:if test="${!empty memberBan }">
-	<div class="alert alert-danger alert-dismissible text-center" role="alert">
+
+	<c:if test="${!empty registerTrue }">
+	<div class="alert alert-success alert-dismissible text-center" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>${memberBan}</strong>
+	  <strong>註冊成功!</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="${pageContext.request.contextPath}/store/store.jsp">拍賣小店</a>。
 	</div>
-	<c:remove var="memberBan" scope="session" />
+	<c:remove var="registerTrue" scope="session" />
 	</c:if>
 	<c:if test="${!empty Logout }">
 		<c:set var="memberName" value="${ Logout.userName }" />

@@ -19,9 +19,9 @@
 		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
 		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>
 		             <li><hr /></li>
-		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>新手指南</b></span></a></li>
+		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>網站導覽</b></span></a></li>
 		            <li role="presentation" class="" id="sectionItem9"><a href="${pageContext.request.contextPath}/tutorial/tutorial.jsp" class="btn"><span class="">新手教學</span></a></li>
-		            <li role="presentation" class="" id="sectionItem10"><a href="${pageContext.request.contextPath}/tutorial/faq.jsp" class="btn"><span class="">常見問題集</span></a></li>
+		            <li role="presentation" class="" id="sectionItem10"><a href="${pageContext.request.contextPath}/tutorial/aboutUs.jsp" class="btn"><span class="">關於我們</span></a></li>
 		          </ul>
 		        </c:if>
 	            <c:if test="${!empty LoginOK}">
@@ -41,8 +41,9 @@
 		            <li role="presentation" class="" id="sectionItem7"><a href="${pageContext.request.contextPath}/member/message/receive.jsp" class="btn"><span class="">收件夾</span></a></li>
 		            <li role="presentation" class="" id="sectionItem8"><a href="${pageContext.request.contextPath}/member/message/send.jsp" class="btn"><span class="">寄件備份</span></a></li>		            
 		             <li><hr /></li>
-		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>新手指南</b></span></a></li>
+		            <li role="presentation"><a href="#" class="btn disabled lead"><span class="lead"><b>網站導覽</b></span></a></li>
 		            <li role="presentation" class="" id="sectionItem9"><a href="${pageContext.request.contextPath}/tutorial/tutorial.jsp" class="btn"><span class="">常見問題</span></a></li>
+		            <li role="presentation" class="" id="sectionItem10"><a href="${pageContext.request.contextPath}/tutorial/aboutUs.jsp" class="btn"><span class="">關於我們</span></a></li>
 		          </ul>
 	            </c:if>
 	        </div>

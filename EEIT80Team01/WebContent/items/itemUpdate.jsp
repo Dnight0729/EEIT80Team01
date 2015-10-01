@@ -154,28 +154,14 @@
 						</c:if>
 					</div>
 				</c:forEach>
-				<script type="text/javascript">
-					$('.myButton').click(function(){
+			
 
-					var value = $(this).attr("id");
-					var dom = $(this).parent();
-					var trace = $(this).parent().attr("id");
-					$.get("ImageRemove",
- 							{"id":value},
- 							function(data){
- 								if(data==="success"){
- 									dom.html('<div class="imginput"><input type="file" name="'+trace+'"></div>');
- 								}	
- 							}
- 					);
-					})
-					
-					</script>
+
 			</div>		
 		</div>
 	</div>
 	</div>
-	
+
 	
 	<input type="hidden" name="itemId" value="${param.itemId}">
 	<input type="submit" value="進行修改">
@@ -183,7 +169,58 @@
 	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
 	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
 </form>
+<div id="dialog" title="刪除確認">
+  <h3>是否要刪除圖片？</h3>
+</div>
+	<script type="text/javascript">
+					
+					
+					</script>
+<script type="text/javascript">
+$( "#dialog" ).dialog({
+	autoOpen: false,
+	closeOnEscape: false,//按ESC不能關閉
+    open: function(event, ui) {
+  	    //隱藏「x」關閉按鈕
+  	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+  	    }
+})
+$('.myButton').click(function(){
 
+	var value = $(this).attr("id");
+	var dom = $(this).parent();
+	var trace = $(this).parent().attr("id");
+	$( "#dialog" ).dialog( "open" );
+	$( "#dialog" ).dialog({
+	  	autoOpen: false,
+	  	modal: true,
+	     closeOnEscape: false,//按ESC不能關閉
+	      open: function(event, ui) {
+	    	    //隱藏「x」關閉按鈕
+	    	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+	    	    },
+	      buttons: {
+	    	  "確定":function(){
+	    			$.get("ImageRemove",
+	    					{"id":value},
+	    					function(data){
+	    						if(data==="success"){
+	    							dom.html('<div class="imginput"><input type="file" name="'+trace+'"></div>');
+	    						}	
+	    					}
+	    			);
+	      		$( this ).dialog( "close" );
+	      	},
+	    	  "取消":function() {
+	              $( this ).dialog( "close" );	              
+	          }
+	      }
+		});
+
+	})
+
+
+</script>
 </div>
 </article>
 <footer>

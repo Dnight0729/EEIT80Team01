@@ -61,7 +61,7 @@ public class ItemShowImageServlet extends HttpServlet {
 					is = getServletContext().getResourceAsStream(
 							"/imgs/NoImage.jpg");
 					int count = 0;
-					byte[] bytes = new byte[1024];
+					byte[] bytes = new byte[8192];
 					while ((count = is.read(bytes)) != -1) {
 						os.write(bytes, 0, count);
 					}
@@ -73,7 +73,7 @@ public class ItemShowImageServlet extends HttpServlet {
 				is = getServletContext().getResourceAsStream(
 						"/imgs/NoImage.jpg");
 				int count = 0;
-				byte[] bytes = new byte[1024];
+				byte[] bytes = new byte[8192];
 				while ((count = is.read(bytes)) != -1) {
 					os.write(bytes, 0, count);
 				}

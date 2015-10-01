@@ -103,12 +103,12 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		return result;
 	}
 	
-	private static final String SELECT_BY_CATEGORY = "SELECT * FROM ITEMS WHERE ITEM_CATEGORY = ?";
+	private static final String SELECT_BY_CATEGORY = "SELECT top 5 * FROM ITEMS WHERE ITEM_CATEGORY = ? order by newid()";
 
 	@Override
 	@GET
 	@Path("/{itemCategory}")
-	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON+";charset=utf-8")
 	public List<ItemsBean> selectCategory(@PathParam("itemCategory") int itemCategory){
 		List<ItemsBean> result=null;
 		Connection conn = null;

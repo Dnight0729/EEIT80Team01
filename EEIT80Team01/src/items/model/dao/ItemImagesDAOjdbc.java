@@ -227,7 +227,7 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	private static final String SELECT_IMAGENO_BY_ITEMID = "SELECT IMAGE_NO FROM ITEM_IMAGES WHERE ITEM_ID=?";
 	@GET
 	@Path("/{itemId}")
-	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON+";charset=utf-8")
 	public List<Integer> selectImages(@PathParam("itemId") int itemId){
 		List<Integer> result  =null;
 		Connection conn = null;

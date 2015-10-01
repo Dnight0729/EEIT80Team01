@@ -171,8 +171,7 @@
 	</div>
 	
 </footer>
-<%@include file="/include/modal" %>
-
+</body>
 <script>
 	$(function(){
 		j = 1;
@@ -284,7 +283,4 @@
 
 
 
-
-
-</body>
 </html>

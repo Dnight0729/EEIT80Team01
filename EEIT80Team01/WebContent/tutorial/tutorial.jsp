@@ -11,7 +11,6 @@
  	margin-bottom: 0px;
 }
 body { padding-top: 50px; }
-#map{ height:300px ; width:700px; }
 </style>
 <title>常見問題</title>
 </head>
@@ -27,9 +26,9 @@ body { padding-top: 50px; }
 	        	<!-- 				以下本頁布置 -->
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">常見問題 1</a></li>
-    <li><a href="#tabs-2">常見問題 2</a></li>
-    <li><a href="#tabs-3">常見問題 3</a></li>
+    <li><a href="#tabs-1">修改訂單</a></li>
+    <li><a href="#tabs-2">檢舉賣家</a></li>
+    <li><a href="#tabs-3">交易取消</a></li>
   </ul>
   <div id="tabs-1">
 	<h3>修改訂單</h3>
@@ -40,10 +39,8 @@ body { padding-top: 50px; }
      <p>如果會員發現站上的商品頁面有違反公告政策情形，請透過客服專區內檢舉商品違規提出，收到檢舉時，系統會依序對於被檢舉的商品頁面進行檢視。</p>
   </div>
   <div id="tabs-3">
-   	<h3>服務方式</h3>
-   	<p>常見問題無法滿足您的需求，請用以下這兩種方式聯絡我們為您服務</p>
-   	<P>地址： 106台北市大安區復興南路一段390號</P>
-   	<P>電話：02 6631 6599</P>
+   	<h3>提出棄標，交易取消</h3>
+   	<p>棄標投訴並不等於取消交易，如果交易未完成且雙方同意取消交易，您可以請交易方於表明確認取消之編號，待對方確實留言後，再向客服中心提出申請，經客服人員確認無誤後將協助雙方取消該筆交易。</p>
    	</div>
 </div>
 <div id="map"></div>
@@ -58,31 +55,13 @@ body { padding-top: 50px; }
 	</footer>
 	<%@include file="/include/modal" %>
 	
-	<!-- 	以下本頁script -->
+<!-- 	以下本頁script -->
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 	<script>
-	$(function() {
-		$( "#tabs" ).tabs();
-	  }(jQuery));
-	function initMap() {
-    	var myLocation = {lat: 25.033779, lng: 121.543271};
-
-    	  // Create a map object and specify the DOM element for display.
-    	  var map = new google.maps.Map(document.getElementById('map'), {
-    	    center: myLocation,
-    	    scrollwheel: false,
-    	    zoom: 12
-    	  });
-
-    	  // Create a marker and set its position.
-    	  var marker = new google.maps.Marker({
-    	    map: map,
-    	    position: myLocation,
-    	    title: 'E7mm服務端!'
-    	  });
-    	}
+		$(function() {
+			$( "#tabs" ).tabs();
+		  }(jQuery));
 	</script>
 <!-- 	以上本頁script -->
 </body>

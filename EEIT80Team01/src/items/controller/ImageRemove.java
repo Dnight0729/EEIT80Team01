@@ -30,7 +30,6 @@ public class ImageRemove extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		
-		System.out.println(id);
 		int itemNo = 0;
 		if(id!=null && id.length()!=0){
 			itemNo = Integer.parseInt(id);

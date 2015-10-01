@@ -37,12 +37,11 @@ color:#0088A8;
 
 
 #itemDescribe{
-border-width:1px;border-style:solid;border-color:#aaaaaa;padding:20px;
-position:relative;
-/*     left:25px; */
+border-width:1px;
+border-color:#aaaaaa;padding:20px;
+ position:relative; 
     top:0;
     width:600px;
-    border-top:3px solid #aaaaaa;
 word-break: break-all;
 }
 .font {font-weight:bolder}
@@ -175,12 +174,13 @@ word-break: break-all;
 
  
 
-<!-- =============商品內容描述====== -->
-	        		<h4>商品內容描述：</h4>
-					<div id="itemDescribe" class="col-md-7">
-<!-- 	        		<h4>商品內容描述：</h4> -->
-	        		${item.itemDescribe}
-	        		</div>	
+<!-- =============商品內容描述====== -->        		
+	   				<div class="col-md-4" id="itemDescribe">
+<div class="panel panel-default" >
+  <div class="panel-heading" style="background-color:RGB(238,238,238)" >商品內容描述：</div>
+   ${item.itemDescribe}
+</div>
+</div>     		        		
 <!-- ===========================================================		     	 -->
 				</div>
 				<div class="col-md-2 col-md-offset-3">

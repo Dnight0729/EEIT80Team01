@@ -6,14 +6,13 @@
   box-sizing: border-box;
 }
 
-body { font-family: sans-serif; }
 
 .gallery {
   background: #EEE;
 }
 
 .gallery-cell {
-  width: 66%;
+  width: 30%;
   height: 200px;
   margin-right: 10px;
   background: #8C8;
@@ -28,4 +27,7 @@ body { font-family: sans-serif; }
   line-height: 200px;
   font-size: 80px;
   color: white;
+}
+small{
+	margin-left:770px;
 }

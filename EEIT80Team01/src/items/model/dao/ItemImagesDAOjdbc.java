@@ -2,7 +2,6 @@ package items.model.dao;
 
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,12 +13,16 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import global.GlobalService;
 import items.model.ImageInput;
 import items.model.ImagesBean;
 import items.model.ItemImagesDAO;
-
+@Path("/itemImg")
 public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	private DataSource ds;
 	
@@ -222,8 +225,10 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	}
 	
 	private static final String SELECT_IMAGENO_BY_ITEMID = "SELECT IMAGE_NO FROM ITEM_IMAGES WHERE ITEM_ID=?";
-	
-	public List<Integer> selectImages(int itemId){
+	@GET
+	@Path("/{itemId}")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON+";charset=utf-8")
+	public List<Integer> selectImages(@PathParam("itemId") int itemId){
 		List<Integer> result  =null;
 		Connection conn = null;
 		PreparedStatement stmt = null;

@@ -8,7 +8,7 @@ public interface ItemsDAO {
 
 	ItemsBean selectId(int itemId);
 
-	ItemsBean selectCategory(int itemCategory);
+	List<ItemsBean> selectCategory(int itemCategory);
 
 	List<ItemsBean> getAll();
 

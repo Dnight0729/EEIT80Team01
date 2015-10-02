@@ -23,7 +23,7 @@ body {
 }
 </style>
 </head>
-<script src="${pageContext.request.contextPath}/scripts/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <body>
 	<header><%@include file="/include/header-support"%></header>
 	<article>

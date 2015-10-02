@@ -25,7 +25,7 @@ body { padding-top: 50px; }
 #contentPart { padding-top: 50px; }
 
 </style>
-<script src="${pageContext.request.contextPath}/scripts/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<header>

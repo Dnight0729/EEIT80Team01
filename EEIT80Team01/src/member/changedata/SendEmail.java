@@ -34,7 +34,7 @@ public class SendEmail {
 
   try {
 	  MimeMessage  message = new MimeMessage(session); 
-	  message.setFrom(new InternetAddress("eeit80team01@gmail.com"));
+	  message.setFrom(new InternetAddress("eeit80team01@gmail.com","E7MM"));
 	  message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));  
 	  message.setSubject("密碼重設信件","UTF-8");   
 	  Multipart mp = new MimeMultipart();

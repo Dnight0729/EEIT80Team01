@@ -21,7 +21,7 @@ body{background-color:#F0F0F0;}
 	<c:if test="${!empty registerTrue }">
 	<div class="alert alert-success alert-dismissible text-center" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>註冊成功!</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="${pageContext.request.contextPath}/store/store.jsp">拍賣小店</a>。
+	  <strong>註冊成功!</strong>
 	</div>
 	<c:remove var="registerTrue" scope="session" />
 	</c:if>

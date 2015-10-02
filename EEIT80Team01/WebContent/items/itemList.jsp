@@ -181,6 +181,8 @@
 <h3>是否要移除商品?</h3>
 </div>
 <script>
+var findValue;
+
 $("#dialog").dialog({
 	autoOpen: false,
 	modal: true,
@@ -190,7 +192,7 @@ $("#dialog").dialog({
 	},
 	buttons:{
 		"確定":function(){
-			$("#delItem").submit();
+			findValue.submit();
 			$(this).dialog("close");
 		},
 		"取消":function(){
@@ -198,7 +200,9 @@ $("#dialog").dialog({
 		}
 	}
 });
+
 $(".DelBtn").click(function(){
+	findValue = $(this).parent('form');
 	$("#dialog").dialog("open");
 });
 </script>

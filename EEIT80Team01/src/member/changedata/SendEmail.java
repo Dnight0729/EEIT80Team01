@@ -36,11 +36,15 @@ public class SendEmail {
 	  MimeMessage  message = new MimeMessage(session); 
 	  message.setFrom(new InternetAddress("eeit80team01@gmail.com"));
 	  message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));  
-	  message.setSubject("重設信件","UTF-8");   
+	  message.setSubject("密碼重設信件","UTF-8");   
 	  Multipart mp = new MimeMultipart();
 	  MimeBodyPart part1 = new MimeBodyPart();
-	  part1.setText("請點以下連結重新設定密碼<br>"+url);
-	  part1.setContent("請點以下連結重新設定密碼<br>"+url,"text/html; charset=utf-8");
+	  StringBuilder sb = new StringBuilder();
+	  sb.append("請點以下連結重新設定密碼<br><a href='");
+	  sb.append(url);
+	  sb.append("'>請點此連結</a>");
+	  part1.setText(sb.toString());
+	  part1.setContent(sb.toString(),"text/html; charset=utf-8");
 	  mp.addBodyPart(part1);
 	  message.setContent(mp);
 	  Transport.send(message);

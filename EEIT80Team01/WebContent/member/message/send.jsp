@@ -108,6 +108,9 @@ $('#delete').click(function(){
 	</div>
 	</div>
 </article>
+<footer>
+<%@include file="/include/footer" %>
+</footer>
 </body>
 <script>
 $("#sectionItem8").addClass("active");

@@ -106,6 +106,9 @@ body {
 			</div>
 		</div>
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 <script>
 	$("#sectionItem4").addClass("active");

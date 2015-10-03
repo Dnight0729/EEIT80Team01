@@ -75,6 +75,9 @@ body { padding-top: 50px; }
 	</div>
 	</div>
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 <script>
 $("#sectionItem6").addClass("active");

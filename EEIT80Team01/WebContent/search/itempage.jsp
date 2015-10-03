@@ -156,6 +156,10 @@ word-break: break-all;
 
 	           			<h1>此商品已售出</h1>
 	        		</c:if>
+	        		<c:if test="${item.itemStatus==3}">
+
+	           			<h1>此商品已被移除</h1>
+	        		</c:if>
 	        		</c:otherwise>
 					</c:choose>
 	        		</c:if>	

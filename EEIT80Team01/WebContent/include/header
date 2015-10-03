@@ -34,8 +34,8 @@ pageContext.setAttribute("list",list);
 		          <div class="input-group-btn">
 			          <select class="btn btn-default" name="option">
 			          	<option value="-100">所有類別</option>
-			          	<c:forEach items="${list}" var="item" >
-			           		<option value="${item.itemCategory}">${item.categoryName}</option>
+			          	<c:forEach items="${list}" var="itemCat" >
+			           		<option value="${itemCat.itemCategory}">${itemCat.categoryName}</option>
 			            </c:forEach>
 			          </select>
 				  </div>

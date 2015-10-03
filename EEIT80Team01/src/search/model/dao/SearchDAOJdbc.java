@@ -91,7 +91,7 @@ public class SearchDAOJdbc implements SearchDAO {
 		return beans;
 	}
 	
-	private String getItemsWithOption = "select * from ITEMS where ITEM_CATEGORY = ? and  TITLE like ? ITEM_Status!=3 order by ITEM_ID desc";
+	private String getItemsWithOption = "select * from ITEMS where ITEM_CATEGORY = ? and  TITLE like ? and ITEM_Status!=3 order by ITEM_ID desc";
 	/* (non-Javadoc)
 	 * @see search.model.dao.SearchDAO#getItemsWithOption(int, java.lang.String)
 	 */

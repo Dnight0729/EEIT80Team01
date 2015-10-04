@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
+<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
 <style >
 #carousel1{
 	margin-bottom: 20px;
@@ -36,17 +37,17 @@
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner" role="listbox">
 	    <div class="item active">
-	      <img src="imgs/aaa.jpg" alt="...">
+	      <img src="imgs/aaa.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
 	    <div class="item">
-	      <img src="imgs/bbb.jpg" alt="...">
+	      <img src="imgs/bbb.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
 	    <div class="item">
-	      <img src="imgs/ccc.jpg" alt="...">
+	      <img src="imgs/ccc.jpg" alt="..." width="100%">
 	      <div class="carousel-caption">
 	      </div>
 	    </div>
@@ -65,10 +66,65 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-9">
-				
-				
-								
+				<div class="page-header">
+				  <h4>${list[0].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[0].itemCategory}&keyword=">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity" id="gal1"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  
+				</div>
+				<div class="page-header">
+				  <h4>${list[1].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[1].itemCategory}&keyword=">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity" id="gal2"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				</div>
+				<div class="page-header">
+				  <h4>${list[2].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[2].itemCategory}&keyword=">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity" id="gal3"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				</div>
+				<div class="page-header">
+				  <h4>${list[3].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[3].itemCategory}&keyword=">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity" id="gal4"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				</div>
+				<div class="page-header">
+				  <h4>${list[4].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[4].itemCategory}&keyword=">查看更多</a></small></h4>
+				</div>
+				<div class="gallery js-flickity" id="gal5"
+				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				  <img class="gallery-cell" src=""/>
+				</div>
+
 			</div>
+			
 			<div class="col-md-3">
 				<div class="panel panel-default">
 	  				<div class="panel-heading">
@@ -105,24 +161,118 @@
 	</div>
 </article>
 <footer>
-	<div class="container">
-		<hr>
-		<div class="row">
-			<div class="col-md-offset-1 col-md-10">
-				<p>&copy; EEIT80TeamOne-All Rights Reserved</p>
-			</div>
-		</div>
-	</div>
-	
+<%@include file="/include/footer" %>
 </footer>
-<%@include file="/include/modal" %>
-
-
-
-
-
-
-
-
 </body>
+<script>
+	$(function(){
+		j = 1;
+		k=1;
+		l=1;
+		m=1;
+		n=1;
+		$.ajax({
+			"type":"get",
+			"url":"${pageContext.request.contextPath}/rest/items/1",
+			"dataType":"json",
+			"success":function(data){
+				$.each(data,function(i,item){
+// 					console.log(item.itemId);
+					$.ajax({
+						"type":"get",
+						"url":"${pageContext.request.contextPath}/rest/itemImg/"+item.itemId,
+						"dataType":"json",
+						"success":function(img){
+							$("#gal1 img:nth-child(+"+j+")").prop("src","${pageContext.request.contextPath}/search/showImage?imageNo="+img[0]);
+							j++;
+						}
+					});
+				})
+			},
+		});
+		$.ajax({
+			"type":"get",
+			"url":"${pageContext.request.contextPath}/rest/items/2",
+			"dataType":"json",
+			"success":function(data){
+				$.each(data,function(i,item){
+// 					console.log(item.itemId);
+					$.ajax({
+						"type":"get",
+						"url":"${pageContext.request.contextPath}/rest/itemImg/"+item.itemId,
+						"dataType":"json",
+						"success":function(img){
+							$("#gal2 img:nth-child(+"+k+")").prop("src","${pageContext.request.contextPath}/search/showImage?imageNo="+img[0]);
+							k++;
+						}
+					});
+				})
+			},
+		});
+		$.ajax({
+			"type":"get",
+			"url":"${pageContext.request.contextPath}/rest/items/3",
+			"dataType":"json",
+			"success":function(data){
+				$.each(data,function(i,item){
+// 					console.log(item.itemId);
+					$.ajax({
+						"type":"get",
+						"url":"${pageContext.request.contextPath}/rest/itemImg/"+item.itemId,
+						"dataType":"json",
+						"success":function(img){
+							$("#gal3 img:nth-child(+"+l+")").prop("src","${pageContext.request.contextPath}/search/showImage?imageNo="+img[0]);
+							l++;
+						}
+					});
+				})
+			},
+		});
+		$.ajax({
+			"type":"get",
+			"url":"${pageContext.request.contextPath}/rest/items/4",
+			"dataType":"json",
+			"success":function(data){
+				$.each(data,function(i,item){
+// 					console.log(item.itemId);
+					$.ajax({
+						"type":"get",
+						"url":"${pageContext.request.contextPath}/rest/itemImg/"+item.itemId,
+						"dataType":"json",
+						"success":function(img){
+							$("#gal4 img:nth-child(+"+m+")").prop("src","${pageContext.request.contextPath}/search/showImage?imageNo="+img[0]);
+							m++;
+						}
+					});
+				})
+			},
+		});
+		$.ajax({
+			"type":"get",
+			"url":"${pageContext.request.contextPath}/rest/items/5",
+			"dataType":"json",
+			"success":function(data){
+				$.each(data,function(i,item){
+// 					console.log(item.itemId);
+					$.ajax({
+						"type":"get",
+						"url":"${pageContext.request.contextPath}/rest/itemImg/"+item.itemId,
+						"dataType":"json",
+						"success":function(img){
+							$("#gal5 img:nth-child(+"+n+")").prop("src","${pageContext.request.contextPath}/search/showImage?imageNo="+img[0]);
+							n++;
+						}
+					});
+				})
+			},
+		});
+		
+		
+		
+	})
+</script>
+
+
+
+
 </html>

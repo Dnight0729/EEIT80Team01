@@ -48,7 +48,9 @@
 	</form>
 	${success}
 </div>
-
+<footer>
+<%@include file="/include/footer" %>
+</footer>
 
 </body>
 </html>

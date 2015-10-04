@@ -11,12 +11,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import global.GlobalService;
 import item.category.model.ItemCategoryBean;
 import item.category.model.ItemCategoryService;
 import items.model.ItemImagesService;
 import items.model.ItemsBean;
 import items.model.ItemsService;
+import member.model.MemberBean;
 
 @WebServlet("/items/itemSelectOne.controller")
 public class ItemSelectOneServlet extends HttpServlet {
@@ -41,14 +44,18 @@ public class ItemSelectOneServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
+		HttpSession session = request.getSession();
+		MemberBean memberBean = (MemberBean)session.getAttribute(GlobalService.LOGIN_TOKEN);
+		if(memberBean==null){
+			request.getRequestDispatcher("/items/itemList").forward(request, response);
+		}
+		
 		String action = request.getParameter("action");
 		
 		if("getOne_For_Update".equals(action)){
 			Map<String, String> errors = new HashMap<String, String>();
 			request.setAttribute("error", errors);
-			ItemCategoryService service = new ItemCategoryService();
-			List<ItemCategoryBean> categoryList = service.selectCategory(null);
-			request.setAttribute("categoryList", categoryList);
+			
 			ItemImagesService imgSvc = new ItemImagesService();
 			try {
 				String itemIdStr =  request.getParameter("itemId");

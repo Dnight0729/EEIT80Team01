@@ -18,7 +18,7 @@ body { padding-top: 50px; }
 #contentPart { padding-top: 50px;
 font-size:180%; }
 .itemimg{
-	width:200px;
+	width:300px;
 }
 
 #directPrice{
@@ -37,14 +37,14 @@ color:#0088A8;
 
 
 #itemDescribe{
-border-width:1px;border-style:solid;border-color:#aaaaaa;padding:20px;
-position:relative;
-/*     left:25px; */
+border-width:1px;
+border-color:#aaaaaa;padding:20px;
+ position:relative; 
     top:0;
     width:600px;
-    border-top:3px solid #aaaaaa;
 word-break: break-all;
 }
+.font {font-weight:bolder}
 </style>
 <c:choose>
 	<c:when test="${!empty item}">
@@ -85,13 +85,13 @@ word-break: break-all;
 				<div class="row">
 				<div class="col-md-7">
 				<div id="opener">賣家：${item.seller}</div>   
-				商品分類：${itemCategory.categoryName}<br>
-	        		商品主題：${item.title}	<br>
+			<span class="font">	商品分類：</span>${itemCategory.categoryName}<br>
+	        <span class="font">	商品主題：</span>${item.title}	<br>
 	        		<fmt:formatNumber value="${ price }"  var="pri" pattern="#" type="number"/>
-	        		商品價格：${pri}元<br>
+	        	<span class="font">	商品價格：</span>${pri}元<br>
 	        		<fmt:formatDate value="${item.endTime}" var="formatDate" type="date" pattern="yyyy年MM月dd日HH時mm分" />	
-	        		結標時間：${formatDate}<br>
-	        		最小加價：${item.bid}<br><br>
+	        	<span class="font">	結標時間：</span>${formatDate}<br>
+	        	<span class="font">	最小加價：</span>${item.bid}<br><br>
 				
 				     
 				     
@@ -129,26 +129,63 @@ word-break: break-all;
 	        		</div>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(topPrice.buyer)}">
-	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
-	        		</div>
+
 	        		<div class="col-md-12 ">	        		
 	        			您是目前最高出價者
 	        		</div>
 	        		</c:if>
 	        		</c:if>
 	        		<c:if test="${LoginOK.userName.equals(item.seller)}">
+	        		<div class="col-md-12 ">
+	        			<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
 	        		<div class="col-md-12 ">	 
 	        			您是這個商品的賣家
 	        		</div>
 	        		</c:if>
 	        		</c:when>
-	        		<c:when test="${item.itemStatus==2}">
+	        		<c:otherwise>
+	        		<div class="col-md-12 ">
+	        			<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
+	        		<c:if test="${item.itemStatus==1}">
+
+	           			<h1>此商品下架中</h1>
+	        		</c:if>
+	        		<c:if test="${item.itemStatus==2}">
+
 	           			<h1>此商品已售出</h1>
-	        		</c:when>
+	        		</c:if>
+	        		<c:if test="${item.itemStatus==3}">
+
+	           			<h1>此商品已被移除</h1>
+	        		</c:if>
+	        		</c:otherwise>
 					</c:choose>
 	        		</c:if>	
-<!-- ========================================================--> 			     	
+<!-- ========================================================--> 
+
+<!-- ===================沒登入出現==================================-->
+				<c:if test="${empty LoginOK}">
+	        		<div class="col-md-12 ">
+	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
+	        		</div>
+	        		<div  class="col-md-12">
+	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
+	        		</div>
+	        		</c:if>	 
+<!-- 	======================================================== -->
+
+ 
+
+<!-- =============商品內容描述====== -->        		
+	   				<div class="col-md-4" id="itemDescribe">
+<div class="panel panel-default" >
+  <div class="panel-heading" style="background-color:RGB(238,238,238)" >商品內容描述：</div>
+   ${item.itemDescribe}
+</div>
+</div>     		        		
+<!-- ===========================================================		     	 -->
 				</div>
 				<div class="col-md-2 col-md-offset-3">
 					        		<h4>商品圖片：</h4>
@@ -163,22 +200,6 @@ word-break: break-all;
 	        		</div>
 				
 					</div>        			        		
-	        		
-<!-- ===================沒登入出現==================================-->
-				<c:if test="${empty LoginOK}">
-	        		<div class="col-md-12 ">
-	        		<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
-	        		</div>
-	        		<div  class="col-md-12">
-	        			<a href="${pageContext.request.contextPath}/member/login.do?itemid=${item.itemId}">若要購買此商品請先登入</a><br>
-	        		</div>
-	        		</c:if>	 
-<!-- 	======================================================== -->
-	        		<h4>商品內容描述：</h4>
-					<div id="itemDescribe" class="col-md-7">
-<!-- 	        		<h4>商品內容描述：</h4> -->
-	        		${item.itemDescribe}
-	        		</div>
 				</div>
 
 				</c:when>
@@ -188,7 +209,7 @@ word-break: break-all;
 				</c:choose>	        
  			 </div> 
  			 <%@include file="itempagedialog.jsp" %>
-<%-- 			<%@include file="/include/blockPart" %> --%>
+
          </div>
         </div>
 	</article>

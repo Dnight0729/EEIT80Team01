@@ -41,7 +41,8 @@ body { padding-top: 50px; }
 		window.location="msg.jsp?t="+num;
 	}
 </script>
-<form method="post" action="senddelete">
+
+<form method="post" action="senddelete" id="form">
 	<fieldset>
 		<legend>寄件備份</legend>
 		<table id="table" class="display" cellspacing="0" width="100%">
@@ -69,16 +70,47 @@ body { padding-top: 50px; }
 			</tbody>
 		</table>
 		<input type="reset" name="reset" value="清除">
-		<input type="submit" name="delete" value="刪除信件">
+		<input type="button" name="delete" value="刪除信件" id="delete">
 	</fieldset>
 </form>
+<div id="dialog" title="刪除信件">
+  <h3>是否確定要刪除？</h3>
+</div>
+<script type="text/javascript">
+$( "#dialog" ).dialog({
+  	autoOpen: false,
+  	modal: true,
+     closeOnEscape: false,//按ESC不能關閉
+      open: function(event, ui) {
+    	    //隱藏「x」關閉按鈕
+    	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+    	    },
+      buttons: {
+    	  "確定":function(){
+      		$('#form').submit();
+      		$( this ).dialog( "close" );
+      	},
+    	  "取消":function() {
+              $( this ).dialog( "close" );	              
+          }
+      }
+	});
+$('#delete').click(function(){
 
+ 		$( "#dialog" ).dialog( "open" );
+	
+})
+
+</script>
 
 	</div>
 		<%@include file="/include/blockPart" %>
 	</div>
 	</div>
 </article>
+<footer>
+<%@include file="/include/footer" %>
+</footer>
 </body>
 <script>
 $("#sectionItem8").addClass("active");

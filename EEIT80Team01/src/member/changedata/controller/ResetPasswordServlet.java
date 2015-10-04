@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.MemberBean;
 import member.model.MemberService;
@@ -36,24 +37,34 @@ public class ResetPasswordServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		String username = request.getParameter("username").toLowerCase();
-		MemberBean bean = service.findMemberData(username);		
-		String password = request.getParameter("password");
-		boolean result = false;
-		if(password!=null && password.length() >= 5){
-			result = service.changePassword(username, password);
-		}
-		
-		
-		
-		if(result){
-			RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
-			request.setAttribute("message", "密碼變更完成");
-			rd.forward(request,response);
+		MemberBean bean = service.findMemberData(username);	
+		HttpSession session = request.getSession();
+		String check = (String)session.getAttribute("EmailChecked");
+		if(bean.getUserName().equals(check)){
+			String password = request.getParameter("password");
+			boolean result = false;
+			if(password!=null && password.length() >= 5){
+				result = service.changePassword(username, password);
+			}
+			
+			
+			
+			if(result){
+				RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
+				session.removeAttribute("EmailChecked");
+				request.setAttribute("message", "密碼變更完成");
+				rd.forward(request,response);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
+				request.setAttribute("message", "密碼變更失敗");
+				rd.forward(request,response);
+			}
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
 			request.setAttribute("message", "密碼變更失敗");
 			rd.forward(request,response);
 		}
+		
 		
 	}
 	

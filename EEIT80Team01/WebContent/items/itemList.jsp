@@ -122,10 +122,10 @@
 							<td>${item.count }</td>
 							<td>${item.itemsBean.endTime }</td>
 							<td>
-								<FORM METHOD="post" ACTION="${pageContext.request.contextPath }/items/itemDel.controller">
-								    <input type="submit" value="移除商品">
+								<FORM METHOD="post" ACTION="${pageContext.request.contextPath }/items/itemDel.controller" id="delItem">
+								    <input type="button" class="DelBtn" value="移除商品">
 								    <input type="hidden" name="DelBtn" value="${item.itemsBean.itemId }">
-								    <input type="hidden" name="action"value="itemDel">
+								    <input type="hidden" name="action" value="itemDel">
 							     </FORM>
 							</td>
 							<td>
@@ -177,6 +177,35 @@
 		</div><!-- col-md-offset-1 col-md-10 -->
 	</div><!-- row -->
 </div><!-- container-fluid -->
+<div id="dialog" title="移除商品">
+<h3>是否要移除商品?</h3>
+</div>
+<script>
+var findValue;
+
+$("#dialog").dialog({
+	autoOpen: false,
+	modal: true,
+	closeOnEscape: false,//按ESC不能關閉
+	open: function(event,ui){
+		$(this).parent().children().children('.ui-dialog-titlebar-close').hide();	//隱藏「x」關閉按鈕
+	},
+	buttons:{
+		"確定":function(){
+			findValue.submit();
+			$(this).dialog("close");
+		},
+		"取消":function(){
+			$(this).dialog("close");
+		}
+	}
+});
+
+$(".DelBtn").click(function(){
+	findValue = $(this).parent('form');
+	$("#dialog").dialog("open");
+});
+</script>
 </article>
 <footer></footer>
 </body>

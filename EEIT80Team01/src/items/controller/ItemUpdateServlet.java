@@ -1,11 +1,14 @@
 package items.controller;
 
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -19,6 +22,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import global.GlobalService;
+import items.model.ImageInput;
+import items.model.ImagesBean;
+import items.model.ItemImagesService;
 import items.model.ItemsBean;
 import items.model.ItemsService;
 import member.model.MemberBean;
@@ -28,9 +34,11 @@ import member.model.MemberBean;
 public class ItemUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemsService service;
+	private ItemImagesService imgSvc;
 
     public ItemUpdateServlet() {
     	service = new ItemsService();
+    	imgSvc = new ItemImagesService();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,6 +57,8 @@ public class ItemUpdateServlet extends HttpServlet {
 		
 		if(memberBean!=null){
 			userName = memberBean.getUserName();
+		}else{
+			request.getRequestDispatcher("/items/itemList.jsp").forward(request, response);
 		}
 		String action = request.getParameter("action");
 		if ("update".equals(action)) { // 來自itemUpdate.jsp的請求	
@@ -64,7 +74,16 @@ public class ItemUpdateServlet extends HttpServlet {
 				String endTimeStr = request.getParameter("endTime");
 				String itemDescribe = request.getParameter("itemDescribe");
 				String itemIdStr = request.getParameter("itemId");
+				Part[] parts = new Part[3];
 
+				try {
+					parts[0] = request.getPart("image1");
+					parts[1] = request.getPart("image2");
+					parts[2] = request.getPart("image3");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
 				//資料驗證
 				if(userName==null || userName.trim().length()==0){
 					errors.put("loginError", "請重新登入");
@@ -143,9 +162,26 @@ public class ItemUpdateServlet extends HttpServlet {
 				bean.setItemDescribe(itemDescribe);
 				bean.setItemStatus(0);
 				bean.setThreadLock(0);
-				bean.setItemId(itemId);					
+				bean.setItemId(itemId);		
 				
-				ItemsBean update = service.update(bean);
+				ImagesBean imgBean = new ImagesBean();
+				imgBean.setItemId(itemId);
+				List<ImageInput> list = new ArrayList<ImageInput>();							
+				for(Part part: parts ){
+					try {
+						
+						ImageInput input= new ImageInput();
+						input.setFis((FileInputStream) part.getInputStream());				
+						input.setSize(part.getSize());
+						list.add(input);
+					} catch (Exception e) {
+					}
+				}
+				
+				service.update(bean);
+				imgSvc.insert(imgBean, list);
+				
+				
 //				request.setAttribute("update", update); // 資料庫update成功後,正確的的bean物件,存入request
 				
 				

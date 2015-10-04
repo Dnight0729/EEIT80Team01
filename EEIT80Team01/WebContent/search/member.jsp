@@ -90,13 +90,12 @@
 					</div>
 					<div  class="col-md-12 ">
 					<c:if test="${!member.userName.equals(LoginOK.userName)}">
-						<a href="message/sendmessage.jsp?id=${member.userName}" target="_blank">寄信給他</a>
+						<a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp?id=${member.userName}" target="_blank">寄信給他</a>
 					</c:if>	
 					</div>
 				</c:when>
 				<c:otherwise>
 				<div  class="col-md-12 ">
-<!-- 					<h2>查無此會員</h2> -->
 <img style="padding-left:10%" src="${pageContext.request.contextPath}/imgs/member.jpg" width="100%">
 
 				</div>

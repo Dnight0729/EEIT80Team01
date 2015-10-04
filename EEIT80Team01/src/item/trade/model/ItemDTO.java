@@ -2,6 +2,7 @@ package item.trade.model;
 
 import java.io.Serializable;
 
+
 public class ItemDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int imageNo;
@@ -54,4 +55,6 @@ public class ItemDTO implements Serializable{
 		this.buyerCheck = buyerCheck;
 	}
 	
+		
+
 }

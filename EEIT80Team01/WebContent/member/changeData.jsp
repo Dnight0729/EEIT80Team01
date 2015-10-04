@@ -74,9 +74,8 @@ body { padding-top: 50px; }
         <script type="text/javascript" src="scripts/changeData.js"></script>
 	</article>
 	<footer>
-	
+	<%@include file="/include/footer" %>
 	</footer>
-	<%@include file="/include/modal" %>
 	
 <script>
 $("#sectionItem2").addClass("active");

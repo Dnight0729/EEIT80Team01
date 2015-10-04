@@ -135,7 +135,7 @@ body { padding-top: 50px; }
 					</div>
 					<div  class="col-md-12 ">
 					<c:if test="${!member.userName.equals(LoginOK.userName)}">
-						<a href="message/sendmessage.jsp?id=${member.userName}">寄信給他</a>
+						<a href="${pageContext.request.contextPath}/member/message/sendmessage.jsp?id=${member.userName}">寄信給他</a>
 					</c:if>	
 					</div>
 				</c:when>
@@ -153,9 +153,8 @@ body { padding-top: 50px; }
         </div>
 	</article>
 	<footer>
-	
+	<%@include file="/include/footer" %>
 	</footer>
-	<%@include file="/include/modal" %>
 
 
 </body>

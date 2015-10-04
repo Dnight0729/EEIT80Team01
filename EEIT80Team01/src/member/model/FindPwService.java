@@ -1,6 +1,7 @@
 package member.model;
 
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,16 +15,17 @@ public class FindPwService {
 		FindPwBean bean = null;
 		FindPwDAO dao = new FindPwDAOjdbc();
 		bean = dao.select(username);
+		Random random = new Random();
 		if(bean != null){
 
-			long date = new Date().getTime();
+			long date = random.nextLong();
 			bean.setUserName(username);
 			bean.setRequestTime(date);
 			bean = dao.update(bean);
 			
 		} else {
 			bean = new FindPwBean();
-			long date = new Date().getTime();
+			long date = random.nextLong();
 			bean.setUserName(username);
 			bean.setRequestTime(date);
 			bean = dao.insert(bean);
@@ -46,7 +48,7 @@ public class FindPwService {
 		sb.append(request.getScheme());
 		sb.append("://");
 		sb.append(request.getServerName());
-		if(request.getServerPort()!=80){
+		if(request.getServerPort()!=80&&request.getServerPort()!=443){
 			sb.append(":");
 			sb.append(request.getServerPort());
 		}

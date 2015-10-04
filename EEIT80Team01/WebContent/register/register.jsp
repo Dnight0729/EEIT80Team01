@@ -14,19 +14,13 @@ body { padding-top: 50px; }
 .form-group{height:45px;}
 .error{color:red;}
 </style>
-<title>Register</title>
+<title>註冊</title>
 </head>
 <body>
 	<header>
 		<%@include file="/include/header" %>
 	</header>
 	<article>
-	<c:if test="${!empty registerTrue }">
-	<div class="alert alert-success alert-dismissible text-center" role="alert">
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>註冊成功!</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="${pageContext.request.contextPath}/store/store.jsp">拍賣小店</a>。
-	</div>
-	</c:if>
 	<c:if test="${!empty registerFalse }">
 	<div class="alert alert-danger alert-dismissible text-center" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -38,7 +32,7 @@ body { padding-top: 50px; }
 			<h5>&nbsp;</h5>
 		</div>
 		<div class="row text-center">
-			<h1><strong>建立您的XXX帳號</strong></h1>
+			<h1><strong>建立您的E7MM帳號</strong></h1>
 		</div>
 		<div class="row text-center">
 			<h3>&nbsp;</h3>
@@ -46,9 +40,11 @@ body { padding-top: 50px; }
 		<div class="row">
 			<div class="col-md-6">
 				<div class="col-md-offset-2 col-md-10 ">
-       				<h2>Slogan</h2>
-       				<p>details</p>
+
+<br><br>
 				</div>
+				<img  src="${pageContext.request.contextPath}/imgs/register.jpg" width="90%" >
+				
 			</div>
 			<div class="col-md-5 ">
 				<form method="post" class="form-horizontal jumbotron  cmxform" id="form" action="register.do">
@@ -128,9 +124,8 @@ body { padding-top: 50px; }
 	</div>
 	</article>
 	<footer>
-
+	<%@include file="/include/footer" %>
 	</footer>
-	<%@include file="/include/modal" %>
 <script src="register.js">
 </script>
 </body>

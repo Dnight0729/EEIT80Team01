@@ -2,7 +2,6 @@ package items.model.dao;
 
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +13,16 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import global.GlobalService;
+import items.model.ImageInput;
 import items.model.ImagesBean;
 import items.model.ItemImagesDAO;
-
+@Path("/itemImg")
 public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	private DataSource ds;
 	
@@ -37,7 +41,7 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	 * @see items.model.dao.ItemImagesDAO#insert(items.model.ImagesBean)
 	 */
 	@Override
-	public int insert(ImagesBean bean, FileInputStream fis, long size){
+	public int insert(ImagesBean bean, List<ImageInput> list){
 		int reuslt=0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -47,11 +51,15 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 				conn.setAutoCommit(false);				
 				stmt = conn.prepareStatement(INSERT);
 				if(bean!=null){
-					stmt.setInt(1, bean.getItemId());
-					stmt.setBinaryStream(2, fis, size);
+					if(list!=null && !list.isEmpty()){
+						for(ImageInput input : list){
+							stmt.setInt(1, bean.getItemId());
+							stmt.setBinaryStream(2, input.getFis(), input.getSize());	
+							reuslt = stmt.executeUpdate();
+							conn.commit();
+						}
+					}
 				}
-				reuslt = stmt.executeUpdate();
-				conn.commit();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
@@ -64,13 +72,6 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 					try {
 						stmt.close();
 					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if(fis!=null){
-					try {
-						fis.close();
-					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
@@ -224,8 +225,10 @@ public class ItemImagesDAOjdbc implements ItemImagesDAO {
 	}
 	
 	private static final String SELECT_IMAGENO_BY_ITEMID = "SELECT IMAGE_NO FROM ITEM_IMAGES WHERE ITEM_ID=?";
-	
-	public List<Integer> selectImages(int itemId){
+	@GET
+	@Path("/{itemId}")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON+";charset=utf-8")
+	public List<Integer> selectImages(@PathParam("itemId") int itemId){
 		List<Integer> result  =null;
 		Connection conn = null;
 		PreparedStatement stmt = null;

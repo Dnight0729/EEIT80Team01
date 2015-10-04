@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/include/include" %>
-<title>Login</title>
+<title>登入</title>
 <style>
 body{background-color:#F0F0F0;}
 .container-fluid{margin-top:150px;}
@@ -17,12 +17,13 @@ body{background-color:#F0F0F0;}
 </style>
 </head>
 <body>
-	<c:if test="${!empty memberBan }">
-	<div class="alert alert-danger alert-dismissible text-center" role="alert">
+
+	<c:if test="${!empty registerTrue }">
+	<div class="alert alert-success alert-dismissible text-center" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>${memberBan}</strong>
+	  <strong>註冊成功!</strong>
 	</div>
-	<c:remove var="memberBan" scope="session" />
+	<c:remove var="registerTrue" scope="session" />
 	</c:if>
 	<c:if test="${!empty Logout }">
 		<c:set var="memberName" value="${ Logout.userName }" />
@@ -35,6 +36,13 @@ body{background-color:#F0F0F0;}
 	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  		<strong>已登出!</strong>&nbsp;點選回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>。
 	  	</div>	
+	</c:if>
+	<c:if test="${!empty message }">	
+	<div class="alert alert-success alert-dismissible text-center" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>${message}</strong>
+	  <c:remove var="message" scope="session" />
+	</div>
 	</c:if>
 	<c:set var="funcName" value="LOG" scope="session"/>	
 	<div class="container-fluid">
@@ -69,7 +77,7 @@ body{background-color:#F0F0F0;}
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<a href="${pageContext.request.contextPath}/service/forgetpassword.jsp">忘記密碼</a><br><br>
-				<a href="${pageContext.request.contextPath}/register/register.jsp">立即創建帳號</a><br><br>
+				<a href="${pageContext.request.contextPath}/register/register.jsp">註冊帳號</a><br><br>
 				<a href="${pageContext.request.contextPath}">回到首頁</a>
 			</div>
 		</div>

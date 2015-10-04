@@ -44,31 +44,26 @@
 <article>
 <h2 align="center">修改我的商品</h2>
 <hr><br>
-<div align="center">
+<div class="col-md-3"></div>
+<div class="col-md-8">
 <form action="${pageContext.request.contextPath }/items/itemUpdate.controller" method="post" enctype="multipart/form-data" role="form" class="horizontal"> 
-	<!-- 商品分類能正常修改運作，但是暫無法seleted之前新增商品的分類   -->
 	<div class="form-group">
 	<label for="inputCategory" class="col-sm-2 control-label">商品分類</label>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-6">
 				<select name="itemCategory" class="form-control" id="inputCategory">
 					<c:forEach var="list" items="${list }">
-						<option value="${list.itemCategory}">${list.categoryName}
+						<option value="${list.itemCategory}" ${param.itemCategory == list.itemCategory ? 'selected' : ''}>${list.categoryName}
 					</c:forEach>
 				</select>
 			</div>
 			<font color="red" size="-1"><span class="error">${error.itemCategoryError }</span></font>
 		</div>	
 	</div>
-	<script type="text/javascript">
-	(function($){
-		$('option:eq(${param.itemCategory-1})').attr("selected", true);
-	})(jQuery)
-	</script>
 	<div class="form-group">
 	<label for="inputTitle" class="col-sm-2 control-label">商品名稱</label>
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-6" >
 				<input type="text" name="title" class="form-control" id="inputTitle" value="${param.title }">
 			</div>
 			<font color="red" size="-1"><span class="error">${error.titleError }</span></font>
@@ -77,7 +72,7 @@
 	<div class="form-group">
 	<label for="inputStartPrice" class="col-sm-2 control-label">起標價格</label>
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-6" >
 				<input type="text" name="startPrice" class="form-control" id="inputStartPrice" value="<fmt:formatNumber value="${ param.startPrice }" pattern="#" type="number"/>">
 			</div>
 			<font color="red" size="-1"><span class="error">${error.startPriceError }</span></font>
@@ -86,7 +81,7 @@
 	<div class="form-group">
 	<label for="inputDirectPrice" class="col-sm-2 control-label">直購價格</label>
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-6" >
 				<input type="text" name="directPrice" class="form-control" id="inputDirectPrice" value="<fmt:formatNumber value="${ param.directPrice }" pattern="#" type="number"/>">
 			</div>
 			<font color="red" size="-1"><span class="error">${error.directPriceError }</span></font>
@@ -95,7 +90,7 @@
 	<div class="form-group">
 	<label for="inputBid" class="col-sm-2 control-label">加價金額</label>
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-6" >
 				<input type="text" name="bid" class="form-control" id="inputBid" value="<fmt:formatNumber value="${ param.bid }" pattern="#" type="number"/>">
 			</div>
 			<font color="red" size="-1"><span class="error">${error.bidError }</span></font>
@@ -104,7 +99,7 @@
 	<div class="form-group">
 	<label class="col-sm-2 control-label">結標時間</label>
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-6" >
 				<input type="text" name="endTime" class="form-control" id="dateTime" value="${param.endTime }" readonly="readonly">
 			</div>
 			<font color="red" size="-1"><span class="error">${error.endTimeError }</span></font>
@@ -132,7 +127,7 @@
 	<div class="form-group">
 		<label for="inputPic" class="col-sm-2 control-label">商品描述</label>
 			<div class="row">
-				<div class="col-sm-5" >
+				<div class="col-sm-6" >
 					<textarea name="itemDescribe" rows="3" class="form-control" id="describe"></textarea>
 					<script>
 						var ta = document.getElementById('describe').value ="${param.itemDescribe}";
@@ -140,24 +135,18 @@
 				</div>
 			</div>		
 	</div>
-	<input type="hidden" name="itemId" value="${param.itemId}">
-	<input type="submit" value="進行修改">
-	<input type="hidden" name="action" value="update">
-	<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
-	<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
-</form>
-<form method="get" action="${pageContext.request.contextPath }/items/ImageRemove.controller" enctype="multipart/form-data" role="form" class="horizontal">
+	
 	<div id="img">
 	<div class="form-group">
 		<label for="inputPic" class="col-sm-2 control-label">商品圖片</label>
 			<div class="row">
-				<div class="col-sm-3" >
+				<div class="col-sm-6" >
 				<c:forEach var="i" begin="0" end="2">
 					<div id="image${i+1}" class="image">
 						<c:if test="${!empty images.get(i) }">
+				
 							<img height="200" width="200" src="${pageContext.request.contextPath}/search/showImage?imageNo=${images.get(i)}">
-							<input type="button" class="myButton" value="x" name="DelBtn">
-							<input type="hidden" name="action"value="delImg">
+							<input type="button" class="myButton" value="x" id="${images.get(i)}" name="DelBtn">
 						</c:if>
 						<c:if test="${empty images.get(i) }">
 							<div class="imginput">
@@ -166,15 +155,75 @@
 						</c:if>
 					</div>
 				</c:forEach>
+			
+
+
 			</div>		
 		</div>
 	</div>
 	</div>
-</form>
 
+	<div class="col-sm-offset-7">
+		<input type="hidden" name="itemId" value="${param.itemId}">
+		<input type="submit" value="進行修改">
+		<input type="hidden" name="action" value="update">
+		<h3><font color="red" size="-1"><span class="error" >${error.loginError }</span></font></h3>
+		<h3><font color="red" size="-1"><span class="error" >${error.action }</span></font></h3>
+	</div>
+</form>
+<div id="dialog" title="刪除確認">
+  <h3>是否要刪除圖片？</h3>
 </div>
+<script type="text/javascript">
+$( "#dialog" ).dialog({
+	autoOpen: false,
+	closeOnEscape: false,//按ESC不能關閉
+    open: function(event, ui) {
+  	    //隱藏「x」關閉按鈕
+  	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+  	    }
+})
+$('.myButton').click(function(){
+
+	var value = $(this).attr("id");
+	var dom = $(this).parent();
+	var trace = $(this).parent().attr("id");
+	$( "#dialog" ).dialog( "open" );
+	$( "#dialog" ).dialog({
+	  	autoOpen: false,
+	  	modal: true,
+	     closeOnEscape: false,//按ESC不能關閉
+	      open: function(event, ui) {
+	    	    //隱藏「x」關閉按鈕
+	    	    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+	    	    },
+	      buttons: {
+	    	  "確定":function(){
+	    			$.get("ImageRemove",
+	    					{"id":value},
+	    					function(data){
+	    						if(data==="success"){
+	    							dom.html('<div class="imginput"><input type="file" name="'+trace+'"></div>');
+	    						}	
+	    					}
+	    			);
+	      		$( this ).dialog( "close" );
+	      	},
+	    	  "取消":function() {
+	              $( this ).dialog( "close" );	              
+	          }
+	      }
+		});
+
+	})
+
+
+</script>
+</div>
+<div class="col-md-1"></div>
 </article>
 <footer>
+<%@include file="/include/footer" %>
 </footer>
 </body>
 </html>

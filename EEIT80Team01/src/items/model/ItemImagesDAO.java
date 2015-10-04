@@ -7,7 +7,7 @@ import items.model.ImagesBean;
 
 public interface ItemImagesDAO {
 
-	int insert(ImagesBean bean, FileInputStream fis, long size);
+	public int insert(ImagesBean bean, List<ImageInput> list);
 
 	int update(ImagesBean bean, FileInputStream fis, long size);
 

@@ -32,7 +32,7 @@ public class SearchDAOJdbc implements SearchDAO {
 	}
 	
 	
-	private String getItemsByKeyword = "select * from ITEMS where TITLE like ? and ITEM_STATUS = 0";
+	private String getItemsByKeyword = "select * from ITEMS where TITLE like ? and ITEM_Status!=3 order by ITEM_ID desc";
 	/* (non-Javadoc)
 	 * @see search.model.dao.SearchDAO#getItemsByKeyword(java.lang.String)
 	 */
@@ -91,7 +91,7 @@ public class SearchDAOJdbc implements SearchDAO {
 		return beans;
 	}
 	
-	private String getItemsWithOption = "select * from ITEMS where ITEM_CATEGORY = ? and  TITLE like ? and ITEM_STATUS = 0";
+	private String getItemsWithOption = "select * from ITEMS where ITEM_CATEGORY = ? and  TITLE like ? and ITEM_Status!=3 order by ITEM_ID desc";
 	/* (non-Javadoc)
 	 * @see search.model.dao.SearchDAO#getItemsWithOption(int, java.lang.String)
 	 */

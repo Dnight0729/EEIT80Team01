@@ -19,8 +19,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
-
+@Path("/items")
 public class ItemsDAOjdbc implements ItemsDAO{
 	private DataSource ds = null;
 	
@@ -99,14 +103,14 @@ public class ItemsDAOjdbc implements ItemsDAO{
 		return result;
 	}
 	
-	private static final String SELECT_BY_CATEGORY = "SELECT * FROM ITEMS WHERE ITEM_CATEGORY = ?";
+	private static final String SELECT_BY_CATEGORY = "SELECT top 5 * FROM ITEMS WHERE ITEM_CATEGORY = ? and item_status = 0 order by newid()";
 
-	/* (non-Javadoc)
-	 * @see items.model.dao.ItemsDAO#selectCategory(int)
-	 */
 	@Override
-	public ItemsBean selectCategory(int itemCategory){
-		ItemsBean result=null;
+	@GET
+	@Path("/{itemCategory}")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON+";charset=utf-8")
+	public List<ItemsBean> selectCategory(@PathParam("itemCategory") int itemCategory){
+		List<ItemsBean> result=null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
@@ -116,19 +120,21 @@ public class ItemsDAOjdbc implements ItemsDAO{
 			stmt = conn.prepareStatement(SELECT_BY_CATEGORY);
 			stmt.setInt(1, itemCategory);
 			rset = stmt.executeQuery();
-			if(rset.next()){
-				result = new ItemsBean();
-				result.setItemId(rset.getInt("ITEM_ID"));
-				result.setSeller(rset.getString("SELLER"));
-				result.setItemCategory(rset.getInt("ITEM_CATEGORY"));
-				result.setTitle(rset.getString("TITLE"));
-				result.setStartPrice(rset.getDouble("START_PRICE"));
-				result.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
-				result.setBid(rset.getInt("BID"));
-				result.setEndTime(rset.getTimestamp("END_TIME"));
-				result.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
-				result.setItemStatus(rset.getInt("ITEM_STATUS"));
-				result.setThreadLock(rset.getInt("THREAD_LOCK"));
+			result = new ArrayList<ItemsBean>();
+			while(rset.next()){
+				ItemsBean bean = new ItemsBean();
+				bean.setItemId(rset.getInt("ITEM_ID"));
+				bean.setSeller(rset.getString("SELLER"));
+				bean.setItemCategory(rset.getInt("ITEM_CATEGORY"));
+				bean.setTitle(rset.getString("TITLE"));
+				bean.setStartPrice(rset.getDouble("START_PRICE"));
+				bean.setDirectPrice(rset.getDouble("DIRECT_PRICE"));
+				bean.setBid(rset.getInt("BID"));
+				bean.setEndTime(rset.getTimestamp("END_TIME"));
+				bean.setItemDescribe(rset.getString("ITEM_DESCRIBE"));
+				bean.setItemStatus(rset.getInt("ITEM_STATUS"));
+				bean.setThreadLock(rset.getInt("THREAD_LOCK"));
+				result.add(bean);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

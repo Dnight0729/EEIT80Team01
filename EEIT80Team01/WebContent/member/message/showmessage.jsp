@@ -67,7 +67,7 @@ dd{border-radius:10px;}
 			<a href="sendmessage.jsp?id=${Message.sender}" class="btn btn-default" role="button">回覆信件</a>
 		</c:if>	
 				<c:if test="${Message.sender.equals(LoginOK.userName)}">
-			<a href="sendmessage.jsp" class="btn btn-default" role="button">寫新信件</a>
+			<a href="sendmessage.jsp?id=${Message.receiver}" class="btn btn-default" role="button">寫新信件</a>
 		</c:if>	
 		</div>		
 		<%@include file="/include/blockPart" %>
@@ -75,5 +75,8 @@ dd{border-radius:10px;}
 	</div>
 	
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 </html>

@@ -153,7 +153,7 @@
 </div><!-- container-fluid -->
 </article>
 <footer>
-
+<%@include file="/include/footer" %>
 </footer>
 <script>
 

@@ -34,7 +34,6 @@ body {
 						style="margin: auto; margin-top: 20px; width: 40%">
 						<div class="panel-heading">
 							<h3 class="panel-title">新增客服帳號</h3>
-							<span style="color: red">${addResult}</span>
 						</div>
 						<div class="panel-body">
 							<form method="post" action="AddSupport.do">
@@ -72,6 +71,7 @@ body {
 									value="送出"> <input class="btn btn-danger" type="reset"
 									id="reset" value="清除">
 							</form>
+							<span style="color: red">${addResult}</span>
 						</div>
 					</div>
 				</div>

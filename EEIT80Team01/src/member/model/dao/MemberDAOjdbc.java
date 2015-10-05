@@ -215,7 +215,7 @@ public class MemberDAOjdbc implements MemberDAO {
 	
 	private static final String BAN_OR_UNBAN =
 			"update member set access=? where username=?";
-	private static final String FORCE_ITEM_DOWN = "update item set item_status=? where seller=?";
+	private static final String FORCE_ITEM_DOWN = "update items set item_status=? where seller=?";
 	@Override
 	public int banMember(String[] userName){
 		int count = 0;

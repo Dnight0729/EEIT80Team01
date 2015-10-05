@@ -215,6 +215,7 @@ public class MemberDAOjdbc implements MemberDAO {
 	
 	private static final String BAN_OR_UNBAN =
 			"update member set access=? where username=?";
+	private static final String FORCE_ITEM_DOWN = "update item set item_status=? where seller=?";
 	@Override
 	public int banMember(String[] userName){
 		int count = 0;
@@ -222,10 +223,14 @@ public class MemberDAOjdbc implements MemberDAO {
 			Connection conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement stmt = conn.prepareStatement(BAN_OR_UNBAN);
+			PreparedStatement stmt2 = conn.prepareStatement(FORCE_ITEM_DOWN);
 			for (int i = 0; i < userName.length; i++){
 				stmt.setInt(1, 1); // 1 = ban, 0 = normal
 				stmt.setString(2, userName[i]);
 				stmt.execute();
+				stmt2.setInt(1, 2); // 2 = item_status 下架
+				stmt2.setString(2, userName[i]);
+				stmt2.execute();
 				count++;
 			}
 			conn.commit();

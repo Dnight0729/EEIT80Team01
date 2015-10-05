@@ -228,7 +228,7 @@ public class MemberDAOjdbc implements MemberDAO {
 				stmt.setInt(1, 1); // 1 = ban, 0 = normal
 				stmt.setString(2, userName[i]);
 				stmt.execute();
-				stmt2.setInt(1, 2); // 2 = item_status 下架
+				stmt2.setInt(1, 1); // 1 = item_status 下架
 				stmt2.setString(2, userName[i]);
 				stmt2.execute();
 				count++;

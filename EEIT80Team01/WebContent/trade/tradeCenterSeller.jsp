@@ -66,7 +66,7 @@
 						<c:forEach var="item" items="${sessionScope.mySellItemsUncheck}">
 							<tr>
 								<td>${item.itemId}</td>
-								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?imageNo=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
 								<td>${item.buyer}</td>
 								<td>${item.seller}</td>
@@ -105,7 +105,7 @@
 						<c:forEach var="item" items="${sessionScope.mySellItemsCheck}">
 							<tr>
 								<td>${item.itemId}</td>
-								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?imageNo=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
 								<td>${item.buyer}</td>
 								<td>${item.seller}</td>
@@ -133,7 +133,7 @@
 						<c:forEach var="item" items="${sessionScope.mySellItemsFinished}">
 							<tr>
 								<td>${item.itemId}</td>
-								<td><img src="${pageContext.request.contextPath}/search/showImage?itemid=${item.imageNo}" width="50px" height="50px"/></td>
+								<td><img src="${pageContext.request.contextPath}/search/showImage?imageNo=${item.imageNo}" width="50px" height="50px"/></td>
 								<td>${item.title}</td>
 								<td>${item.buyer}</td>
 								<td>${item.seller}</td>

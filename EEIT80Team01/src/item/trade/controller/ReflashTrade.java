@@ -177,10 +177,12 @@ public class ReflashTrade extends HttpServlet {
 		if(request.getAttribute("refererPage")!=null){
 			System.out.println("c");
 			response.sendRedirect(request.getAttribute("refererPage").toString());
-		}else if(request.getHeader("referer").equalsIgnoreCase("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenter.jsp")){
+		}else if(request.getHeader("referer").equalsIgnoreCase("https://"+request.getServerName()+request.getContextPath()+"/trade/tradeCenter.jsp")){
+//		}else if(request.getHeader("referer").equalsIgnoreCase("https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenter.jsp")){
 			System.out.println("a");
 			response.sendRedirect(request.getContextPath()+"/trade/tradeCenterSeller.jsp");
-		}else if(request.getHeader("referer").equalsIgnoreCase("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenterSeller.jsp")){
+		}else if(request.getHeader("referer").equalsIgnoreCase("https://"+request.getServerName()+request.getContextPath()+"/trade/tradeCenterSeller.jsp")){
+//		}else if(request.getHeader("referer").equalsIgnoreCase("https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/trade/tradeCenterSeller.jsp")){
 			System.out.println("b");
 			response.sendRedirect(request.getContextPath()+"/trade/tradeCenter.jsp");
 		}else{

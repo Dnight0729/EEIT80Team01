@@ -62,7 +62,7 @@ pageContext.setAttribute("list",list);
 	            <li><a href="${pageContext.request.contextPath}/items/itemList"><span class="glyphicon glyphicon-usd">&nbsp;我的拍賣小店</span></a></li>
 	            <li role="separator" class="divider"></li>
 	            <c:if test="${!empty LoginOK}">
-	            <li><a href="${pageContext.request.contextPath}/question/NewQuestion.jsp"><span class="glyphicon glyphicon-wrench">&nbsp;客服中心</span></a></li>
+	            <li><a href="${pageContext.request.contextPath}/member/question/NewQuestion.jsp"><span class="glyphicon glyphicon-wrench">&nbsp;客服中心</span></a></li>
 	            </c:if>
 	            <li><a href="${pageContext.request.contextPath}/tutorial/tutorial.jsp"><span class="glyphicon glyphicon-education">&nbsp;新手指南</span></a></li>
 	            <li><a href="${pageContext.request.contextPath}/register/register.jsp"><span class="glyphicon glyphicon-pencil">&nbsp;註冊帳號</span></a></li>

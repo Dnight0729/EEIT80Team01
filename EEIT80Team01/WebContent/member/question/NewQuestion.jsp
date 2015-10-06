@@ -32,7 +32,7 @@ body {
 }
 </style>
 </head>
-<script src="http://cdn.ckeditor.com/4.5.3/basic/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <body>
 	<header>
 		<%@include file="/include/header"%>
@@ -106,6 +106,9 @@ body {
 			</div>
 		</div>
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 <script>
 	$("#sectionItem4").addClass("active");

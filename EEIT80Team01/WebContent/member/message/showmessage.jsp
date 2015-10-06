@@ -75,5 +75,8 @@ dd{border-radius:10px;}
 	</div>
 	
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 </html>

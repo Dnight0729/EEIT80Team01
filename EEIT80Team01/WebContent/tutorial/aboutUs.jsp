@@ -33,7 +33,7 @@ body { padding-top: 50px; }
          </div>
 	</article>
 	<footer>
-	
+	<%@include file="/include/footer" %>
 	</footer>
 	<%@include file="/include/modal" %>
 <!-- 	以下google map -->

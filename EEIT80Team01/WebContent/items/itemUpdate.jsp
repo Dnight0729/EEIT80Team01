@@ -223,6 +223,7 @@ $('.myButton').click(function(){
 <div class="col-md-1"></div>
 </article>
 <footer>
+<%@include file="/include/footer" %>
 </footer>
 </body>
 </html>

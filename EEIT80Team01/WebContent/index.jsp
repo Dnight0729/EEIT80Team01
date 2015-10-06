@@ -67,7 +67,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<div class="page-header">
-				  <h4>影音娛樂<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=7&keyword=">查看更多</a></small></h4>
+				  <h4>${list[0].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[0].itemCategory}&keyword=">查看更多</a></small></h4>
 				</div>
 				<div class="gallery js-flickity" id="gal1"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -79,7 +79,7 @@
 				  
 				</div>
 				<div class="page-header">
-				  <h4>生活家居<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=8&keyword=">查看更多</a></small></h4>
+				  <h4>${list[1].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[1].itemCategory}&keyword=">查看更多</a></small></h4>
 				</div>
 				<div class="gallery js-flickity" id="gal2"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -90,7 +90,7 @@
 				  <img class="gallery-cell" src=""/>
 				</div>
 				<div class="page-header">
-				  <h4>彩妝保養<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=10&keyword=">查看更多</a></small></h4>
+				  <h4>${list[2].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[2].itemCategory}&keyword=">查看更多</a></small></h4>
 				</div>
 				<div class="gallery js-flickity" id="gal3"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -101,7 +101,7 @@
 				  <img class="gallery-cell" src=""/>
 				</div>
 				<div class="page-header">
-				  <h4>保健食品<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=11&keyword=">查看更多</a></small></h4>
+				  <h4>${list[3].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[3].itemCategory}&keyword=">查看更多</a></small></h4>
 				</div>
 				<div class="gallery js-flickity" id="gal4"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -112,7 +112,7 @@
 				  <img class="gallery-cell" src=""/>
 				</div>
 				<div class="page-header">
-				  <h4>流行服飾<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=5&keyword=">查看更多</a></small></h4>
+				  <h4>${list[4].categoryName}<small><a href="${pageContext.request.contextPath}/search/searchItems.do?option=${list[4].itemCategory}&keyword=">查看更多</a></small></h4>
 				</div>
 				<div class="gallery js-flickity" id="gal5"
 				  data-flickity-options='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -161,15 +161,7 @@
 	</div>
 </article>
 <footer>
-	<div class="container">
-		<hr>
-		<div class="row">
-			<div class="col-md-offset-1 col-md-10">
-				<p>&copy; EEIT80TeamOne-All Rights Reserved</p>
-			</div>
-		</div>
-	</div>
-	
+<%@include file="/include/footer" %>
 </footer>
 </body>
 <script>
@@ -219,7 +211,7 @@
 		});
 		$.ajax({
 			"type":"get",
-			"url":"${pageContext.request.contextPath}/rest/items/2",
+			"url":"${pageContext.request.contextPath}/rest/items/3",
 			"dataType":"json",
 			"success":function(data){
 				$.each(data,function(i,item){
@@ -238,7 +230,7 @@
 		});
 		$.ajax({
 			"type":"get",
-			"url":"${pageContext.request.contextPath}/rest/items/2",
+			"url":"${pageContext.request.contextPath}/rest/items/4",
 			"dataType":"json",
 			"success":function(data){
 				$.each(data,function(i,item){
@@ -257,7 +249,7 @@
 		});
 		$.ajax({
 			"type":"get",
-			"url":"${pageContext.request.contextPath}/rest/items/2",
+			"url":"${pageContext.request.contextPath}/rest/items/5",
 			"dataType":"json",
 			"success":function(data){
 				$.each(data,function(i,item){

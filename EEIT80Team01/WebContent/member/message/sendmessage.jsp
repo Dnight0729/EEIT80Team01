@@ -25,7 +25,7 @@ body { padding-top: 50px; }
 #contentPart { padding-top: 50px; }
 
 </style>
-<script src="http://cdn.ckeditor.com/4.5.3/basic/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<header>
@@ -75,6 +75,9 @@ body { padding-top: 50px; }
 	</div>
 	</div>
 	</article>
+	<footer>
+	<%@include file="/include/footer" %>
+	</footer>
 </body>
 <script>
 $("#sectionItem6").addClass("active");

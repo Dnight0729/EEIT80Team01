@@ -13,6 +13,8 @@ body { padding-top: 50px;
 }
 #section1{
 	background:#007979;
+	height:860px;
+	padding-right:0px;padding-left:0px;
 }
 #section1 a{
 	color:#D7FFEE; 
@@ -26,5 +28,5 @@ body { padding-top: 50px;
 }
 #section2{
 	background:#007979;
-	height:800px;
+	height:860px;
 }

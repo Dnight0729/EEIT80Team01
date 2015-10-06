@@ -148,7 +148,12 @@ word-break: break-all;
 	        		<div class="col-md-12 ">
 	        			<span id="directPrice1" class="alert alert-warning" role="alert">直購價：<span id="directPrice">${directPrice}元</span></span><br><BR>
 	        		</div>
-	        		<c:if test="${item.itemStatus==1}">
+	        		
+	        		</c:otherwise>
+					</c:choose>
+	        		</c:if>	
+<!-- ========================================================--> 
+				<c:if test="${item.itemStatus==1}">
 
 	           			<h1>此商品下架中</h1>
 	        		</c:if>
@@ -159,12 +164,7 @@ word-break: break-all;
 	        		<c:if test="${item.itemStatus==3}">
 
 	           			<h1>此商品已被移除</h1>
-	        		</c:if>
-	        		</c:otherwise>
-					</c:choose>
-	        		</c:if>	
-<!-- ========================================================--> 
-
+	        	</c:if>
 <!-- ===================沒登入出現==================================-->
 				<c:if test="${empty LoginOK}">
 	        		<div class="col-md-12 ">

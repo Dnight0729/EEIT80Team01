@@ -52,17 +52,16 @@ public class ResetPasswordServlet extends HttpServlet {
 			if(result){
 				RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
 				session.removeAttribute("EmailChecked");
-				request.setAttribute("message", "密碼變更完成");
-				rd.forward(request,response);
+				session.setAttribute("message", "密碼變更完成");
+				response.sendRedirect(request.getContextPath() + "/login/login.jsp");
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
-				request.setAttribute("message", "密碼變更失敗");
-				rd.forward(request,response);
+				session.setAttribute("message", "密碼變更失敗");
+				response.sendRedirect(request.getContextPath() + "/login/login.jsp");
 			}
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/service/finished.jsp");
-			request.setAttribute("message", "密碼變更失敗");
-			rd.forward(request,response);
+			session.setAttribute("message", "密碼變更失敗");
+			response.sendRedirect(request.getContextPath() + "/login/login.jsp");
+
 		}
 		
 		

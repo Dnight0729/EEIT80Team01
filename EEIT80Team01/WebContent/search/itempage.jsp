@@ -155,7 +155,7 @@ word-break: break-all;
 <!-- ========================================================--> 
 				<c:if test="${item.itemStatus==1}">
 
-	           			<h1>此商品下架中</h1>
+	           			<h1>此商品已下架</h1>
 	        		</c:if>
 	        		<c:if test="${item.itemStatus==2}">
 

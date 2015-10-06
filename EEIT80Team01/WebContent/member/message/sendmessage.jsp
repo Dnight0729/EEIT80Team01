@@ -35,7 +35,7 @@ body { padding-top: 50px; }
 	<c:if test="${!empty successMessage }">
 	<div class="alert alert-success alert-dismissible text-center" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>${successMessage}</strong>回<a href="${pageContext.request.contextPath}/index.jsp">首頁</a>繼續您的購物,或是進入您的<a href="${pageContext.request.contextPath}/store/store.jsp">拍賣小店</a>。
+	  <strong>${successMessage}</strong>
 	</div>
 	</c:if>
 	<c:if test="${!empty errorMessage }">
